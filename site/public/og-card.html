@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&display=swap">
+<style>
+  :root {
+    --background: 0.975 0.004 85;
+    --foreground: 0.245 0.015 240;
+    --primary: 0.420 0.070 210;
+    --accent: 0.45 0.095 195;
+    --camel: 0.245 0.045 220;
+    --camel-foreground: 0.965 0.006 85;
+  }
+  * { margin: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 630px; overflow: hidden; }
+  .card {
+    width: 1200px; height: 630px;
+    background: oklch(var(--camel));
+    color: oklch(var(--camel-foreground));
+    font-family: "Mona Sans", system-ui, sans-serif;
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 72px 80px 64px;
+    position: relative;
+  }
+  .eyebrow {
+    font-size: 22px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; opacity: 0.85;
+    font-variation-settings: "wdth" 115;
+  }
+  h1 {
+    font-size: 92px; line-height: 1.02; letter-spacing: -0.01em;
+    font-weight: 650; font-variation-settings: "wdth" 115;
+    max-width: 980px; text-wrap: balance;
+  }
+  .bottom { display: flex; align-items: baseline; justify-content: space-between; }
+  .brand { font-size: 30px; font-weight: 650; font-variation-settings: "wdth" 115; }
+  .url { font-size: 24px; font-weight: 500; opacity: 0.7; }
+  .tick { position: absolute; top: 0; left: 80px; width: 120px; height: 8px; background: oklch(var(--accent)); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="tick"></div>
+    <div>
+      <div class="eyebrow">Design systems studio</div>
+      <h1 style="margin-top: 28px;">Systemised design for complex products</h1>
+    </div>
+    <div class="bottom">
+      <div class="brand">Pebble Interactive</div>
+      <div class="url">pebbleinteractive.com</div>
+    </div>
+  </div>
+</body>
+</html>

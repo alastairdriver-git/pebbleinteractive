@@ -3,6 +3,7 @@ import "../styles/global.css";
 import BaseLayout from "@grade/astro-kit/BaseLayout.astro";
 import { Section, Container } from "@gradeui/ui";
 import { SITE, NAV, FONT_HREF } from "../lib/site.config";
+import AiToolLogos from "../components/AiToolLogos.astro";
 
 const sectors = ["SaaS", "Mobile apps", "Websites", "Medtech", "Fintech"];
 
@@ -15,14 +16,21 @@ const services = [
 
 ---
 
-<BaseLayout site={SITE} nav={NAV} fontHref={FONT_HREF} title="Pebble Interactive — Design systems and interactive product engineering">
-  {/* Hero — left-aligned, editorial */}
+<BaseLayout
+  site={SITE}
+  nav={NAV}
+  fontHref={FONT_HREF}
+  title="Pebble Interactive — Systemised design for complex products"
+  image="/og.png"
+>
+  {/* Hero — left-aligned, editorial, mesh-gradient ground */}
+  <div class="mesh-hero">
   <Section pad="xl">
     <Container maxW="xl">
       <div class="flex flex-col gap-6">
         <span class="eyebrow">Design systems studio</span>
-        <h1 class="max-w-4xl text-balance font-display text-5xl leading-[1.04] tracking-tight sm:text-6xl lg:text-7xl">
-          Systemised design for complex&nbsp;products
+        <h1 class="text-balance font-display text-4xl leading-[1.04] tracking-tight sm:text-6xl lg:text-7xl">
+          Systemised design for complex products
         </h1>
         <p class="max-w-prose text-pretty text-xl leading-relaxed text-muted-foreground">
           Pebble Interactive designs and builds for domains where detail compounds —
@@ -31,6 +39,7 @@ const services = [
       </div>
     </Container>
   </Section>
+  </div>
 
   {/* Services — numbered editorial rows, hairline dividers */}
   <Section pad="lg">
@@ -51,18 +60,35 @@ const services = [
   <Section pad="lg">
     <Container maxW="xl">
       <span class="eyebrow">Where we work</span>
-      <p class="mt-6 max-w-4xl font-display text-2xl leading-snug tracking-tight text-foreground sm:text-3xl">
+      <p class="mt-6 flex max-w-4xl flex-wrap items-baseline gap-x-3 gap-y-2 font-display text-2xl leading-snug tracking-tight text-foreground sm:text-3xl">
         {sectors.map((s, i) => (
-          <>
-            <span class="whitespace-nowrap">{s}</span>
-            {i < sectors.length - 1 && <span class="mx-3 text-muted-foreground/50">·</span>}
-          </>
+          <span class="whitespace-nowrap">
+            {s}
+            {i < sectors.length - 1 && <span class="ml-3 text-accent">·</span>}
+          </span>
         ))}
       </p>
       <p class="mt-4 max-w-prose text-pretty text-xl leading-relaxed text-muted-foreground">
         From product interfaces to marketing sites — including the regulated, detail-heavy
         worlds of medtech and fintech, where consistency and accessibility aren't optional.
       </p>
+    </Container>
+  </Section>
+
+  {/* AI-first — tools strip */}
+  <Section pad="lg">
+    <Container maxW="xl">
+      <span class="eyebrow">How we build</span>
+      <h2 class="mt-4 max-w-3xl text-balance font-display text-3xl tracking-tight sm:text-4xl">
+        An AI-first studio
+      </h2>
+      <p class="mt-4 max-w-prose text-pretty text-xl leading-relaxed text-muted-foreground">
+        AI runs through how we work — from first prototype to production code —
+        with a design system keeping every generated screen on brand.
+      </p>
+      <div class="mt-10">
+        <AiToolLogos />
+      </div>
     </Container>
   </Section>
 
@@ -85,7 +111,7 @@ const services = [
           <div class="sm:justify-self-end">
             <a
               href="https://gradeui.com"
-              class="inline-block border-b border-current pb-1 text-sm font-semibold tracking-wide transition-opacity hover:opacity-70"
+              class="inline-block border-b border-current pb-1 text-sm font-semibold tracking-wide text-accent transition-opacity hover:opacity-70"
             >
               Explore Grade at gradeui.com →
             </a>

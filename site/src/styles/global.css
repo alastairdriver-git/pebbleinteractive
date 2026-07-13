@@ -26,12 +26,14 @@
   --font-display: "Mona Sans", system-ui, sans-serif;
   --font-heading-weight: 650;
   --font-heading-width: 115;
+  --font-heading-tracking: -0.035em; /* a smidge past tracking-tight (-0.025em) */
 }
 
 h1, h2, h3,
 .font-display {
   font-variation-settings: "wdth" var(--font-heading-width);
   font-weight: var(--font-heading-weight);
+  letter-spacing: var(--font-heading-tracking);
 }
 
 /* Eyebrow — section kicker. Token-driven: the tick picks up --primary,
@@ -45,11 +47,49 @@ h1, h2, h3,
   font-variation-settings: "wdth" var(--font-heading-width);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: oklch(var(--foreground) / 0.75);
+  color: oklch(var(--accent));
 }
 .bg-camel .eyebrow {
   color: inherit;
   opacity: 0.85;
+}
+/* Links on the dark band: the page accent is too dark against --camel
+   (~2:1); swap to the lifted on-camel accent for AA contrast. */
+.bg-camel a,
+.bg-camel .text-accent {
+  color: oklch(var(--accent-on-camel));
+}
+
+/* Mesh-gradient hero — you know, standard stuff. Five token-derived teal
+   radial layers over the stone ground, slowly drifting. Pure CSS: cheaper
+   than WebGL, themes with the variables, and switches itself off for
+   prefers-reduced-motion. */
+.mesh-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.mesh-hero::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: -1;
+  background:
+    radial-gradient(38% 45% at 18% 22%, oklch(var(--primary) / 0.22), transparent 68%),
+    radial-gradient(45% 52% at 82% 12%, oklch(var(--accent) / 0.16), transparent 70%),
+    radial-gradient(36% 44% at 68% 78%, oklch(var(--camel) / 0.14), transparent 66%),
+    radial-gradient(30% 38% at 38% 88%, oklch(var(--accent) / 0.12), transparent 70%),
+    radial-gradient(50% 60% at 50% 45%, oklch(var(--primary) / 0.07), transparent 75%);
+  filter: blur(48px);
+  animation: mesh-drift 24s ease-in-out infinite alternate;
+}
+@keyframes mesh-drift {
+  0%   { transform: translate3d(-3%, -2%, 0) scale(1) rotate(0deg); }
+  50%  { transform: translate3d(2%, 3%, 0) scale(1.08) rotate(2deg); }
+  100% { transform: translate3d(4%, -3%, 0) scale(1.02) rotate(-2deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mesh-hero::before { animation: none; }
 }
 
 /* ───────────────────────────────────────────────────────────────────────
@@ -71,8 +111,15 @@ h1, h2, h3,
   --secondary-foreground: 0.300 0.015 240;
   --muted: 0.945 0.006 85;
   --muted-foreground: 0.520 0.012 240;
-  --accent: 0.420 0.070 210;
+  /* Accent split from primary: deeper, greener teal — same family as
+     primary (hue 210) but pulled toward blue-green and given more chroma,
+     so it reads as a distinct voice without leaving the palette.
+     Carries interpuncts, links, and eyebrows. */
+  --accent: 0.45 0.095 195;
   --accent-foreground: 0.975 0.004 85;
+  /* Accent for use ON the dark camel band — same teal family lifted to
+     AA-contrast lightness against --camel (L 0.245). */
+  --accent-on-camel: 0.82 0.09 195;
   --border: 0.900 0.006 85;
   --input: 0.900 0.006 85;
   --ring: 0.420 0.070 210;

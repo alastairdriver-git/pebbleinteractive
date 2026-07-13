@@ -89,8 +89,8 @@ const hasHours = (site.hours?.length ?? 0) > 0;
       )}
     </div>
 
-    <div class="flex flex-col items-center justify-between gap-2 border-t border-border py-6 text-xs text-muted-foreground sm:flex-row">
-      <p>© {new Date().getFullYear()} {site.name}</p>
+    <div class="flex flex-col items-center justify-between gap-2 border-t border-border py-6 text-sm text-muted-foreground sm:flex-row">
+      <p>© {new Date().getFullYear()} {site.legalName ?? site.name}</p>
       {(site.legalLinks?.length ?? 0) > 0 && (
         <nav class="flex gap-4">
           {site.legalLinks!.map((l) => (

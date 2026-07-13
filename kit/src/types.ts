@@ -16,6 +16,8 @@ export type Accreditation = { src: string; alt: string };
 
 export interface SiteConfig {
   name: string;
+  /** Registered legal entity for the footer © line (falls back to name). */
+  legalName?: string;
   tagline?: string;
   logo?: string; // header logo src
   logoFooter?: string; // footer logo src (defaults to logo)
