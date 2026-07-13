@@ -1,99 +1,98 @@
 ---
 import "../styles/global.css";
 import BaseLayout from "@grade/astro-kit/BaseLayout.astro";
-import { Section, Container, Card, CardHeader, CardTitle, CardContent } from "@gradeui/ui";
+import { Section, Container } from "@gradeui/ui";
 import { SITE, NAV, FONT_HREF } from "../lib/site.config";
+
+const sectors = ["SaaS", "Mobile apps", "Websites", "Medtech", "Fintech"];
 
 const services = [
   { title: "Design systems", body: "Token architectures, component libraries, and the tooling that keeps design and code in lockstep — from CSS variables up." },
   { title: "Interactive product design", body: "Prototypes and production interfaces built with real components, so what you sign off is what ships." },
   { title: "Front-end engineering", body: "Accessible, performant React and Astro builds that treat the design system as the source of truth." },
+  { title: "AI-generated prototypes", body: "Working prototypes generated with AI on top of Grade — real components and real tokens, so an idea becomes a testable product in hours, not weeks." },
 ];
 
-const principles = [
-  { title: "Tokens first", body: "Every colour, space, and motion value is a named decision. Rebrands become a variable swap, not a rewrite." },
-  { title: "Prototype in production materials", body: "We design in the same components we ship, so nothing is lost in translation." },
-  { title: "Small, senior, hands-on", body: "You work directly with the people doing the work." },
-];
-
-const grade = {
-  title: "Built on Grade",
-  body: "We produce and maintain Grade, our own open design system — the token architecture, component library, and AI-assisted studio behind everything we ship.",
-  href: "https://gradeui.com",
-};
 ---
 
 <BaseLayout site={SITE} nav={NAV} fontHref={FONT_HREF} title="Pebble Interactive — Design systems and interactive product engineering">
-  {/* Hero */}
+  {/* Hero — left-aligned, editorial */}
   <Section pad="xl">
     <Container maxW="xl">
-      <div class="flex flex-col items-center gap-6 text-center">
-        <span class="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-          Design systems studio
-        </span>
-        <h1 class="max-w-4xl font-display text-5xl leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-          Interfaces built on systems, not one-offs
+      <div class="flex flex-col gap-6">
+        <span class="eyebrow">Design systems studio</span>
+        <h1 class="max-w-4xl text-balance font-display text-5xl leading-[1.04] tracking-tight sm:text-6xl lg:text-7xl">
+          Systemised design for complex&nbsp;products
         </h1>
-        <p class="max-w-2xl text-lg text-muted-foreground">
-          Pebble Interactive designs and builds digital products on top of rigorous design
-          systems — tokens, components, and documentation that outlive any single screen.
+        <p class="max-w-prose text-pretty text-xl leading-relaxed text-muted-foreground">
+          Pebble Interactive designs and builds for domains where detail compounds —
+          tokens, components, and documentation that hold up as the product grows.
         </p>
       </div>
     </Container>
   </Section>
 
-  {/* Services */}
+  {/* Services — numbered editorial rows, hairline dividers */}
   <Section pad="lg">
     <Container maxW="xl">
-      <div class="flex flex-col items-start gap-2">
-        <span class="text-xs uppercase tracking-[0.2em] text-primary">What we do</span>
-        <h2 class="max-w-3xl font-display text-3xl sm:text-4xl">
-          From token architecture to shipped product
-        </h2>
-      </div>
-      <div class="mt-10 grid gap-6 md:grid-cols-3">
+      <span class="eyebrow">What we do</span>
+      <div class="mt-6 border-t border-border">
         {services.map((s) => (
-          <Card className="h-full">
-            <CardHeader>
-              <CardTitle>{s.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p class="text-muted-foreground">{s.body}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </Container>
-  </Section>
-
-  {/* Grade */}
-  <Section pad="lg">
-    <Container maxW="xl">
-      <div class="flex flex-col items-start gap-3 rounded-2xl border border-border bg-card p-8 sm:p-10">
-        <span class="text-xs uppercase tracking-[0.2em] text-primary">Our design system</span>
-        <h2 class="font-display text-3xl sm:text-4xl">{grade.title}</h2>
-        <p class="max-w-2xl text-muted-foreground">{grade.body}</p>
-        <a
-          href={grade.href}
-          class="mt-2 text-sm font-semibold text-primary underline-offset-4 hover:underline"
-        >
-          Explore Grade at gradeui.com →
-        </a>
-      </div>
-    </Container>
-  </Section>
-
-  {/* Principles */}
-  <Section pad="lg">
-    <Container maxW="xl">
-      <div class="grid gap-10 md:grid-cols-3">
-        {principles.map((p) => (
-          <div class="flex flex-col gap-2">
-            <h3 class="font-display text-xl">{p.title}</h3>
-            <p class="text-muted-foreground">{p.body}</p>
+          <div class="grid gap-2 border-b border-border py-8 sm:grid-cols-[1fr_1.4fr] sm:gap-8 sm:py-10">
+            <h2 class="text-balance font-display text-2xl tracking-tight sm:text-3xl">{s.title}</h2>
+            <p class="max-w-prose text-balance text-lg leading-relaxed text-muted-foreground sm:pt-1">{s.body}</p>
           </div>
         ))}
       </div>
     </Container>
   </Section>
+
+  {/* Sectors — inline editorial strip */}
+  <Section pad="lg">
+    <Container maxW="xl">
+      <span class="eyebrow">Where we work</span>
+      <p class="mt-6 max-w-4xl font-display text-2xl leading-snug tracking-tight text-foreground sm:text-3xl">
+        {sectors.map((s, i) => (
+          <>
+            <span class="whitespace-nowrap">{s}</span>
+            {i < sectors.length - 1 && <span class="mx-3 text-muted-foreground/50">·</span>}
+          </>
+        ))}
+      </p>
+      <p class="mt-4 max-w-prose text-pretty text-xl leading-relaxed text-muted-foreground">
+        From product interfaces to marketing sites — including the regulated, detail-heavy
+        worlds of medtech and fintech, where consistency and accessibility aren't optional.
+      </p>
+    </Container>
+  </Section>
+
+  {/* Grade — full-bleed band */}
+  <div class="bg-camel">
+    <Section pad="xl">
+      <Container maxW="xl">
+        <div class="grid gap-8 sm:grid-cols-[1.2fr_1fr] sm:items-end">
+          <div class="flex flex-col gap-4">
+            <span class="eyebrow">Our design system</span>
+            <h2 class="text-balance font-display text-4xl leading-[1.05] tracking-tight sm:text-5xl">
+              Built on Grade
+            </h2>
+            <p class="max-w-prose text-pretty text-xl leading-relaxed opacity-80">
+              We produce and maintain Grade, our own open design system — the token
+              architecture, component library, and AI-assisted studio behind everything
+              we ship.
+            </p>
+          </div>
+          <div class="sm:justify-self-end">
+            <a
+              href="https://gradeui.com"
+              class="inline-block border-b border-current pb-1 text-sm font-semibold tracking-wide transition-opacity hover:opacity-70"
+            >
+              Explore Grade at gradeui.com →
+            </a>
+          </div>
+        </div>
+      </Container>
+    </Section>
+  </div>
+
 </BaseLayout>
