@@ -20,9 +20,9 @@
 
 /* Fonts. */
 :root {
-  --font-sans: "Inter Tight", "Inter", system-ui, sans-serif;
-  --font-geist: "Inter Tight", "Inter", system-ui, sans-serif;
-  --font-display: "Inter Tight", "Inter", system-ui, sans-serif;
+  --font-sans: "Mona Sans", system-ui, sans-serif;
+  --font-geist: "Mona Sans", system-ui, sans-serif;
+  --font-display: "Mona Sans", system-ui, sans-serif;
   --font-heading-weight: 500;
 }
 

@@ -15,6 +15,12 @@ const principles = [
   { title: "Prototype in production materials", body: "We design in the same components we ship, so nothing is lost in translation." },
   { title: "Small, senior, hands-on", body: "You work directly with the people doing the work." },
 ];
+
+const grade = {
+  title: "Built on Grade",
+  body: "We produce and maintain Grade, our own open design system — the token architecture, component library, and AI-assisted studio behind everything we ship.",
+  href: "https://gradeui.com",
+};
 ---
 
 <BaseLayout site={SITE} nav={NAV} fontHref={FONT_HREF} title="Pebble Interactive — Design systems and interactive product engineering">
@@ -32,12 +38,6 @@ const principles = [
           Pebble Interactive designs and builds digital products on top of rigorous design
           systems — tokens, components, and documentation that outlive any single screen.
         </p>
-        <a
-          href={SITE.bookingUrl}
-          class="mt-2 rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
-        >
-          {SITE.bookingLabel}
-        </a>
       </div>
     </Container>
   </Section>
@@ -62,6 +62,23 @@ const principles = [
             </CardContent>
           </Card>
         ))}
+      </div>
+    </Container>
+  </Section>
+
+  {/* Grade */}
+  <Section pad="lg">
+    <Container maxW="xl">
+      <div class="flex flex-col items-start gap-3 rounded-2xl border border-border bg-card p-8 sm:p-10">
+        <span class="text-xs uppercase tracking-[0.2em] text-primary">Our design system</span>
+        <h2 class="font-display text-3xl sm:text-4xl">{grade.title}</h2>
+        <p class="max-w-2xl text-muted-foreground">{grade.body}</p>
+        <a
+          href={grade.href}
+          class="mt-2 text-sm font-semibold text-primary underline-offset-4 hover:underline"
+        >
+          Explore Grade at gradeui.com →
+        </a>
       </div>
     </Container>
   </Section>
