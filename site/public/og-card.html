@@ -38,12 +38,15 @@
   .bottom { display: flex; align-items: baseline; justify-content: space-between; }
   .brand { font-size: 30px; font-weight: 650; font-variation-settings: "wdth" 115; }
   .url { font-size: 24px; font-weight: 500; opacity: 0.7; }
-  .tick { position: absolute; top: 0; left: 80px; width: 120px; height: 8px; background: oklch(var(--accent)); }
+  .mark { position: absolute; top: 64px; right: 80px; }
 </style>
 </head>
 <body>
   <div class="card">
-    <div class="tick"></div>
+    <svg class="mark" viewBox="0 0 125 102" width="110" height="90">
+      <path fill="oklch(0.82 0.09 195)" d="M60 2 C95 -3 122 18 124 48 C126 78 100 100 62 101 C26 102 -2 82 0 50 C2 20 28 7 60 2 Z"/>
+      <rect x="-20" y="58" width="180" height="12" fill="oklch(0.245 0.045 220)" transform="rotate(-7 62 64)"/>
+    </svg>
     <div>
       <div class="eyebrow">Design systems studio</div>
       <h1 style="margin-top: 28px;">Systemised design for complex products</h1>

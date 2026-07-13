@@ -27,12 +27,9 @@ export default function SiteHeader({
     >
       <Container maxW="xl">
         <div className="flex h-20 items-center justify-between gap-6">
-          <a href="/" className="flex shrink-0 items-center" aria-label={site.name}>
-            {site.logo ? (
-              <img src={site.logo} alt={site.name} className="h-11 w-auto" />
-            ) : (
-              <span className="font-display text-xl">{site.name}</span>
-            )}
+          <a href="/" className="flex shrink-0 items-center gap-3" aria-label={site.name}>
+            {site.logo && <img src={site.logo} alt="" className="h-8 w-auto" />}
+            <span className="font-display text-xl">{site.name}</span>
           </a>
 
           <nav className="hidden items-center gap-1 lg:flex">

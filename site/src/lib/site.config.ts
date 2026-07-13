@@ -9,6 +9,7 @@ export const FONT_HREF =
 export const SITE: SiteConfig = {
   name: "Pebble Interactive",
   legalName: "Pebble Interactive Ltd",
+  logo: "/logo.svg",
   tagline: "Design systems and interactive product engineering",
   email: "hello@pebbleinteractive.com",
   theme: "pebble",
