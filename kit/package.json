@@ -1,0 +1,26 @@
+{
+  "name": "@grade/astro-kit",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Shared engine for Grade × Astro markdown-driven sites: content schema, site chrome, page renderer, compound-component wrappers, and base styles.",
+  "exports": {
+    "./content": "./src/content.ts",
+    "./types": "./src/types.ts",
+    "./styles.css": "./src/styles/kit.css",
+    "./BaseLayout.astro": "./src/layouts/BaseLayout.astro",
+    "./PageBody.astro": "./src/components/PageBody.astro",
+    "./Sections.astro": "./src/components/Sections.astro",
+    "./SiteFooter.astro": "./src/components/SiteFooter.astro",
+    "./SiteHeader": "./src/components/SiteHeader.tsx",
+    "./FaqAccordion": "./src/components/FaqAccordion.tsx",
+    "./ContactForm": "./src/components/ContactForm.tsx",
+    "./LocationMap": "./src/components/LocationMap.tsx"
+  },
+  "peerDependencies": {
+    "@gradeui/ui": "^4.0.0",
+    "astro": "*",
+    "react": "*",
+    "react-dom": "*"
+  }
+}

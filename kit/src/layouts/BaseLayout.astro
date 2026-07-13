@@ -1,0 +1,105 @@
+---
+/* Generic document shell. Owns <html>/<head>/<body>, the theme attribute, SEO/OG
+   tags, and the site chrome (header + footer). Everything site-specific comes in
+   as props: the `site` config, the `nav` tree, the page meta, and (optionally)
+   the web-font stylesheet href. No brand strings are hard-coded here. */
+import SiteHeader from "../components/SiteHeader.tsx";
+import SiteFooter from "../components/SiteFooter.astro";
+import type { NavItem, SiteConfig } from "../types";
+
+interface Props {
+  site: SiteConfig;
+  nav: NavItem[];
+  title: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  /** data-grade-theme id; falls back to site.theme. */
+  theme?: string;
+  /** web-font stylesheet href; defaults to Inter + Instrument Serif. */
+  fontHref?: string;
+  /** Overlay header: transparent over a full-bleed hero, solid on scroll.
+      The page's first element should be the full-bleed hero. */
+  headerOverlay?: boolean;
+}
+
+const {
+  site,
+  nav,
+  title,
+  description = site.tagline ?? "",
+  image,
+  canonical,
+  theme = site.theme,
+  fontHref = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap",
+  headerOverlay = false,
+} = Astro.props;
+
+const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const ogImage = image ? new URL(image, Astro.site ?? Astro.url).href : undefined;
+---
+
+<!doctype html>
+<html lang="en" data-grade-theme={theme}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href={canonicalURL} />
+    {site.logo && <link rel="icon" href={site.logo} />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href={fontHref} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+    <slot name="head" />
+  </head>
+  <body class="bg-background text-foreground">
+    <SiteHeader site={site} nav={nav} overlay={headerOverlay} />
+    <main>
+      <slot />
+    </main>
+    <SiteFooter site={site} />
+
+    <script>
+      // Overlay header: solidify on scroll by toggling [data-scrolled]. Harmless
+      // for the solid header (it ignores the attribute).
+      const hdr = document.querySelector("[data-site-header]");
+      if (hdr) {
+        const onScroll = () => hdr.setAttribute("data-scrolled", String(window.scrollY > 8));
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+      }
+
+      const els = document.querySelectorAll("[data-reveal]");
+      if (!("IntersectionObserver" in window)) {
+        els.forEach((el) => el.classList.add("in-view"));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add("in-view");
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: "0px 0px -10% 0px", threshold: 0.1 },
+        );
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

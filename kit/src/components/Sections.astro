@@ -1,0 +1,147 @@
+---
+import {
+  Section,
+  Container,
+  SectionEyebrow,
+  SectionTitle,
+  SectionSubtitle,
+  SectionActions,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  MediaSurface,
+  Button,
+} from "@gradeui/ui";
+
+/* Renders an ordered stack of typed section blocks by composing the Grade
+   PRIMITIVES — Section (themeable band: scope + pad) + Container (the measure,
+   maxW widths) — plus Card/MediaSurface/Button. No SectionBlock: per
+   STUDIO-SECTIONS, Section owns theme+layout and Container owns width, so a
+   parallel block component isn't needed. The kit's value is the data→layout
+   mapping (the pageSection union), not a duplicate band component. */
+interface Props {
+  sections: any[];
+}
+const { sections } = Astro.props;
+
+// tone → Section scope (dark uses the inverse marketing scope: dark band, light text)
+const scopeFor = (t?: string) =>
+  t === "muted" ? "muted" : t === "dark" ? "inverse" : t === "card" ? "card" : undefined;
+const maxW = (n?: number) => (n === 2 ? "md" : n === 4 ? "xl" : "lg");
+const gridCols = (n?: number) =>
+  n === 2 ? "sm:grid-cols-2" : n === 4 ? "sm:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-2 lg:grid-cols-3";
+---
+
+{
+  sections.map((s) => (
+    <>
+      {s.type === "mediaText" && (
+        <Section pad="lg" scope={scopeFor(s.tone)}>
+          <Container maxW="xl">
+            <div
+              class:list={[
+                "flex flex-col gap-10 lg:items-center",
+                s.reverse ? "lg:flex-row-reverse" : "lg:flex-row",
+              ]}
+            >
+              <div class="lg:w-1/2">
+                {s.media ? (
+                  <img src={s.media} alt={s.title} class="aspect-[4/3] w-full rounded-2xl object-cover" />
+                ) : (
+                  <MediaSurface hint={s.mediaHint} alt={s.title} aspect="video" radius="lg" className="w-full" />
+                )}
+              </div>
+              <div class="flex flex-col items-start gap-4 lg:w-1/2">
+                {s.eyebrow && <SectionEyebrow>{s.eyebrow}</SectionEyebrow>}
+                <SectionTitle>{s.title}</SectionTitle>
+                {s.body && <SectionSubtitle>{s.body}</SectionSubtitle>}
+                {s.action && (
+                  <SectionActions>
+                    <Button asChild className="rounded-full">
+                      <a href={s.action.href}>{s.action.label}</a>
+                    </Button>
+                  </SectionActions>
+                )}
+              </div>
+            </div>
+          </Container>
+        </Section>
+      )}
+
+      {s.type === "kpis" && (
+        <Section pad="lg" scope={scopeFor(s.tone)}>
+          <Container maxW="xl">
+            {(s.eyebrow || s.title) && (
+              <div class="mb-10 flex flex-col items-center gap-2 text-center">
+                {s.eyebrow && <SectionEyebrow>{s.eyebrow}</SectionEyebrow>}
+                {s.title && <SectionTitle>{s.title}</SectionTitle>}
+              </div>
+            )}
+            <div class="grid gap-8 text-center sm:grid-cols-3">
+              {s.items.map((k: any) => (
+                <div class="flex flex-col gap-2">
+                  <span class="font-display text-5xl text-primary">{k.figure}</span>
+                  <span class="text-sm text-muted-foreground">{k.label}</span>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </Section>
+      )}
+
+      {s.type === "featureGrid" && (
+        <Section pad="lg" scope={scopeFor(s.tone)}>
+          <Container maxW="xl">
+            {(s.eyebrow || s.title) && (
+              <div class="mb-10 flex flex-col items-start gap-2">
+                {s.eyebrow && <SectionEyebrow>{s.eyebrow}</SectionEyebrow>}
+                {s.title && <SectionTitle>{s.title}</SectionTitle>}
+              </div>
+            )}
+            <div class:list={["grid gap-6", gridCols(s.columns)]}>
+              {s.items.map((it: any) => (
+                <Card className="h-full overflow-hidden">
+                  {it.media && <MediaSurface hint="landscape" alt={it.title} aspect="video" className="w-full" />}
+                  <CardHeader>
+                    <CardTitle className="text-lg">{it.title}</CardTitle>
+                    {it.body && (
+                      <CardContent className="px-0 pt-2 text-sm text-muted-foreground">{it.body}</CardContent>
+                    )}
+                  </CardHeader>
+                </Card>
+              ))}
+            </div>
+          </Container>
+        </Section>
+      )}
+
+      {s.type === "cta" && (
+        <Section pad="lg" scope={s.tone === "light" ? "card" : "inverse"}>
+          <Container maxW="md">
+            <div class="flex flex-col items-center gap-5 text-center">
+              <SectionTitle>{s.title}</SectionTitle>
+              {s.body && <SectionSubtitle>{s.body}</SectionSubtitle>}
+              {s.action && (
+                <SectionActions>
+                  <Button asChild className="rounded-full">
+                    <a href={s.action.href}>{s.action.label}</a>
+                  </Button>
+                </SectionActions>
+              )}
+            </div>
+          </Container>
+        </Section>
+      )}
+
+      {s.type === "richText" && (
+        <Section pad="lg">
+          <Container maxW="prose">
+            {s.title && <SectionTitle className="mb-4">{s.title}</SectionTitle>}
+            <div class="es-prose" set:html={s.body} />
+          </Container>
+        </Section>
+      )}
+    </>
+  ))
+}

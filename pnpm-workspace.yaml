@@ -1,0 +1,6 @@
+# Pebble Interactive site — Grade × Astro.
+# `kit` is a vendored copy of @grade/astro-kit from gradeui-astro-builds
+# (unpublished engine); `site` is the thin content + theme layer.
+packages:
+  - "kit"
+  - "site"

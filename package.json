@@ -1,0 +1,12 @@
+{
+  "name": "pebbleinteractive-astro-site",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Pebble Interactive site on the Grade × Astro markdown-driven kit.",
+  "scripts": {
+    "dev": "pnpm --filter pebbleinteractive-site dev",
+    "build": "pnpm --filter pebbleinteractive-site build",
+    "preview": "pnpm --filter pebbleinteractive-site preview"
+  },
+  "pnpm": { "overrides": { "@gradeui/ui": "4.0.1" } }
+}

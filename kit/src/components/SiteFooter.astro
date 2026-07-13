@@ -1,0 +1,103 @@
+---
+import { Section, Container } from "@gradeui/ui";
+import type { SiteConfig } from "../types";
+
+interface Props {
+  site: SiteConfig;
+}
+const { site } = Astro.props;
+const logo = site.logoFooter ?? site.logo;
+const hasNewsletter = Boolean(site.newsletterUrl);
+const hasAccreditations = (site.accreditations?.length ?? 0) > 0;
+const hasHours = (site.hours?.length ?? 0) > 0;
+---
+
+{
+  (hasNewsletter || hasAccreditations) && (
+    <Section pad="lg" scope="muted">
+      <Container maxW="xl">
+        <div class="flex flex-col items-center gap-6 text-center">
+          {hasNewsletter && (
+            <>
+              <p class="font-display text-2xl">Sign up to the {site.name} newsletter</p>
+              <a
+                href={site.newsletterUrl}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+              >
+                Sign up
+              </a>
+            </>
+          )}
+          {hasAccreditations && (
+            <div class="mt-4 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+              {site.accreditations!.map((a) => (
+                <img src={a.src} alt={a.alt} class="h-14 w-auto object-contain opacity-90" />
+              ))}
+            </div>
+          )}
+        </div>
+      </Container>
+    </Section>
+  )
+}
+
+<footer class="border-t border-border bg-background">
+  <Container maxW="xl">
+    <div class="grid gap-10 py-14 md:grid-cols-3">
+      <div class="flex flex-col items-start gap-4">
+        {logo ? <img src={logo} alt={site.name} class="h-12 w-auto" /> : <span class="font-display text-xl">{site.name}</span>}
+        {site.tagline && <p class="max-w-xs text-sm text-muted-foreground">{site.tagline}.</p>}
+        {(site.instagram || site.facebook) && (
+          <div class="flex items-center gap-3">
+            {site.instagram && (
+              <a href={site.instagram} target="_blank" rel="noopener" aria-label="Instagram" class="text-muted-foreground hover:text-foreground">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </a>
+            )}
+            {site.facebook && (
+              <a href={site.facebook} target="_blank" rel="noopener" aria-label="Facebook" class="text-muted-foreground hover:text-foreground">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V5h-3c-2.2 0-4 1.8-4 4v2H7v4h3v6h4v-6h3l1-4h-4V9c0-.6.4-1 1-1z"/></svg>
+              </a>
+            )}
+          </div>
+        )}
+      </div>
+
+      <div>
+        <h4 class="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">Contact {site.name}</h4>
+        <ul class="flex flex-col gap-2 text-sm text-muted-foreground">
+          {site.phone && <li><a href={site.phoneHref} class="hover:text-foreground">Tel: {site.phone}</a></li>}
+          {site.email && <li><a href={`mailto:${site.email}`} class="hover:text-foreground">Email: {site.email}</a></li>}
+          {site.address && <li>{site.address}</li>}
+        </ul>
+      </div>
+
+      {hasHours && (
+        <div>
+          <h4 class="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">Opening hours</h4>
+          <ul class="flex flex-col gap-1.5 text-sm text-muted-foreground">
+            {site.hours!.map((h) => (
+              <li class="flex justify-between gap-6">
+                <span>{h.day}</span>
+                <span class={h.time.toLowerCase() === "closed" ? "opacity-60" : ""}>{h.time}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+
+    <div class="flex flex-col items-center justify-between gap-2 border-t border-border py-6 text-xs text-muted-foreground sm:flex-row">
+      <p>© {new Date().getFullYear()} {site.name}</p>
+      {(site.legalLinks?.length ?? 0) > 0 && (
+        <nav class="flex gap-4">
+          {site.legalLinks!.map((l) => (
+            <a href={l.href} class="hover:text-foreground">{l.label}</a>
+          ))}
+        </nav>
+      )}
+    </div>
+  </Container>
+</footer>

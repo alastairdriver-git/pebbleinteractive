@@ -1,0 +1,82 @@
+---
+import "../styles/global.css";
+import BaseLayout from "@grade/astro-kit/BaseLayout.astro";
+import { Section, Container, Card, CardHeader, CardTitle, CardContent } from "@gradeui/ui";
+import { SITE, NAV, FONT_HREF } from "../lib/site.config";
+
+const services = [
+  { title: "Design systems", body: "Token architectures, component libraries, and the tooling that keeps design and code in lockstep — from CSS variables up." },
+  { title: "Interactive product design", body: "Prototypes and production interfaces built with real components, so what you sign off is what ships." },
+  { title: "Front-end engineering", body: "Accessible, performant React and Astro builds that treat the design system as the source of truth." },
+];
+
+const principles = [
+  { title: "Tokens first", body: "Every colour, space, and motion value is a named decision. Rebrands become a variable swap, not a rewrite." },
+  { title: "Prototype in production materials", body: "We design in the same components we ship, so nothing is lost in translation." },
+  { title: "Small, senior, hands-on", body: "You work directly with the people doing the work." },
+];
+---
+
+<BaseLayout site={SITE} nav={NAV} fontHref={FONT_HREF} title="Pebble Interactive — Design systems and interactive product engineering">
+  {/* Hero */}
+  <Section pad="xl">
+    <Container maxW="xl">
+      <div class="flex flex-col items-center gap-6 text-center">
+        <span class="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          Design systems studio
+        </span>
+        <h1 class="max-w-4xl font-display text-5xl leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+          Interfaces built on systems, not one-offs
+        </h1>
+        <p class="max-w-2xl text-lg text-muted-foreground">
+          Pebble Interactive designs and builds digital products on top of rigorous design
+          systems — tokens, components, and documentation that outlive any single screen.
+        </p>
+        <a
+          href={SITE.bookingUrl}
+          class="mt-2 rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+        >
+          {SITE.bookingLabel}
+        </a>
+      </div>
+    </Container>
+  </Section>
+
+  {/* Services */}
+  <Section pad="lg">
+    <Container maxW="xl">
+      <div class="flex flex-col items-start gap-2">
+        <span class="text-xs uppercase tracking-[0.2em] text-primary">What we do</span>
+        <h2 class="max-w-3xl font-display text-3xl sm:text-4xl">
+          From token architecture to shipped product
+        </h2>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {services.map((s) => (
+          <Card className="h-full">
+            <CardHeader>
+              <CardTitle>{s.title}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p class="text-muted-foreground">{s.body}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  {/* Principles */}
+  <Section pad="lg">
+    <Container maxW="xl">
+      <div class="grid gap-10 md:grid-cols-3">
+        {principles.map((p) => (
+          <div class="flex flex-col gap-2">
+            <h3 class="font-display text-xl">{p.title}</h3>
+            <p class="text-muted-foreground">{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>

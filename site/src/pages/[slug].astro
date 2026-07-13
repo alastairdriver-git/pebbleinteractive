@@ -1,0 +1,28 @@
+---
+import "../styles/global.css";
+import { getCollection } from "astro:content";
+import BaseLayout from "@grade/astro-kit/BaseLayout.astro";
+import PageBody from "@grade/astro-kit/PageBody.astro";
+import { SITE, NAV, FONT_HREF } from "../lib/site.config";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("pages");
+  return pages
+    .filter((p) => p.id !== "index")
+    .map((page) => ({ params: { slug: page.id }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const { data } = page;
+---
+
+<BaseLayout
+  site={SITE}
+  nav={NAV}
+  fontHref={FONT_HREF}
+  title={data.metaTitle ?? `${data.title} — ${SITE.name}`}
+  description={data.metaDescription}
+  image={data.banner || undefined}
+>
+  <PageBody page={page} site={SITE} />
+</BaseLayout>

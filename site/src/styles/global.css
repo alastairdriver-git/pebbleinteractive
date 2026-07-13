@@ -1,0 +1,64 @@
+/* Grade's stylesheet is the sole Tailwind entrypoint. */
+@import "@gradeui/ui/styles/globals.css";
+
+/* Scan this app's own markup. */
+@source "../**/*.{astro,tsx,jsx,ts,js,mdx}";
+
+/* Scan the vendored kit's components (real relative path — NOT through the
+   pnpm symlink, which Tailwind won't traverse). */
+@source "../../../kit/src/**/*.{astro,tsx}";
+
+/* Scan @gradeui/ui's compiled output so component-baked classes generate.
+   pnpm hoists the real files to the workspace-root .pnpm store; we list the
+   likely locations and Tailwind ignores the ones that don't exist. */
+@source "../../node_modules/.pnpm/@gradeui+ui@*/node_modules/@gradeui/ui/dist/**/*.{js,mjs}";
+@source "../../../node_modules/.pnpm/@gradeui+ui@*/node_modules/@gradeui/ui/dist/**/*.{js,mjs}";
+@source "../../node_modules/@gradeui/ui/dist/**/*.{js,mjs}";
+
+/* Kit base styles (prose + token-driven band utilities). */
+@import "@grade/astro-kit/styles.css";
+
+/* Fonts. */
+:root {
+  --font-sans: "Inter Tight", "Inter", system-ui, sans-serif;
+  --font-geist: "Inter Tight", "Inter", system-ui, sans-serif;
+  --font-display: "Inter Tight", "Inter", system-ui, sans-serif;
+  --font-heading-weight: 500;
+}
+
+/* ───────────────────────────────────────────────────────────────────────
+   PEBBLE — warm stone neutrals with a deep ink-teal accent. Self-contained
+   OKLCH token set under the theme id. Placeholder palette: tune at will.
+   ─────────────────────────────────────────────────────────────────────── */
+:root[data-grade-theme="pebble"] {
+  --background: 0.975 0.004 85;            /* warm off-white stone */
+  --foreground: 0.245 0.015 240;           /* deep ink */
+  --bg-base: 0.975 0.004 85;
+  --fg-base: 0.245 0.015 240;
+  --card: 1 0 0;
+  --card-foreground: 0.245 0.015 240;
+  --popover: 1 0 0;
+  --popover-foreground: 0.245 0.015 240;
+  --primary: 0.420 0.070 210;              /* deep teal */
+  --primary-foreground: 0.975 0.004 85;
+  --secondary: 0.945 0.006 85;
+  --secondary-foreground: 0.300 0.015 240;
+  --muted: 0.945 0.006 85;
+  --muted-foreground: 0.520 0.012 240;
+  --accent: 0.420 0.070 210;
+  --accent-foreground: 0.975 0.004 85;
+  --border: 0.900 0.006 85;
+  --input: 0.900 0.006 85;
+  --ring: 0.420 0.070 210;
+  --radius: 0.625rem;
+
+  /* EXPRESSIVE ramps: accent1 = ink-teal (dark bands), accent2 = warm stone. */
+  --gds-expressive-accent1-100: #e8f0f2;
+  --gds-expressive-accent1-300: #8fb3bd;
+  --gds-expressive-accent1-700: #1e4653;
+  --gds-expressive-accent1-900: #0d222b;
+  --gds-expressive-accent2-100: #f7f3ec;
+  --gds-expressive-accent2-300: #ddd2bf;
+  --gds-expressive-accent2-700: #6f6350;
+  --gds-expressive-accent2-900: #332c22;
+}

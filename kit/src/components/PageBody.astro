@@ -1,0 +1,243 @@
+---
+import { getCollection, render } from "astro:content";
+import {
+  Section,
+  Container,
+  SectionEyebrow,
+  SectionTitle,
+  Button,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  Badge,
+  MediaSurface,
+} from "@gradeui/ui";
+import ContactForm from "./ContactForm.tsx";
+import LocationMap from "./LocationMap.tsx";
+import Sections from "./Sections.astro";
+import type { SiteConfig } from "../types";
+
+/* The generic page renderer. Layout is chosen by FEATURE DETECTION on the
+   frontmatter, not by page id or domain wording — so it works for clinic
+   treatments, portfolio projects, or anything else:
+
+     tiers[]            → pricing cards
+     team[]             → people grid
+     kind === "index"   → grouped card menu of all kind:"detail" pages
+     lat/lng | mapEmbed → contact layout (map + details + form)
+     else               → prose (+ a spec bar if `stats` is present)
+*/
+interface Props {
+  page: any; // CollectionEntry<"pages"> in the consuming site
+  site: SiteConfig;
+}
+const { page, site } = Astro.props;
+const { data } = page;
+const { Content } = await render(page);
+
+const isPricing = Array.isArray(data.tiers) && data.tiers.length > 0;
+const isTeam = Array.isArray(data.team) && data.team.length > 0;
+const isIndex = data.kind === "index";
+const isContact =
+  data.kind === "contact" || (data.lat != null && data.lng != null) || Boolean(data.mapEmbed);
+const hasSections = Array.isArray(data.sections) && data.sections.length > 0;
+const stats = data.stats;
+const hasStats = stats && (stats.duration || stats.results || stats.longevity || stats.frequency);
+const STAT_LABELS: Record<string, string> = {
+  duration: "Duration",
+  results: "Results seen",
+  longevity: "Results last",
+  frequency: "Frequency",
+};
+
+// Index page: group every detail page by `group`, in first-appearance order.
+let groups: { group: string; items: { slug: string; title: string; blurb?: string; thumb?: string }[] }[] = [];
+if (isIndex) {
+  const all = await getCollection("pages" as any);
+  const order: string[] = [];
+  const map = new Map<string, typeof groups[number]["items"]>();
+  for (const p of all as any[]) {
+    if (p.data.kind !== "detail") continue;
+    const g = p.data.group ?? "Other";
+    if (!map.has(g)) {
+      map.set(g, []);
+      order.push(g);
+    }
+    map.get(g)!.push({ slug: p.id, title: p.data.title, blurb: p.data.metaDescription, thumb: p.data.thumb });
+  }
+  groups = order.map((g) => ({ group: g, items: map.get(g)! }));
+}
+---
+
+{/* Banner / page header */}
+{
+  data.banner ? (
+    <div class="relative">
+      <img src={data.banner} alt={data.title} class="h-56 w-full object-cover sm:h-72" />
+      <div class="absolute inset-0 bg-foreground/35" />
+      <div class="absolute inset-0 flex items-end">
+        <Container maxW="xl">
+          <h1 class="pb-8 font-display text-4xl text-background sm:text-5xl">{data.title}</h1>
+        </Container>
+      </div>
+    </div>
+  ) : (
+    <Section pad="lg" scope="muted">
+      <Container maxW="xl">
+        <h1 class="font-display text-4xl sm:text-5xl">{data.title}</h1>
+      </Container>
+    </Section>
+  )
+}
+
+{
+  isIndex ? (
+    <Section pad="lg">
+      <Container maxW="xl">
+        {data.intro && (
+          <p class="mb-12 max-w-2xl text-lg text-muted-foreground">{data.intro}</p>
+        )}
+        <div class="flex flex-col gap-16">
+          {groups.map((grp) => (
+            <div>
+              <div class="mb-6 flex items-baseline justify-between gap-4 border-b border-border pb-3">
+                <h2 class="font-display text-2xl sm:text-3xl">{grp.group}</h2>
+                <span class="text-sm text-muted-foreground">{grp.items.length}</span>
+              </div>
+              <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {grp.items.map((t) => (
+                  <a href={`/${t.slug}`} class="group">
+                    <Card className="h-full overflow-hidden transition-shadow hover:shadow-lg">
+                      {t.thumb && <img src={t.thumb} alt={t.title} class="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105" />}
+                      <CardHeader>
+                        <CardTitle className="text-lg">{t.title}</CardTitle>
+                        {t.blurb && <p class="line-clamp-3 text-sm text-muted-foreground">{t.blurb}</p>}
+                      </CardHeader>
+                    </Card>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </Section>
+  ) : isPricing ? (
+    <Section pad="lg">
+      <Container maxW="xl">
+        {data.intro && <p class="mx-auto mb-12 max-w-2xl text-center text-lg text-muted-foreground">{data.intro}</p>}
+        <div class="grid items-start gap-6 md:grid-cols-3">
+          {data.tiers.map((t: any) => (
+            <Card className={`flex h-full flex-col ${t.featured ? "ring-2 ring-primary shadow-lg" : ""}`}>
+              <CardHeader>
+                <div class="flex items-center justify-between gap-2">
+                  <CardTitle>{t.name}</CardTitle>
+                  {t.featured && <Badge variant="info-soft">Most popular</Badge>}
+                </div>
+                <p class="mt-2"><span class="font-display text-4xl">{t.price}</span><span class="text-sm text-muted-foreground">{t.cadence}</span></p>
+              </CardHeader>
+              <CardContent className="flex flex-1 flex-col gap-6">
+                <ul class="flex flex-col gap-3 text-sm">
+                  {t.perks.map((p: string) => (
+                    <li class="flex gap-2.5">
+                      <svg class="mt-0.5 size-4 shrink-0 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5" /></svg>
+                      <span class="text-muted-foreground">{p}</span>
+                    </li>
+                  ))}
+                </ul>
+                {t.signupUrl && (
+                  <Button asChild variant={t.featured ? "default" : "outline"} className="mt-auto w-full">
+                    <a href={t.signupUrl} target="_blank" rel="noopener">Sign up</a>
+                  </Button>
+                )}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+        {data.termsUrl && (
+          <p class="mt-8 text-center text-sm text-muted-foreground">
+            <a href={data.termsUrl} target="_blank" rel="noopener" class="underline underline-offset-2">Terms &amp; conditions</a>
+          </p>
+        )}
+      </Container>
+    </Section>
+  ) : isTeam ? (
+    <Section pad="lg">
+      <Container maxW="xl">
+        <div class="flex flex-col gap-12">
+          {data.team.map((m: any) => (
+            <article class="grid items-start gap-6 border-b border-border pb-12 last:border-0 sm:grid-cols-[200px_1fr]" data-reveal="fade-up">
+              <img src={m.photo} alt={m.name} class="aspect-[3/4] w-full rounded-xl object-cover shadow-md sm:w-[200px]" />
+              <div class="flex flex-col gap-3">
+                <div>
+                  <h2 class="font-display text-2xl">{m.name}</h2>
+                  <p class="text-sm font-medium text-primary">{m.role}</p>
+                </div>
+                <p class="text-sm leading-relaxed text-muted-foreground">{m.bio}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </Section>
+  ) : isContact ? (
+    <Section pad="lg">
+      <Container maxW="xl">
+        <div class="grid gap-12 lg:grid-cols-2">
+          <div class="flex flex-col gap-6">
+            {(data.phone ?? site.phone) && (
+              <div><p class="font-semibold">Call us on</p><a href={data.phone ? `tel:${data.phone.replace(/\s/g, "")}` : site.phoneHref} class="text-primary hover:underline">{data.phone ?? site.phone}</a></div>
+            )}
+            {data.emergencyPhone && (
+              <div><p class="font-semibold">Emergency contact</p><a href={`tel:${data.emergencyPhone.replace(/\s/g, "")}`} class="text-primary hover:underline">{data.emergencyPhone}</a></div>
+            )}
+            {(data.email ?? site.email) && (
+              <div><p class="font-semibold">Email</p><a href={`mailto:${data.email ?? site.email}`} class="text-primary hover:underline">{data.email ?? site.email}</a></div>
+            )}
+            {(data.address ?? site.address) && (
+              <div><p class="font-semibold">Find us</p><p class="text-muted-foreground">{data.address ?? site.address}</p></div>
+            )}
+            {data.lat != null && data.lng != null ? (
+              <div class="mt-2"><LocationMap client:load lat={data.lat} lng={data.lng} zoom={15} label={site.name} /></div>
+            ) : data.mapEmbed ? (
+              <iframe src={data.mapEmbed} title={`Map to ${site.name}`} class="mt-2 h-72 w-full rounded-xl border border-border" loading="lazy" referrerpolicy="no-referrer-when-downgrade" />
+            ) : null}
+          </div>
+          <div class="flex flex-col gap-5">
+            <SectionEyebrow>Get in touch</SectionEyebrow>
+            <SectionTitle>Send us your enquiry</SectionTitle>
+            <ContactForm client:load />
+          </div>
+        </div>
+      </Container>
+    </Section>
+  ) : hasSections ? (
+    <Sections sections={data.sections} bookingUrl={site.bookingUrl} bookingLabel={site.bookingLabel} />
+  ) : (
+    <Section pad="lg">
+      <Container maxW="prose">
+        {hasStats && (
+          <dl class="mb-10 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-4">
+            {Object.entries(STAT_LABELS).map(([key, label]) =>
+              stats[key] ? (
+                <div class="flex flex-col gap-1 bg-card p-4 text-center">
+                  <dt class="text-xs uppercase tracking-wide text-muted-foreground">{label}</dt>
+                  <dd class="font-display text-lg">{stats[key]}</dd>
+                </div>
+              ) : null,
+            )}
+          </dl>
+        )}
+        <div class="es-prose"><Content /></div>
+        {site.bookingUrl && (
+          <div class="mt-12 flex flex-wrap gap-3 border-t border-border pt-8">
+            <Button asChild>
+              <a href={site.bookingUrl} target="_blank" rel="noopener">{site.bookingLabel ?? "Book now"}</a>
+            </Button>
+          </div>
+        )}
+      </Container>
+    </Section>
+  )
+}
