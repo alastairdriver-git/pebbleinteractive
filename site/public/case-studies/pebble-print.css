@@ -370,3 +370,26 @@ p, li, td { text-wrap: pretty; }
   .onepage.short { display: flex; flex-direction: column; min-height: 257mm; }
   .onepage.short > .band { margin-top: auto; margin-bottom: 0; }
 }
+
+/* Screen: reflow the A4 sheet on narrow screens (web versions of PDFs) */
+@media screen and (max-width: 840px) {
+  body { padding: 0; }
+  .doc { width: auto; padding: 24px 16px 40px; box-shadow: none; }
+  .doc.onepage { --t-body: 15px; --t-lead: 17px; --t-h1: 30px; --t-h3: 16px; --t-small: 13px; }
+  .masthead { margin-bottom: 20px; }
+  .client-logo { position: static; display: block; height: 20px; margin-bottom: 14px; }
+  .title-block h1, .onepage .title-block h1, .title-block:has(.client-logo) h1 { max-width: none; }
+  .facts { grid-template-columns: repeat(2, 1fr) !important; }
+  .facts > div, .facts > div + div { padding: 8px 10px 8px 0; border-left: 0; }
+  .facts dd { font-size: 14px; }
+  .facts dt { font-size: 12px; }
+  .cols { grid-template-columns: 1fr !important; gap: 0; }
+  .fig figcaption { font-size: 12px; }
+  .band .eyebrow { font-size: 17px; }
+  .map, .onepage .map { font-size: 14px; }
+  .map tr { display: block; padding: 8px 0; border-top: 1px solid rgb(255 255 255 / .14); }
+  .map tr:first-child { border-top: 0; }
+  .map th, .map td { display: block; border: 0 !important; padding: 0; width: auto; }
+  .map th { margin-bottom: 2px; }
+  .page-break { display: none; }
+}
