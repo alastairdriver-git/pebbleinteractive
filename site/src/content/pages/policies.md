@@ -14,41 +14,20 @@ Pebble Interactive Ltd is a design and software studio run by two directors. The
 | Policy owner | Alastair Driver, Director |
 | Review | Every year on 1 November. Next review 1 November 2027 |
 
-## Downloads
-
-Each policy is also available as a PDF, or as one pack: [all company policies (PDF)](/policies/pebble-interactive-company-policies.pdf).
-
-- [Policy governance and review](/policies/policy-governance-and-review.pdf)
-- [Environmental and carbon reduction policy](/policies/environmental-and-carbon-reduction-policy.pdf)
-- [Procurement policy](/policies/procurement-policy.pdf)
-- [Business continuity and disaster recovery plan](/policies/business-continuity-and-disaster-recovery-plan.pdf)
-- [Information security policy](/policies/information-security-policy.pdf)
-- [Subcontractor selection and due diligence](/policies/subcontractor-selection-and-due-diligence.pdf)
-- [Supplier management and monitoring](/policies/supplier-management-and-monitoring.pdf)
-- [Anti-facilitation of tax evasion policy](/policies/anti-facilitation-of-tax-evasion-policy.pdf)
-- [Business ethics policy](/policies/business-ethics-policy.pdf)
-- [Anti-bribery and corruption policy](/policies/anti-bribery-and-corruption-policy.pdf)
-- [Anti-slavery and human trafficking policy](/policies/anti-slavery-and-human-trafficking-policy.pdf)
-- [Code of conduct](/policies/code-of-conduct.pdf)
-- [Data protection policy](/policies/data-protection-policy.pdf)
-- [Duty of care policy](/policies/duty-of-care-policy.pdf)
-- [Equal opportunities policy](/policies/equal-opportunities-policy.pdf)
-- [Physical security policy](/policies/physical-security-policy.pdf)
-- [Recruitment policy](/policies/recruitment-policy.pdf)
-- [Whistleblowing policy](/policies/whistleblowing-policy.pdf)
+All of these policies are also available as one document: [download the company policies (PDF)](/policies/pebble-interactive-company-policies.pdf).
 
 ## Policy governance and review
 
 The directors own every policy in this document. Alastair Driver is responsible for keeping them up to date.
 
 - We review all policies together every year on 1 November, and sooner if the law changes, a client asks, something goes wrong, or the business changes (for example, taking on staff).
-- Each review records the date, what changed and who approved it, in the change log at the end of this document.
+- Each review records the date, what changed and who approved it.
 - Anyone who works for us is given these policies at the start of their engagement and told when they change.
 - Breaches of any policy are taken seriously and may lead to disciplinary action or the end of a contract.
 
 ## Environmental and carbon reduction policy
 
-We are a small digital business with no premises beyond a home office, so our footprint comes mainly from energy, equipment, cloud services and travel. We aim to keep it low and to keep reducing it.
+We are a small digital business with no premises beyond a home office, so our footprint comes mainly from energy, equipment, cloud services and travel. We aim to keep it low and to keep reducing it, and we review this policy every year on 1 November.
 
 **What we do**
 
@@ -57,14 +36,6 @@ We are a small digital business with no premises beyond a home office, so our fo
 - **Travel.** Meet online by default. Where travel is needed, prefer rail and public transport over driving, and avoid flights within Great Britain.
 - **Digital work.** Design and build lightweight software: efficient code, compressed media, and cloud resources sized to need and switched off when unused. Prefer hosting and cloud providers that publish carbon commitments.
 - **Paper.** Work digitally and print only when necessary.
-
-**Identifying and managing environmental risks**
-
-At each annual review we list the environmental impacts of our work, rate them, and agree actions for the most significant. On client projects we flag any environmental risks we notice and follow the client's environmental requirements.
-
-**Annual reporting**
-
-Each year on 1 November we record an estimate of our carbon footprint (energy, travel and cloud use), the actions taken that year and the targets for the next. The first year is our baseline, and we set a reduction target after it. The record is kept with this document and is available to clients on request.
 
 ## Procurement policy
 
@@ -147,8 +118,8 @@ We review their work and conduct during the project. We record the checks we mad
 
 We keep track of who we rely on, and check they remain suitable.
 
-- **Supplier register.** We keep a register of regular suppliers and any subcontractors. It records what they provide, any client data they handle, contract and renewal dates, the checks made, and their own key suppliers where relevant to client work.
-- **Annual review.** Each year on 1 November we review each supplier's performance, cost, security and data protection position, and financial stability where we depend on them, and record the outcome.
+- **Supplier register.** We keep a register of regular suppliers and any subcontractors. It records what they provide, any client data they handle, renewal dates, the checks made, and their own key suppliers where relevant to client work.
+- **Annual review.** Each year on 1 November we review each supplier's performance, cost, security and data protection position, and its financial stability where we depend on it, and record the outcome in the register.
 - **Acting on problems.** If a supplier has a security incident, a change of ownership, financial difficulty or poor performance, we assess the impact on clients and replace the supplier if needed.
 
 ## Anti-facilitation of tax evasion policy
@@ -300,9 +271,3 @@ For example: crime, fraud, bribery or tax evasion; breaches of the law or of a c
 **What we will do**
 
 Treat the concern seriously and confidentially; acknowledge it within five working days; look into it and act where needed; and tell the person raising it the outcome, as far as we can. Nobody will be disadvantaged for raising a genuine concern in good faith.
-
-## Change log
-
-| Date | Change | Approved by |
-|---|---|---|
-| 13 November 2026 | All policies adopted | The directors |
