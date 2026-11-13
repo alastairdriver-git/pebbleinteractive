@@ -10,9 +10,9 @@ Pebble Interactive Ltd is a design and software studio run by two directors. The
 |---|---|
 | Company | Pebble Interactive Ltd, company number 08064564 |
 | Registered office | 338 Queens Park Road, Brighton, BN2 9ZL |
-| Adopted | 13 November 2026, by the directors |
 | Policy owner | Alastair Driver, Director |
-| Review | Every year on 1 November. Next review 1 November 2027 |
+| Policy year | 1 November to 31 October |
+| Next review | 1 November 2027 |
 
 All of these policies are also available as one document: [download the company policies (PDF)](/policies/pebble-interactive-company-policies.pdf).
 
