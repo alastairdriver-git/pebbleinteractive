@@ -3,5 +3,25 @@
   "framework": "astro",
   "installCommand": "pnpm install",
   "buildCommand": "pnpm --filter pebbleinteractive-site build",
-  "outputDirectory": "site/dist"
+  "outputDirectory": "site/dist",
+  "headers": [
+    {
+      "source": "/case-studies/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/case-studies",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ]
 }

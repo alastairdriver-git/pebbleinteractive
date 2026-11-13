@@ -1,0 +1,372 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   Pebble Interactive — print stylesheet for A4 PDFs
+   Tokens mirror the "pebble" theme on pebbleinteractive.com
+   (astro-site/site/src/styles/global.css). Change them there, change here.
+   ───────────────────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: "Mona Sans";
+  src: url("assets/MonaSans.woff2") format("woff2");
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Mona Sans";
+  src: url("assets/MonaSans-Italic.woff2") format("woff2");
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  font-style: italic;
+}
+
+:root {
+  /* Colour — same OKLCH values as the site */
+  --stone: oklch(0.975 0.004 85);        /* background */
+  --stone-2: oklch(0.945 0.006 85);      /* secondary / muted panel */
+  --ink: oklch(0.245 0.015 240);         /* foreground */
+  --ink-2: oklch(0.300 0.015 240);       /* secondary foreground */
+  --ink-muted: oklch(0.520 0.012 240);   /* muted foreground */
+  --teal: oklch(0.420 0.070 210);        /* primary */
+  --teal-accent: oklch(0.45 0.095 195);  /* accent: eyebrows, links, ticks */
+  --border: oklch(0.900 0.006 85);
+  --camel: oklch(0.245 0.045 220);       /* dark band ground */
+  --camel-fg: oklch(0.965 0.006 85);
+  --accent-on-camel: oklch(0.82 0.09 195);
+
+  /* Type — Mona Sans; headings ride the width axis wider and heavier */
+  --font: "Mona Sans", system-ui, sans-serif;
+  --heading-width: 115;
+  --heading-weight: 650;
+  --heading-tracking: -0.035em;
+
+  /* Print type scale (pt), major third from 10pt body */
+  --t-caption: 7.5pt;
+  --t-small: 8.5pt;
+  --t-body: 10pt;
+  --t-lead: 12.5pt;
+  --t-h3: 12.5pt;
+  --t-h2: 16pt;
+  --t-h1: 30pt;
+
+  --radius: 6pt;
+  --gap: 14pt;
+}
+
+/* ── Page ───────────────────────────────────────────────────────────── */
+@page {
+  size: A4;
+  margin: 18mm 18mm 20mm 18mm;
+  @bottom-left {
+    content: "Pebble Interactive Ltd · pebbleinteractive.com · hello@pebbleinteractive.com"; /* override per document if needed */
+    font-family: var(--font);
+    font-size: 7.5pt;
+    color: oklch(0.520 0.012 240);
+    vertical-align: top;
+    padding-top: 6mm;
+  }
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    font-family: var(--font);
+    font-size: 7.5pt;
+    color: oklch(0.520 0.012 240);
+    vertical-align: top;
+    padding-top: 6mm;
+  }
+}
+
+* { box-sizing: border-box; }
+html {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: var(--t-body);
+  line-height: 1.55;
+  color: var(--ink);
+  background: #fff;
+  font-kerning: normal;
+  hyphens: manual;
+}
+/* Screen preview: show A4 sheets on stone */
+@media screen {
+  body { background: var(--stone); padding: 24px 0; }
+  .doc { width: 210mm; margin: 0 auto; background: #fff; padding: 18mm; box-shadow: 0 1px 2px rgb(0 0 0 / .08), 0 8px 30px rgb(0 0 0 / .06); }
+}
+
+h1, h2, h3, .display {
+  font-variation-settings: "wdth" var(--heading-width);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
+  color: var(--ink);
+  margin: 0;
+}
+h1 { font-size: var(--t-h1); line-height: 1.06; }
+h2 { font-size: var(--t-h2); line-height: 1.2; letter-spacing: -0.02em; }
+h3 { font-size: var(--t-h3); line-height: 1.3; letter-spacing: -0.01em; }
+p { margin: 0 0 0.75em; }
+a { color: var(--teal-accent); text-decoration: none; }
+strong { font-weight: 620; }
+ul, ol { margin: 0 0 0.75em; padding-left: 1.1em; }
+li { margin-bottom: 0.3em; }
+li::marker { color: var(--teal-accent); }
+
+/* ── Masthead: mark + wordmark, document type on the right ─────────── */
+.masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10pt;
+  border-bottom: 0.75pt solid var(--border);
+  margin-bottom: 26pt;
+}
+.brand { display: flex; align-items: center; gap: 7pt; }
+.brand img { height: 17pt; width: auto; }
+.brand span {
+  font-weight: 640;
+  font-variation-settings: "wdth" 100;
+  font-size: 11pt;
+  letter-spacing: -0.015em;
+}
+.doc-type {
+  font-size: var(--t-small);
+  color: var(--ink-muted);
+  text-align: right;
+}
+
+/* ── Eyebrow: section kicker with a teal tick, as on the site ──────── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7pt;
+  font-size: 8.5pt;
+  font-weight: 600;
+  font-variation-settings: "wdth" var(--heading-width);
+  letter-spacing: 0.01em;
+  color: var(--teal-accent);
+  margin-bottom: 8pt;
+}
+
+/* ── Title block ───────────────────────────────────────────────────── */
+.title-block { margin-bottom: 18pt; }
+.title-block h1 { max-width: 15ch; margin-bottom: 10pt; }
+.standfirst {
+  font-size: var(--t-lead);
+  line-height: 1.45;
+  color: var(--ink-2);
+  max-width: 34em;
+  margin: 0;
+}
+
+/* ── Facts: key/value strip under the title ────────────────────────── */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(var(--facts-cols, 4), 1fr);
+  gap: 0;
+  margin: 0 0 22pt;
+  border-top: 0.75pt solid var(--border);
+  border-bottom: 0.75pt solid var(--border);
+}
+.facts > div { padding: 8pt 10pt 9pt 0; }
+.facts > div + div { padding-left: 10pt; border-left: 0.75pt solid var(--border); }
+.facts dt {
+  font-size: 7.8pt;
+  font-weight: 600;
+  color: var(--ink-muted);
+  margin-bottom: 2pt;
+}
+.facts dd { margin: 0; font-size: 9pt; line-height: 1.35; font-weight: 520; }
+
+/* ── Dark band: highlights / at a glance ───────────────────────────── */
+.band {
+  background: var(--camel);
+  color: var(--camel-fg);
+  border-radius: var(--radius);
+  padding: 16pt 18pt;
+  margin: 0 0 22pt;
+  break-inside: avoid;
+}
+.band .eyebrow { color: var(--accent-on-camel); }
+.band h2, .band h3 { color: var(--camel-fg); }
+.band a { color: var(--accent-on-camel); }
+.stats { display: grid; grid-template-columns: repeat(var(--stats-cols, 3), 1fr); gap: 16pt; }
+.stat .stat-value {
+  display: block;
+  font-size: 15pt;
+  line-height: 1.15;
+  font-weight: 650;
+  font-variation-settings: "wdth" var(--heading-width);
+  letter-spacing: -0.02em;
+  margin-bottom: 4pt;
+}
+.stat .stat-label { font-size: 8.5pt; line-height: 1.4; opacity: 0.85; }
+
+/* ── Body sections: label column + content column ──────────────────── */
+.section {
+  display: grid;
+  grid-template-columns: 34mm 1fr;
+  gap: 0 var(--gap);
+  margin-bottom: 16pt;
+}
+.section > .label {
+  font-size: 8pt;
+  font-weight: 600;
+  font-variation-settings: "wdth" var(--heading-width);
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  padding-top: 2.5pt;
+  border-top: 1.25pt solid var(--teal-accent);
+  align-self: start;
+}
+.section > .content { border-top: 0.75pt solid var(--border); padding-top: 6pt; }
+.section > .content > h3 { margin-bottom: 4pt; }
+.section > .content > :last-child { margin-bottom: 0; }
+.section.full { display: block; }
+
+/* Sub-items inside a section: numbered work streams */
+.workstream { break-inside: avoid; margin-bottom: 10pt; }
+.workstream h3 { display: flex; gap: 6pt; align-items: baseline; margin-bottom: 3pt; }
+.workstream h3 .num { color: var(--teal-accent); font-size: 9pt; font-variant-numeric: tabular-nums; }
+
+/* ── Callout: stone panel, e.g. "Relevance to the client" ──────────── */
+.callout {
+  background: var(--stone-2);
+  border-radius: var(--radius);
+  padding: 12pt 14pt;
+  margin: 0 0 16pt;
+  break-inside: avoid;
+}
+.callout > :last-child { margin-bottom: 0; }
+.callout h3 { margin-bottom: 6pt; }
+
+/* Two-column mapping table (requirement → evidence) */
+.map { width: 100%; border-collapse: collapse; font-size: 9pt; }
+.map th, .map td { text-align: left; vertical-align: top; padding: 5pt 8pt 5pt 0; border-top: 0.75pt solid var(--border); }
+.map th { font-weight: 600; width: 38%; }
+.map tr:first-child th, .map tr:first-child td { border-top: 0; }
+
+/* ── Quote ─────────────────────────────────────────────────────────── */
+.quote {
+  border-left: 1.5pt solid var(--teal-accent);
+  padding: 2pt 0 2pt 12pt;
+  margin: 0 0 16pt;
+  font-size: 11.5pt;
+  line-height: 1.45;
+  font-style: italic;
+}
+.quote cite { display: block; margin-top: 4pt; font-style: normal; font-size: var(--t-small); color: var(--ink-muted); }
+
+/* ── Figures ───────────────────────────────────────────────────────── */
+.fig { margin: 0 0 14pt; break-inside: avoid; }
+.fig .frame {
+  background: var(--stone-2);
+  border: 0.75pt solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fig .frame.pad { padding: 10pt; }
+.fig img { display: block; max-width: 100%; height: auto; }
+.fig .frame.pad img { border-radius: 3pt; }
+.fig figcaption { font-size: var(--t-caption); line-height: 1.45; color: var(--ink-muted); margin-top: 5pt; }
+.fig figcaption b { color: var(--ink); font-weight: 600; }
+.fig-grid { display: grid; grid-template-columns: repeat(var(--cols, 2), 1fr); gap: 10pt; margin-bottom: 14pt; }
+.fig-grid .fig { margin: 0; }
+/* fixed-height frames so a row lines up */
+.fig .frame.h-60 { height: 60mm; } .fig .frame.h-80 { height: 80mm; } .fig .frame.h-100 { height: 100mm; } .fig .frame.h-120 { height: 120mm; }
+.fig .frame[class*="h-"] img { max-height: 100%; width: auto; object-fit: contain; }
+
+/* ── Evidence list (supporting documents) ──────────────────────────── */
+.evidence { list-style: none; padding: 0; margin: 0; }
+.evidence li {
+  display: block;
+  padding: 5pt 0;
+  border-top: 0.75pt solid var(--border);
+  margin: 0;
+  font-size: 9pt;
+}
+.evidence li span { color: var(--ink-muted); }
+
+/* ── Utilities ─────────────────────────────────────────────────────── */
+.page-break { break-before: page; }
+.avoid-break { break-inside: avoid; }
+.muted { color: var(--ink-muted); }
+.small { font-size: var(--t-small); }
+.mt-0 { margin-top: 0; } .mb-0 { margin-bottom: 0; }
+
+/* ── One-page layout ───────────────────────────────────────────────────
+   <main class="doc onepage">: tighter scale so a case study fits one A4.
+   Body splits into .cols: story on the left, evidence on the right. */
+.onepage { --t-body: 8.6pt; --t-lead: 10.5pt; --t-h1: 21pt; --t-h3: 9.6pt; --t-small: 7.6pt; --gap: 12pt; }
+.onepage { font-size: var(--t-body); line-height: 1.5; }
+.onepage .masthead { margin-bottom: 14pt; padding-bottom: 8pt; }
+.onepage .title-block { margin-bottom: 10pt; }
+.onepage .title-block h1 { max-width: none; margin-bottom: 6pt; }
+.onepage .standfirst { max-width: none; }
+.onepage .facts { margin-bottom: 12pt; }
+.onepage .facts > div { padding-top: 6pt; padding-bottom: 6pt; }
+.onepage .facts dd { font-size: 8.2pt; }
+.onepage p { margin-bottom: 0.55em; }
+.onepage ul { margin-bottom: 0.55em; }
+.onepage li { margin-bottom: 0.2em; }
+.cols { display: grid; grid-template-columns: var(--cols-template, 1.45fr 1fr); gap: 0 16pt; margin-bottom: 12pt; }
+.block { margin-bottom: 9pt; }
+.block > .label {
+  font-size: 8pt; font-weight: 600; letter-spacing: 0.01em;
+  font-variation-settings: "wdth" var(--heading-width);
+  color: var(--teal-accent);
+  padding-top: 4pt; border-top: 1.25pt solid var(--teal-accent);
+  margin-bottom: 4pt;
+}
+.block > :last-child { margin-bottom: 0; }
+.onepage .workstream { margin-bottom: 6pt; }
+.onepage .workstream h3 { margin-bottom: 1pt; }
+.onepage .workstream h3 .num { font-size: 7.5pt; }
+.onepage .workstream p { margin-bottom: 0; }
+.onepage .fig { margin-bottom: 9pt; }
+.onepage .fig figcaption { margin-top: 3pt; font-size: 7pt; }
+.onepage .band { padding: 11pt 14pt; margin-bottom: 0; }
+.onepage .band .eyebrow { margin-bottom: 6pt; }
+.onepage .map { font-size: 8pt; }
+.onepage .map th, .onepage .map td { padding: 3.5pt 8pt 3.5pt 0; }
+.band .map th, .band .map td { border-top-color: oklch(1 0 0 / .14); }
+.band .map th { color: var(--accent-on-camel); font-weight: 600; }
+.fig .frame.h-45 { height: 45mm; } .fig .frame.h-50 { height: 50mm; } .fig .frame.h-70 { height: 70mm; }
+
+/* ── Short variant: one page, scannable ────────────────────────────────
+   <main class="doc onepage short">: larger type, one line per work stream. */
+.short { --t-body: 9.6pt; --t-lead: 11.5pt; --t-h1: 23pt; --t-h3: 10.5pt; }
+.short .title-block { margin-bottom: 10pt; }
+.short .facts { margin-bottom: 14pt; }
+.short .block { margin-bottom: 10pt; }
+.short .workstream { margin-bottom: 7pt; }
+.short .workstream h3 { margin-bottom: 2pt; }
+.short .band { margin-bottom: 10pt; padding: 12pt 16pt; }
+.short .map { font-size: 9pt; }
+.short .map th, .short .map td { padding: 4pt 8pt 4pt 0; }
+.footnote { font-size: 7.5pt; color: var(--ink-muted); border-top: 0.75pt solid var(--border); padding-top: 6pt; }
+.footnote b { color: var(--ink); font-weight: 600; }
+
+/* Curated line breaks: balance headings and standfirsts, no orphan words in body copy */
+h1, h2, h3, .standfirst, .stat-value, figcaption { text-wrap: balance; }
+p, li, td { text-wrap: pretty; }
+
+/* Band heading: a step up from the eyebrow so it reads as the band's title */
+.band .eyebrow { font-size: 12pt; font-weight: 650; letter-spacing: -0.01em; margin-bottom: 8pt; }
+.onepage .band .eyebrow { margin-bottom: 7pt; }
+
+/* Client logo: top right of the title block, level with the eyebrow */
+.title-block { position: relative; }
+.client-logo { position: absolute; top: 0; right: 0; height: 15pt; width: auto; filter: brightness(0); } /* monochrome black */
+/* Titles: capped by character count so case-study titles run to two balanced lines
+   and stay clear of the client logo. Tune --title-measure per document if needed. */
+.title-block h1, .onepage .title-block h1 { max-width: var(--title-measure, 26ch); }
+
+/* One-pagers: fill the printable height and pin the band to the foot of the page */
+@media print {
+  .onepage.short { display: flex; flex-direction: column; min-height: 257mm; }
+  .onepage.short > .band { margin-top: auto; margin-bottom: 0; }
+}

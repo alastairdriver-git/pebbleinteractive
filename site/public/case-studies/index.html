@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case studies — Pebble Interactive</title>
+<link rel="icon" href="/logo.svg">
+<style>
+  @font-face { font-family: "Mona Sans"; src: url("assets/MonaSans.woff2") format("woff2"); font-weight: 200 900; font-stretch: 75% 125%; }
+  :root {
+    --stone: oklch(0.975 0.004 85); --stone-2: oklch(0.945 0.006 85); --card: #fff;
+    --ink: oklch(0.245 0.015 240); --ink-2: oklch(0.300 0.015 240); --muted: oklch(0.520 0.012 240);
+    --teal: oklch(0.45 0.095 195); --border: oklch(0.900 0.006 85);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --stone: oklch(0.2 0.012 240); --stone-2: oklch(0.26 0.014 240); --card: oklch(0.24 0.014 240);
+      --ink: oklch(0.96 0.005 85); --ink-2: oklch(0.88 0.006 85); --muted: oklch(0.72 0.01 240);
+      --teal: oklch(0.8 0.09 195); --border: oklch(0.34 0.014 240);
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--stone); color: var(--ink); font-family: "Mona Sans", system-ui, sans-serif; line-height: 1.55; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 32px 16px 64px; }
+  header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+  .brand { display: flex; gap: 10px; align-items: center; font-weight: 640; text-decoration: none; color: var(--ink); }
+  .brand img { height: 26px; }
+  .note { font-size: 13px; color: var(--muted); }
+  .eyebrow { font-size: 14px; font-weight: 600; font-variation-settings: "wdth" 115; color: var(--teal); margin-bottom: 8px; }
+  h1, h2 { font-variation-settings: "wdth" 115; font-weight: 650; letter-spacing: -0.035em; margin: 0; text-wrap: balance; }
+  h1 { font-size: clamp(36px, 6vw, 56px); line-height: 1.05; margin-bottom: 12px; }
+  .lede { font-size: 18px; color: var(--ink-2); max-width: 40em; margin: 0 0 40px; text-wrap: pretty; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+  .thumb { display: block; background: var(--stone-2); padding: 20px 20px 0; border-bottom: 1px solid var(--border); }
+  .thumb img { display: block; width: 100%; height: 260px; object-fit: cover; object-position: top; border-radius: 4px 4px 0 0; box-shadow: 0 1px 3px rgb(0 0 0 / .12); }
+  .body { padding: 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .body h2 { font-size: 22px; line-height: 1.2; }
+  .meta { font-size: 14px; color: var(--muted); }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 8px; }
+  .links a { font-size: 14px; font-weight: 560; text-decoration: none; color: var(--ink); border: 1px solid var(--border); border-radius: 999px; padding: 7px 14px; }
+  .links a.primary { background: var(--ink); color: var(--stone); border-color: var(--ink); }
+  .links a:hover { border-color: var(--teal); }
+  footer { margin-top: 48px; font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/"><img src="/logo.svg" alt=""><span>Pebble Interactive</span></a>
+    <span class="note">Unlisted page</span>
+  </header>
+
+  <div class="eyebrow">Case studies</div>
+  <h1>Selected work</h1>
+  <p class="lede">Design and prototyping case studies, each as a one-page summary, a detailed version and a web page.</p>
+
+  <div class="grid">
+    <article class="card">
+      <a class="thumb" href="case-study-glint-short.pdf"><img src="assets/thumb-case-study-glint-short.png" alt="First page of the Glint case study"></a>
+      <div class="body">
+        <div class="eyebrow">Regulated fintech · UK and US</div>
+        <h2>Design and prototyping for UK and US business accounts</h2>
+        <div class="meta">Glint Pay · August – November 2026</div>
+        <div class="links">
+          <a class="primary" href="case-study-glint-short.pdf">One-page PDF</a>
+          <a href="case-study-glint.pdf">Detailed PDF</a>
+          <a href="case-study-glint-short.html">Web version</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <a class="thumb" href="case-study-brightlocal-short.pdf"><img src="assets/thumb-case-study-brightlocal-short.png" alt="First page of the BrightLocal case study"></a>
+      <div class="body">
+        <div class="eyebrow">B2B SaaS · Local search</div>
+        <h2>Design and prototyping for a platform rebuild</h2>
+        <div class="meta">BrightLocal · June 2026 – ongoing</div>
+        <div class="links">
+          <a class="primary" href="case-study-brightlocal-short.pdf">One-page PDF</a>
+          <a href="case-study-brightlocal.pdf">Detailed PDF</a>
+          <a href="case-study-brightlocal-short.html">Web version</a>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <footer>Pebble Interactive Ltd · pebbleinteractive.com · hello@pebbleinteractive.com</footer>
+</div>
+</body>
+</html>
