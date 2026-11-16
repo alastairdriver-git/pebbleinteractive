@@ -16,3 +16,19 @@ export const SITE: SiteConfig = {
 };
 
 export const NAV: NavItem[] = [];
+
+/** Article byline. */
+export const AUTHOR = {
+  name: "Alastair Driver",
+  role: "Director, Pebble Interactive",
+  url: "https://www.alastairdriver.com",
+};
+
+/** Newsletter. Set `url` to the Substack publication (e.g.
+    "https://systemised.substack.com") and every subscribe block goes live.
+    While it's empty, subscribe blocks don't render. */
+export const NEWSLETTER = {
+  name: "Systemised",
+  promise: "Design systems and AI, from work that shipped. Every two weeks.",
+  url: "",
+};

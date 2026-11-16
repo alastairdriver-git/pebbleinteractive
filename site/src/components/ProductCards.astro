@@ -1,0 +1,27 @@
+---
+/* Product cards, shared by /products and article footers. */
+import { formatPrice } from "../lib/content";
+interface Props {
+  items: any[]; // CollectionEntry<"products">[]
+}
+const { items } = Astro.props;
+---
+
+<div class="product-cards">
+  {items.map((p) => (
+    <a href={`/products/${p.id}`} class="product-card">
+      {p.data.image && (
+        <div class="product-card-media"><img src={p.data.image} alt={p.data.imageAlt ?? ""} loading="lazy" /></div>
+      )}
+      <div class="product-card-body">
+        <span class="eyebrow">{p.data.format}</span>
+        <h2 class="text-balance font-display text-2xl tracking-tight">{p.data.title}</h2>
+        <p class="text-pretty text-muted-foreground">{p.data.summary}</p>
+        <span class="product-price">
+          {p.data.status === "live" ? formatPrice(p.data.price, p.data.currency) : "Coming soon"}
+          {p.data.status === "draft" && " · Draft"}
+        </span>
+      </div>
+    </a>
+  ))}
+</div>

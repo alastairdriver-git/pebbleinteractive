@@ -1,4 +1,4 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection, reference, z } from "astro:content";
 import { glob } from "astro/loaders";
 import { corePageSchema } from "@grade/astro-kit/content";
 
@@ -51,10 +51,66 @@ const work = defineCollection({
   }),
 });
 
+/* Articles: Markdown with a body. `draft` defaults to true so nothing goes out
+   until it has been edited and the flag is flipped to false. Drafts render in
+   `astro dev` and on Vercel preview deploys, never in production. */
+const articles = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/articles" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(), // standfirst, also the meta description
+    series: z.enum([
+      "Design systems in practice",
+      "AI in the design process",
+      "Curating AI output",
+      "Ethics and trust",
+    ]),
+    pubDate: z.coerce.date(),
+    updated: z.coerce.date().optional(),
+    draft: z.boolean().default(true),
+    related: z.array(reference("work")).default([]), // case studies it draws on
+    products: z.array(reference("products")).default([]), // products to mention at the end
+    image: z.string().optional(), // optional hero image, also used on the thumbnail
+    imageAlt: z.string().optional(),
+    ogImage: z.string().optional(),
+    keywords: z.array(z.string()).default([]),
+  }),
+});
+
+/* Digital products sold through a merchant of record (Lemon Squeezy).
+   status: draft (hidden in production) → soon (listed, no checkout)
+   → live (needs checkoutUrl, or price 0 for a free download). */
+const products = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/products" }),
+  schema: z
+    .object({
+      title: z.string(),
+      summary: z.string(), // one sentence for cards and meta
+      price: z.number(), // in `currency`; 0 = free
+      currency: z.string().default("USD"),
+      status: z.enum(["draft", "soon", "live"]).default("draft"),
+      checkoutUrl: z.string().url().optional(), // Lemon Squeezy checkout link
+      downloadUrl: z.string().optional(), // free products: direct file
+      format: z.string(), // e.g. "PDF and editable Word files"
+      includes: z.array(z.string()).min(1),
+      forWho: z.string(),
+      image: z.string().optional(),
+      imageAlt: z.string().optional(),
+      sample: z.object({ label: z.string(), href: z.string() }).optional(),
+      order: z.number(),
+      keywords: z.array(z.string()).default([]),
+    })
+    .refine((p) => p.status !== "live" || p.checkoutUrl || (p.price === 0 && p.downloadUrl), {
+      message: "A live product needs a checkoutUrl (or, if free, a downloadUrl)",
+    }),
+});
+
 export const collections = {
   pages: defineCollection({
     loader: glob({ pattern: "**/*.md", base: "./src/content/pages" }),
     schema: corePageSchema,
   }),
   work,
+  articles,
+  products,
 };

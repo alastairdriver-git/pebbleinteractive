@@ -1,0 +1,93 @@
+---
+import "../../styles/global.css";
+import { render } from "astro:content";
+import BaseLayout from "@grade/astro-kit/BaseLayout.astro";
+import { Section, Container } from "@gradeui/ui";
+import { SITE, NAV, FONT_HREF } from "../../lib/site.config";
+import JsonLd from "../../components/JsonLd.astro";
+import Subscribe from "../../components/Subscribe.astro";
+import { getProducts, formatPrice } from "../../lib/content";
+import { graph, organization, website, webPage, product, breadcrumbs } from "../../lib/seo";
+
+export async function getStaticPaths() {
+  return (await getProducts()).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const d = entry.data;
+const { Content } = await render(entry);
+const path = `/products/${entry.id}`;
+const og = `/og/products/${entry.id}.png`;
+const live = d.status === "live";
+const free = d.price === 0;
+const nodes: object[] = [
+  organization(),
+  website(),
+  webPage({ path, name: d.title, description: d.summary }),
+  breadcrumbs([
+    { name: "Home", path: "/" },
+    { name: "Products", path: "/products" },
+    { name: d.title, path },
+  ]),
+];
+if (live) nodes.push(product(entry.id, d, d.image ?? og));
+const ld = graph(...nodes);
+/* Lemon Squeezy: the overlay checkout opens in-page when lemon.js loads;
+   without it the link still goes to the hosted checkout. */
+const checkout = d.checkoutUrl ? `${d.checkoutUrl}${d.checkoutUrl.includes("?") ? "&" : "?"}embed=1` : undefined;
+---
+
+<BaseLayout site={SITE} nav={NAV} fontHref={FONT_HREF} title={`${d.title} — Pebble Interactive`} description={d.summary} image={og}>
+  <JsonLd slot="head" data={ld} />
+  {!live && <meta slot="head" name="robots" content="noindex" />}
+
+  <Section pad="lg">
+    <Container maxW="xl">
+      <nav aria-label="Breadcrumb" class="work-crumbs">
+        <a href="/">Home</a><span aria-hidden="true">/</span><a href="/products">Products</a>
+      </nav>
+      <div class="product-head">
+        <div class="flex flex-col gap-5">
+          {d.status === "draft" && <p class="article-draft">Draft: not listed</p>}
+          <span class="eyebrow">{d.format}</span>
+          <h1 class="text-balance font-display text-4xl leading-[1.05] tracking-tight sm:text-5xl">{d.title}</h1>
+          <p class="max-w-3xl text-pretty text-xl leading-relaxed text-muted-foreground">{d.summary}</p>
+        </div>
+        <div class="product-buy">
+          <p class="product-buy-price">{live ? formatPrice(d.price, d.currency) : "Coming soon"}</p>
+          {live && checkout && <a href={checkout} class="product-buy-button lemonsqueezy-button">Buy now</a>}
+          {live && free && d.downloadUrl && <a href={d.downloadUrl} class="product-buy-button" download>Download free</a>}
+          {d.sample && <a href={d.sample.href} class="work-all">{d.sample.label}</a>}
+          <p class="product-buy-note">
+            {live && !free ? "Secure checkout by Lemon Squeezy. VAT and sales tax handled at checkout. Instant download." :
+             live ? "Free download." : "Subscribe below to hear when it launches."}
+          </p>
+        </div>
+      </div>
+      {d.image && <figure class="article-hero"><img src={d.image} alt={d.imageAlt ?? ""} /></figure>}
+    </Container>
+  </Section>
+
+  <Section pad="lg">
+    <Container maxW="xl">
+      <section class="work-block">
+        <h2 class="work-label">What's included</h2>
+        <div class="work-block-body">
+          <ul class="product-includes">{d.includes.map((i) => <li>{i}</li>)}</ul>
+        </div>
+      </section>
+      <section class="work-block">
+        <h2 class="work-label">Who it's for</h2>
+        <div class="work-block-body"><p class="work-lead">{d.forWho}</p></div>
+      </section>
+      <section class="work-block">
+        <h2 class="work-label">About it</h2>
+        <div class="work-block-body es-prose"><Content /></div>
+      </section>
+      <div class="mt-16"><Subscribe /></div>
+      <p class="mt-12"><a href="/products" class="work-all">All products</a></p>
+    </Container>
+  </Section>
+
+  {live && checkout && <script is:inline src="https://assets.lemonsqueezy.com/lemon.js" defer></script>}
+</BaseLayout>

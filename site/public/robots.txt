@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /og-cards/
+Disallow: /case-studies/
+
+Sitemap: https://www.pebbleinteractive.com/sitemap.xml

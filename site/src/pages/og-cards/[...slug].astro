@@ -1,21 +1,24 @@
 ---
-/* Social card (1200×630) for every case study — and articles, once that
-   collection exists. Not linked anywhere: `pnpm og` screenshots each of these
+/* Social card (1200×630) for every case study, article and product. Not linked anywhere: `pnpm og` screenshots each of these
    into public/og/<slug>.png, which the pages then use as their og:image.
    Edit this file to change how every thumbnail looks. */
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const work = await getCollection("work");
-  return work.map((e) => ({
+  const work = (await getCollection("work")).map((e) => ({
     params: { slug: `work/${e.id}` },
-    props: {
-      eyebrow: e.data.category,
-      title: e.data.title,
-      kicker: e.data.client,
-      image: e.data.thumb,
-    },
+    props: { eyebrow: e.data.category, title: e.data.title, kicker: e.data.client, image: e.data.thumb },
   }));
+  // Every article and product, drafts included, so thumbnails exist before publishing.
+  const articles = (await getCollection("articles")).map((e) => ({
+    params: { slug: `articles/${e.id}` },
+    props: { eyebrow: e.data.series, title: e.data.title, kicker: "Article", image: e.data.image },
+  }));
+  const products = (await getCollection("products")).map((e) => ({
+    params: { slug: `products/${e.id}` },
+    props: { eyebrow: e.data.format, title: e.data.title, kicker: "Product", image: e.data.image },
+  }));
+  return [...work, ...articles, ...products];
 }
 
 const { eyebrow, title, kicker, image } = Astro.props;
@@ -44,10 +47,18 @@ const { eyebrow, title, kicker, image } = Astro.props;
   .brand svg { width: 46px; height: 38px; }
   .media { position: relative; margin: 56px 56px 56px 0; border-radius: 14px; overflow: hidden; background: oklch(0.3 0.04 220); }
   .media img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+  /* No image: the title takes the full width, larger. */
+  .card.text-only { grid-template-columns: 1fr; }
+  .card.text-only .text { padding: 72px 96px 64px 72px; }
+  .card.text-only h1 { font-size: 72px; max-width: 18ch; }
+  .card.text-only::after {
+    content: ""; position: absolute; right: -120px; top: -120px; width: 460px; height: 460px; border-radius: 50%;
+    background: oklch(0.82 0.09 195 / .14);
+  }
 </style>
 </head>
 <body>
-  <div class="card">
+  <div class={image ? "card" : "card text-only"}>
     <div class="text">
       <div>
         <div class="eyebrow">{eyebrow}</div>
@@ -62,7 +73,7 @@ const { eyebrow, title, kicker, image } = Astro.props;
         Pebble Interactive
       </div>
     </div>
-    <div class="media">{image && <img src={image} alt="" />}</div>
+    {image && <div class="media"><img src={image} alt="" /></div>}
   </div>
 </body>
 </html>

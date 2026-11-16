@@ -1,6 +1,6 @@
 ---
 name: pebble-content
-description: Add or edit case studies (and, later, articles) on pebbleinteractive.com in the house structure, with a generated social thumbnail and schema.org JSON-LD. Use when asked to add a case study, write up a project for the site, add an article or blog post, update work pages, or make or refresh thumbnails / OG images / meta images.
+description: Add or edit case studies, articles and digital products on pebbleinteractive.com in the house structure, with a generated social thumbnail and schema.org JSON-LD. Use when asked to add a case study, write up a project for the site, write or publish an article or blog post, add or launch a product, set up the newsletter form, update work pages, or make or refresh thumbnails / OG images / meta images.
 ---
 
 # Pebble content: case studies, articles and thumbnails
@@ -32,7 +32,7 @@ Copy one of the existing files as a starting point. Images go in `site/public/wo
 
 ## Thumbnails (social / meta images)
 
-Every case study's `og:image` is `/og/work/<slug>.png`, generated from its frontmatter. After adding or changing a case study (title, category, client or thumb), run from the repo root:
+Every case study, article and product gets a generated `og:image` at `/og/<collection>/<slug>.png` (cards without an image use a text-only layout). After adding or changing one, run from the repo root:
 
 ```bash
 pnpm og
@@ -40,9 +40,26 @@ pnpm og
 
 That builds the site, screenshots each card page (`site/src/pages/og-cards/[...slug].astro`) with local Google Chrome, and writes `site/public/og/<collection>/<slug>.png`. Commit the PNGs with the content. To change how every thumbnail looks, edit the card page; to override one, set `ogImage` in that file's frontmatter.
 
-## Articles (when the collection exists)
+## Articles
 
-Follow the same pattern as `work`: a collection in `content.config.ts`, pages under `site/src/pages/articles/`, and a branch in the og-cards `getStaticPaths` so each article gets `/og/articles/<slug>.png`. Articles use `BlogPosting` JSON-LD with the author (Alastair Driver), dates and the related case study. See the articles plan for topics and format.
+Files: `site/src/content/articles/<slug>.md`, Markdown body plus frontmatter (schema in `content.config.ts`): `title`, `description` (the standfirst and meta description), `series` (one of four), `pubDate`, optional `updated`, `draft`, `related` (case study slugs), `products` (product slugs), optional `image`, `keywords`.
+
+- **Drafts:** `draft` defaults to true. Drafts show in `pnpm dev` and on Vercel preview deploys (push a branch other than `main`), never in production. To publish, an edited article gets `draft: false` and a real `pubDate`.
+- **Writing:** one idea, 800 to 1,500 words, drawn from a real case study and linking to it. British English, plain, first person plural for Pebble's work. No invented facts or figures: only what the case study or Ali says. No client confidential detail. Avoid em dashes.
+- **Byline:** `AUTHOR` in `site/src/lib/site.config.ts` (Alastair Driver). JSON-LD is `BlogPosting` with the author, dates, word count and `isBasedOn` the related case studies.
+- **Feed:** `/rss.xml` lists published articles (use it for Substack, Medium and dev.to imports, with the canonical URL set to pebbleinteractive.com).
+- The homepage shows the latest three published articles; the section is hidden until one is published.
+- Topics and running order: the content plan (articles 5, 6, 9, 1, 7, 2 first).
+
+## Products
+
+Files: `site/src/content/products/<slug>.md`, frontmatter plus a short Markdown body. `status` is `draft` (hidden in production), `soon` (listed as coming soon, noindex) or `live`. A live product needs `checkoutUrl` (the Lemon Squeezy checkout link) or, if `price: 0`, a `downloadUrl`; the build fails otherwise. Live products get `Product` + `Offer` JSON-LD and the Lemon Squeezy overlay checkout. Never put client IP (screens, specs, data) in a product.
+
+/products is noindex and not linked until a product is live.
+
+## Newsletter
+
+`NEWSLETTER` in `site/src/lib/site.config.ts`. Set `url` to the Substack publication URL and the subscribe block (`components/Subscribe.astro`) appears on articles, products and /articles. It posts straight to Substack, no script. While `url` is empty it renders nothing.
 
 ## Structured data
 
@@ -50,7 +67,7 @@ Helpers live in `site/src/lib/seo.ts` and render through `site/src/components/Js
 
 ## Before publishing
 
-1. `pnpm build` passes (it validates every case study).
+1. `pnpm build` passes (it validates every case study, article and product).
 2. `pnpm og` run, and the new PNGs look right.
 3. Check the page at desktop and phone width.
 4. Commit and push `main`; Vercel deploys it. Check the live URL returns 200.

@@ -1,0 +1,21 @@
+---
+/* Article list, shared by /articles and the homepage. */
+import { formatDate, readingTime } from "../lib/content";
+interface Props {
+  items: any[]; // CollectionEntry<"articles">[]
+}
+const { items } = Astro.props;
+---
+
+<ol class="article-list">
+  {items.map((a) => (
+    <li>
+      <a href={`/articles/${a.id}`} class="article-row">
+        <span class="eyebrow">{a.data.series}{a.data.draft && " · Draft"}</span>
+        <h2 class="text-balance font-display text-2xl tracking-tight sm:text-3xl">{a.data.title}</h2>
+        <p class="max-w-prose text-pretty text-muted-foreground">{a.data.description}</p>
+        <span class="article-meta">{formatDate(a.data.pubDate)} · {readingTime(a.body)} min read</span>
+      </a>
+    </li>
+  ))}
+</ol>

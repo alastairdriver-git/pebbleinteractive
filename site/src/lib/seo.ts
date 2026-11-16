@@ -127,4 +127,89 @@ export const workList = (items: { slug: string; client: string; title: string }[
   })),
 });
 
+type ArticleData = {
+  title: string;
+  description: string;
+  series: string;
+  pubDate: Date;
+  updated?: Date;
+  keywords?: string[];
+};
+
+export const article = (slug: string, d: ArticleData, o: { image: string; wordCount: number; related: string[] }) => {
+  const url = abs(`/articles/${slug}`);
+  return {
+    "@type": "BlogPosting",
+    "@id": `${url}#article`,
+    url,
+    mainEntityOfPage: { "@id": `${url}#webpage` },
+    headline: d.title,
+    description: d.description,
+    image: abs(o.image),
+    datePublished: d.pubDate.toISOString(),
+    dateModified: (d.updated ?? d.pubDate).toISOString(),
+    author: { "@id": FOUNDER_ID },
+    publisher: { "@id": ORG_ID },
+    articleSection: d.series,
+    keywords: d.keywords?.join(", "),
+    wordCount: o.wordCount,
+    inLanguage: "en-GB",
+    ...(o.related.length ? { isBasedOn: o.related.map((s) => ({ "@id": `${abs(`/work/${s}`)}#casestudy` })) } : {}),
+  };
+};
+
+export const articleList = (items: { slug: string; title: string }[]) => ({
+  "@type": "ItemList",
+  itemListElement: items.map((it, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    url: abs(`/articles/${it.slug}`),
+    name: it.title,
+  })),
+});
+
+type ProductData = {
+  title: string;
+  summary: string;
+  price: number;
+  currency: string;
+  status: string;
+  image?: string;
+  keywords?: string[];
+};
+
+/** Product with an Offer. Only for products on sale (status "live"). */
+export const product = (slug: string, d: ProductData, image: string) => {
+  const url = abs(`/products/${slug}`);
+  return {
+    "@type": "Product",
+    "@id": `${url}#product`,
+    url,
+    name: d.title,
+    description: d.summary,
+    image: abs(image),
+    brand: { "@id": ORG_ID },
+    category: "Digital download",
+    keywords: d.keywords?.join(", "),
+    offers: {
+      "@type": "Offer",
+      url,
+      price: d.price.toFixed(2),
+      priceCurrency: d.currency,
+      availability: "https://schema.org/InStock",
+      seller: { "@id": ORG_ID },
+    },
+  };
+};
+
+export const productList = (items: { slug: string; title: string }[]) => ({
+  "@type": "ItemList",
+  itemListElement: items.map((it, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    url: abs(`/products/${it.slug}`),
+    name: it.title,
+  })),
+});
+
 export const graph = (...nodes: object[]) => ({ "@context": "https://schema.org", "@graph": nodes });

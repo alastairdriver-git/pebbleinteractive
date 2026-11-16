@@ -6,10 +6,13 @@ import { SITE, NAV, FONT_HREF } from "../lib/site.config";
 import AiToolLogos from "../components/AiToolLogos.astro";
 import JsonLd from "../components/JsonLd.astro";
 import WorkCards from "../components/WorkCards.astro";
+import ArticleCards from "../components/ArticleCards.astro";
+import { getArticles } from "../lib/content";
 import { getCollection } from "astro:content";
 import { graph, organization, founder, website, webPage } from "../lib/seo";
 
 const work = (await getCollection("work")).sort((a, b) => a.data.order - b.data.order);
+const articles = (await getArticles()).slice(0, 3);
 const ld = graph(
   organization(),
   founder(),
@@ -88,6 +91,22 @@ const services = [
       </div>
     </Container>
   </Section>
+
+  {/* Latest articles — only once something is published */}
+  {articles.length > 0 && (
+    <Section pad="lg">
+      <Container maxW="xl">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <span class="eyebrow">Writing</span>
+            <h2 class="mt-4 max-w-3xl text-balance font-display text-3xl tracking-tight sm:text-4xl">Latest articles</h2>
+          </div>
+          <a href="/articles" class="work-all">All articles →</a>
+        </div>
+        <div class="mt-10"><ArticleCards items={articles} /></div>
+      </Container>
+    </Section>
+  )}
 
   {/* Sectors — inline editorial strip */}
   <Section pad="lg">
