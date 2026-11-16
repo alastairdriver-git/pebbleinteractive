@@ -22,17 +22,33 @@
 .pa2-log pre { margin: 0; padding: 0; background: none; color: oklch(var(--camel-foreground)); font-size: .78rem; white-space: pre-wrap; }
 .pa2-log .pa2-muted { color: oklch(var(--camel-foreground) / .6); }
 
+/* Surface tokens. Every component reads text colours from these, so a
+   component placed on a tinted surface (pink, ink) stays legible and on
+   brand. Defaults match the page; tinted surfaces override them. */
+.pa2-card, .pa2-demo-body {
+  --s-fg: var(--foreground);
+  --s-muted: var(--muted-foreground);
+  --s-accent: var(--accent);
+  --s-subtle: var(--muted);
+}
+.pa2-product {
+  --s-fg: 0.27 0.06 352;
+  --s-muted: 0.45 0.08 352;
+  --s-accent: 0.5 0.16 352;
+  --s-subtle: 0.9 0.06 352;
+}
+
 /* Catalogue components. House style: Mona Sans, wide for headings and
    actions; flat surfaces and pills; rows on a fixed grid so lists align. */
 .pa2-card, .pa2-demo { font-family: var(--font-sans, "Mona Sans", system-ui, sans-serif); }
 .pa2-card { --pa2-card-bg: oklch(var(--card)); display: flex; flex-direction: column; gap: 1.25rem; padding: 1.5rem; border-radius: calc(var(--radius) * 1.4); background: var(--pa2-card-bg); border: 1px solid oklch(var(--border)); color: oklch(var(--foreground)); text-align: left; }
 .pa2-card-head { display: flex; flex-direction: column; gap: .45rem; }
-.pa2-eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; font-variation-settings: "wdth" 115; color: oklch(var(--accent)); }
-.pa2-mark { width: 1.25rem; height: auto; color: oklch(var(--accent)); flex: none; }
+.pa2-eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; font-variation-settings: "wdth" 115; color: oklch(var(--s-accent, var(--accent))); }
+.pa2-mark { width: 1.25rem; height: auto; color: oklch(var(--s-accent, var(--accent))); flex: none; }
 .pa2-title { margin: 0; font-family: var(--font-display, var(--font-sans)); font-size: 1.5rem; line-height: 1.1; font-weight: 650; font-variation-settings: "wdth" 115; letter-spacing: -0.025em; text-wrap: balance; }
 .pa2-heading { margin: 0; font-size: .95rem; font-weight: 650; font-variation-settings: "wdth" 112; letter-spacing: -0.005em; }
 .pa2-text { margin: 0; font-size: .95rem; line-height: 1.5; text-wrap: pretty; }
-.pa2-muted { color: oklch(var(--muted-foreground)); }
+.pa2-muted { color: oklch(var(--s-muted, var(--muted-foreground))); }
 .pa2-small { font-size: .8rem; }
 .pa2-stack { display: flex; flex-direction: column; }
 .pa2-row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
@@ -75,7 +91,8 @@
 .pa2-button-ghost:hover { color: oklch(var(--foreground)); background: oklch(var(--muted)); }
 .pa2-button:focus-visible { outline: 2px solid oklch(var(--pink)); outline-offset: 2px; }
 
-.pa2-product { display: flex; flex-direction: column; gap: .45rem; padding: 1.1rem 1.2rem; border-radius: var(--radius); background: oklch(var(--pink-soft)); }
+.pa2-product { display: flex; flex-direction: column; gap: .45rem; padding: 1.1rem 1.2rem; border-radius: var(--radius); background: oklch(var(--pink-soft)); color: oklch(var(--s-fg)); }
+.pa2-product .pa2-title, .pa2-product .pa2-price { color: oklch(var(--s-fg)); }
 .pa2-price { font-size: 1.5rem; font-weight: 700; font-variation-settings: "wdth" 115; letter-spacing: -0.02em; }
 .pa2-field { display: flex; flex-direction: column; gap: .4rem; }
 .pa2-field-label { font-size: .8rem; font-weight: 620; font-variation-settings: "wdth" 108; }

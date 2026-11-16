@@ -28,6 +28,8 @@ const kids = (children: unknown, buildChild: (id: string, basePath?: string) => 
   );
 
 const gap = { sm: "gap-2", md: "gap-4", lg: "gap-6" } as const;
+/** Display labels in sentence case; values stay as sent. */
+const sentence = (t: unknown) => { const x = String(t ?? ""); return x.charAt(0).toUpperCase() + x.slice(1); };
 
 const PebbleMark = () => (
   <svg className="pa2-mark" viewBox="0 0 125 102" aria-hidden="true">
@@ -38,7 +40,6 @@ const PebbleMark = () => (
 
 /** Status pill: Grade Badge, soft variant, flattened in styles.css. */
 const BADGE_VARIANT: Record<string, string> = { neutral: "secondary", accent: "info-soft", success: "success-soft", warning: "warning-soft", pink: "highlight" };
-const sentence = (t: unknown) => { const x = String(t ?? ""); return x.charAt(0).toUpperCase() + x.slice(1); };
 const Pill = ({ tone, children }: { tone: string; children: React.ReactNode }) => (
   <GBadge variant={(BADGE_VARIANT[tone] ?? "secondary") as any} {...({ rounded: "full" } as any)} className={`pa2-pill pa2-pill-${tone}`}>{typeof children === "string" ? sentence(children) : children}</GBadge>
 );
@@ -145,7 +146,7 @@ const Choice = createComponentImplementation(ChoiceApi, ({ props }) => (
     <span className="pa2-field-label">{props.label}</span>
     <div className="pa2-chips" role="radiogroup" aria-label={props.label}>
       {props.options.map((o: string) => (
-        <button type="button" role="radio" aria-checked={props.value === o} key={o} className={props.value === o ? "pa2-chip on" : "pa2-chip"} onClick={() => { (props as any).setValue?.(o); setTimeout(() => (props.action as any)?.(), 0); }}>{o}</button>
+        <button type="button" role="radio" aria-checked={props.value === o} key={o} className={props.value === o ? "pa2-chip on" : "pa2-chip"} onClick={() => { (props as any).setValue?.(o); setTimeout(() => (props.action as any)?.(), 0); }}>{sentence(o)}</button>
       ))}
     </div>
   </div>
