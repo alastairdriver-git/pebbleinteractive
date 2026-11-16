@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /og-cards/
 Disallow: /case-studies/
+Disallow: /figure-cards/
 
 Sitemap: https://www.pebbleinteractive.com/sitemap.xml

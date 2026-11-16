@@ -1,0 +1,21 @@
+figures:
+  - id: one-foundation
+    type: fanout
+    eyebrow: Pocket Films
+    title: Defined once, inherited everywhere
+    source: One token foundation
+    items:
+      - { label: iOS app, note: Consumer, touch first }
+      - { label: Provider platform, note: Web, for service providers }
+      - { label: Admin, note: Dense, used all day }
+  - id: share-or-diverge
+    type: comparison
+    tone: light
+    eyebrow: Across platforms
+    title: What to share, and what to let diverge
+    left:
+      label: Let it diverge
+      items: [Navigation, Density, Platform controls, Input, Text size settings]
+    right:
+      label: Share it
+      items: ["Colour, by purpose", Type scale, Spacing scale, Shape, Meaning and names]

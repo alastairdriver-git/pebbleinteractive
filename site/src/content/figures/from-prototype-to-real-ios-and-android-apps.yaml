@@ -1,0 +1,21 @@
+figures:
+  - id: one-token-source
+    type: fanout
+    eyebrow: Native apps
+    title: One token source, three platforms
+    source: Design tokens
+    items:
+      - { label: SwiftUI, note: iOS }
+      - { label: Jetpack Compose, note: Android }
+      - { label: Web components, note: Prototypes and the web app }
+  - id: web-or-native
+    type: comparison
+    tone: light
+    eyebrow: Where to test what
+    title: Prototype on the web first, or build natively to judge?
+    left:
+      label: Build natively to judge
+      items: [Navigation and gestures, The keyboard, System features, Performance, Text size and screen readers, Being offline]
+    right:
+      label: Prototype on the web first
+      items: [The flow, The content, The data, The awkward cases]

@@ -1,6 +1,6 @@
 ---
 title: A2UI and the future of interfaces
-description: Interfaces may be moving from fixed screens to UI composed by an agent at the moment of need, from a catalogue of your own components. What A2UI is, and why it makes the design system matter more.
+description: Interfaces are moving from fixed screens to UI composed by an agent at the moment of need, from a catalogue of your own components. What A2UI is, now it has reached 1.0, and why it makes the design system matter more.
 series: AI in the design process
 pubDate: 2026-11-16
 draft: false
@@ -27,6 +27,8 @@ So the agent should choose and arrange. It shouldn't invent.
 
 A2UI is an open-source generative UI framework built around that principle. This is how its documentation at a2ui.org describes it.
 
+![Four steps: the agent decides a screen will help, composes it only from your catalogue, streams it as JSON data, and your app renders it with your own components.](/figures/a2ui-and-the-future-of-interfaces/how-a2ui-works.png "wide: How an agent builds a screen from your components.")
+
 - **The agent describes, the client renders.** An agent describes an interactive UI as a stream of JSON messages. The client renders that description using its own native widgets.
 - **There is a catalogue.** The client registers a component catalogue, a file called `catalog.json`. The agent may only place components from it.
 - **It's data, not code.** A2UI sends declarative data, never executable code. The agent says "a card containing a date picker and a button". It doesn't send a script.
@@ -35,6 +37,8 @@ A2UI is an open-source generative UI framework built around that principle. This
 - **It isn't tied to one transport.** Messages can travel over AG-UI, A2A, MCP and WebSockets. An A2UI surface can also run inside an MCP App, in hosts that support MCP Apps.
 
 In short, the agent sends a description, and your app builds it from parts you've already made.
+
+https://a2ui.org/
 
 ## The catalogue is the design system
 
@@ -49,6 +53,8 @@ A thin, inconsistent or poorly described system gives an agent little to work wi
 ## What this asks of your system
 
 If you want to be ready for this, the work is familiar. It's the same work that helps AI tools prototype well today.
+
+![Checklist of what A2UI asks of a design system: a limited set of components, self-describing components, purpose-named tokens, built-in states, platform parity, written guidance.](/figures/a2ui-and-the-future-of-interfaces/what-a2ui-asks.png "wide: What A2UI asks of your design system.")
 
 - **A clear, limited set of components.** A catalogue is a list. Three slightly different cards make an agent's choice harder and the result less consistent.
 - **Components that describe themselves.** The agent chooses from the catalogue based on names, properties and descriptions. "Use for a single choice from two to five options" helps it choose well.
@@ -70,11 +76,13 @@ A composed interface still has to be designed. The work moves to different place
 
 Some things probably shouldn't be composed on the fly at all. Regulated flows, payments, consent and anything where the exact wording and order matter are better as fixed screens that an agent can open but not rearrange.
 
-## It's early
+## It's ready to use
 
-We want to be measured about this. A2UI is a strong candidate for how interfaces will be built, not a settled answer. The approach is young. Open questions remain about how composed interfaces should be tested, how accessibility is checked when no two screens are the same, and how people will feel about interfaces that change from one visit to the next.
+A2UI has moved from version 0.9 to 1.0. The protocol is stable, there are renderers for the web, iOS and Android, and it runs over the transports agents already use, MCP included. That's the point at which it stops being an experiment to watch and becomes something to build on.
 
-The specific protocol may change, or a different one may win. The direction looks more durable: agents arranging trusted components, with the client in charge of how they look and behave.
+The open questions now are about craft rather than plumbing. How do you test an interface when no two screens are quite the same? How is accessibility checked across every combination an agent might compose? How do people feel about a screen that's shaped around what they just asked for? Those are design questions, and they're the reason design systems teams should be involved from the start.
+
+The direction is clear: agents arranging trusted components, with your app in charge of how they look and behave.
 
 ## What to do now
 

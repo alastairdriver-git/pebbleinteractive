@@ -1,0 +1,26 @@
+figures:
+  - id: what-agents-get-wrong
+    type: grid
+    eyebrow: Without documentation
+    title: What AI tools get wrong
+    items:
+      - { label: Invents components, note: A new empty state instead of yours }
+      - { label: Uses raw values, note: Hex colours and pixel sizes }
+      - { label: Picks the wrong variant, note: Primary for a destructive action }
+      - { label: Guesses the API, note: Plausible names that aren't yours }
+      - { label: Skips the quiet parts, note: Labels, focus and errors }
+      - { label: Copies old patterns, note: Whatever it finds in the repo }
+  - id: what-to-write
+    type: checklist
+    tone: light
+    eyebrow: For every component
+    title: What to write down
+    items:
+      - What it's for
+      - When to use it
+      - When not to, and what instead
+      - What each variant means
+      - Content rules
+      - Accessibility requirements
+      - A correct example
+      - A common mistake

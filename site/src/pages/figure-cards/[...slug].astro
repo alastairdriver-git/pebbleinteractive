@@ -1,0 +1,181 @@
+---
+/* Diagram cards (1600×1000) for articles. Not linked anywhere: `pnpm og`
+   screenshots each into public/figures/<article>/<id>.png, and articles
+   embed them as Markdown images. Specs live in src/content/figures/<article>.yaml.
+   Types: checklist, steps (numbered), comparison, flow, fanout, grid, statement. */
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const files = await getCollection("figures");
+  return files.flatMap((f) =>
+    f.data.figures.map((fig) => ({ params: { slug: `${f.id}/${fig.id}` }, props: { fig } })),
+  );
+}
+
+const { fig } = Astro.props;
+const label = (i: string | { label: string; note?: string }) => (typeof i === "string" ? i : i.label);
+const note = (i: string | { label: string; note?: string }) => (typeof i === "string" ? undefined : i.note);
+const n = fig.items.length;
+---
+
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&display=swap">
+<style is:global>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1600px; height: 1000px; overflow: hidden; }
+  :root {
+    --ink: oklch(0.245 0.045 220); --ink-2: oklch(0.3 0.045 220); --ink-3: oklch(0.36 0.045 220);
+    --cream: oklch(0.965 0.006 85); --stone: oklch(0.935 0.008 85); --line: oklch(0.88 0.008 85);
+    --teal: oklch(0.82 0.09 195); --teal-deep: oklch(0.45 0.095 195);
+    --pink: oklch(0.72 0.19 352);
+  }
+  .card { width: 1600px; height: 1000px; position: relative; overflow: hidden; display: flex; flex-direction: column;
+    padding: 84px 96px 72px; font-family: "Mona Sans", system-ui, sans-serif; }
+  .dark { background: var(--ink); color: var(--cream); --muted: oklch(0.965 0.006 85 / .66); --panel: var(--ink-2); --panel-2: var(--ink-3); --rule: oklch(1 0 0 / .12); }
+  .light { background: var(--cream); color: var(--ink); --muted: oklch(0.245 0.045 220 / .62); --panel: oklch(1 0 0); --panel-2: var(--stone); --rule: var(--line); }
+  .blob { position: absolute; right: -180px; top: -220px; width: 640px; height: 560px; border-radius: 52% 48% 55% 45% / 50% 55% 45% 50%; background: var(--pink); opacity: .12; }
+  .light .blob { opacity: .22; }
+  .eyebrow { font-size: 28px; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; font-variation-settings: "wdth" 115; color: var(--teal); }
+  .light .eyebrow { color: var(--teal-deep); }
+  h1 { margin-top: 18px; font-size: 76px; line-height: 1.04; letter-spacing: -0.025em; font-weight: 680; font-variation-settings: "wdth" 115; text-wrap: balance; max-width: 1200px; }
+  .body { flex: 1; display: flex; flex-direction: column; justify-content: center; margin: 40px 0 28px; min-height: 0; }
+  .foot { display: flex; align-items: center; gap: 14px; font-size: 28px; font-weight: 650; font-variation-settings: "wdth" 110; color: var(--muted); }
+  .foot svg { width: 40px; height: 33px; }
+
+  /* checklist / steps */
+  .list { list-style: none; display: grid; gap: 28px 64px; }
+  .list.cols-2 { grid-template-columns: 1fr 1fr; }
+  .list li { display: flex; gap: 26px; align-items: flex-start; font-size: 44px; line-height: 1.22; font-weight: 520; text-wrap: pretty; }
+  .list.big li { font-size: 52px; }
+  .tick { flex: none; width: 52px; height: 52px; margin-top: -1px; border-radius: 50% 46% 52% 48% / 48% 52% 46% 50%; background: var(--pink); display: grid; place-items: center; }
+  .tick svg { width: 24px; height: 24px; }
+  .num { flex: none; width: 52px; height: 52px; margin-top: -4px; border-radius: 999px; background: var(--pink); color: var(--ink); display: grid; place-items: center; font-size: 28px; font-weight: 750; font-variation-settings: "wdth" 110; }
+  .list small { display: block; margin-top: 6px; font-size: 26px; font-weight: 450; color: var(--muted); }
+
+  /* comparison */
+  .cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: stretch; }
+  .col { border-radius: 28px; padding: 40px 44px; background: var(--panel); display: flex; flex-direction: column; gap: 22px; }
+  .col.right { background: var(--pink); color: var(--ink); }
+  .col h2 { font-size: 40px; font-weight: 700; font-variation-settings: "wdth" 112; letter-spacing: -0.01em; padding-bottom: 18px; border-bottom: 2px solid var(--rule); }
+  .col.right h2 { border-color: oklch(0.245 0.045 220 / .2); }
+  .col ul { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+  .col li { font-size: 40px; line-height: 1.22; font-weight: 520; padding-left: 40px; position: relative; text-wrap: pretty; }
+  .col.left li { color: var(--muted); }
+  .col.left li::before { content: "×"; position: absolute; left: 0; top: -2px; font-weight: 700; color: var(--muted); }
+  .col.right li::before { content: ""; position: absolute; left: 2px; top: 15px; width: 20px; height: 16px; border-radius: 50%; background: var(--ink); }
+
+  /* flow */
+  .flow { display: flex; align-items: stretch; gap: 0; }
+  .step { flex: 1; min-width: 0; background: var(--panel); border-radius: 26px; padding: 34px 30px; display: flex; flex-direction: column; gap: 16px; }
+  .step .num { margin-top: 0; }
+  .step b { font-size: 42px; line-height: 1.15; font-weight: 650; font-variation-settings: "wdth" 108; text-wrap: balance; }
+  .step span { font-size: 30px; line-height: 1.3; color: var(--muted); text-wrap: pretty; }
+  .arrow { flex: none; width: 56px; display: grid; place-items: center; color: var(--pink); }
+  .light .arrow { color: var(--teal-deep); }
+  .arrow svg { width: 34px; height: 34px; }
+  .flow.wrap { flex-wrap: wrap; row-gap: 28px; }
+  .flow.wrap .step { flex: 0 0 calc((100% - 112px) / 3); }
+  .flow.wrap .arrow:nth-of-type(3n) { display: none; }
+
+  /* fanout */
+  .fan { display: grid; grid-template-columns: 0.9fr 140px 1.4fr; align-items: center; height: 100%; max-height: 620px; }
+  .src { background: var(--pink); color: var(--ink); border-radius: 30px; padding: 48px; font-size: 54px; line-height: 1.12; font-weight: 700; font-variation-settings: "wdth" 112; text-wrap: balance; }
+  .lines { height: 100%; }
+  .targets { display: flex; flex-direction: column; justify-content: space-between; gap: 22px; height: 100%; }
+  .target { background: var(--panel); border-radius: 24px; padding: 28px 34px; }
+  .target b { display: block; font-size: 44px; font-weight: 650; font-variation-settings: "wdth" 108; }
+  .target span { display: block; margin-top: 6px; font-size: 30px; color: var(--muted); }
+
+  /* grid */
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .grid.g2 { grid-template-columns: repeat(2, 1fr); }
+  .tile { background: var(--panel); border-radius: 24px; padding: 30px 32px; display: flex; flex-direction: column; gap: 10px; min-height: 180px; }
+  .tile b { font-size: 42px; line-height: 1.15; font-weight: 650; font-variation-settings: "wdth" 108; text-wrap: balance; }
+  .tile span { font-size: 30px; line-height: 1.3; color: var(--muted); text-wrap: pretty; }
+  .tile i { width: 34px; height: 8px; border-radius: 99px; background: var(--pink); }
+
+  /* statement */
+  .statement h1 { font-size: 124px; line-height: 1.0; max-width: 1300px; margin-top: 26px; }
+  .statement h1 em { font-style: normal; background: linear-gradient(transparent 58%, var(--pink) 0); color: inherit; padding: 0 .06em; }
+  .dark.statement h1 em { background: none; color: var(--pink); }
+  .statement .lede { margin-top: 40px; font-size: 44px; line-height: 1.35; color: var(--muted); max-width: 1100px; text-wrap: pretty; }
+</style>
+</head>
+<body>
+  <div class={`card ${fig.tone} ${fig.type === "statement" ? "statement" : ""}`}>
+    <div class="blob"></div>
+    <div class="eyebrow">{fig.eyebrow ?? "Pebble Interactive"}</div>
+    {fig.type === "statement"
+      ? <h1 set:html={fig.title.replace(/\*(.+?)\*/g, "<em>$1</em>")} />
+      : <h1>{fig.title}</h1>}
+
+    <div class="body">
+      {fig.type === "statement" && fig.note && <p class="lede">{fig.note}</p>}
+
+      {(fig.type === "checklist" || fig.type === "steps") && (
+        <ul class={`list ${n > 5 ? "cols-2" : "big"}`}>
+          {fig.items.map((it, i) => (
+            <li>
+              {fig.type === "steps"
+                ? <span class="num">{i + 1}</span>
+                : <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="oklch(0.245 0.045 220)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>}
+              <span>{label(it)}{note(it) && <small>{note(it)}</small>}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {fig.type === "comparison" && fig.left && fig.right && (
+        <div class="cmp">
+          <div class="col left"><h2>{fig.left.label}</h2><ul>{fig.left.items.map((x) => <li>{x}</li>)}</ul></div>
+          <div class="col right"><h2>{fig.right.label}</h2><ul>{fig.right.items.map((x) => <li>{x}</li>)}</ul></div>
+        </div>
+      )}
+
+      {fig.type === "flow" && (
+        <div class={`flow ${n > 4 ? "wrap" : ""}`}>
+          {fig.items.map((it, i) => (
+            <>
+              <div class="step"><span class="num">{i + 1}</span><b>{label(it)}</b>{note(it) && <span>{note(it)}</span>}</div>
+              {i < n - 1 && <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></div>}
+            </>
+          ))}
+        </div>
+      )}
+
+      {fig.type === "fanout" && (
+        <div class="fan">
+          <div class="src">{fig.source}</div>
+          <svg class="lines" viewBox="0 0 140 600" preserveAspectRatio="none" aria-hidden="true">
+            {fig.items.map((_, i) => {
+              const y = n === 1 ? 300 : 60 + (480 / (n - 1)) * i;
+              return <path d={`M0 300 C 70 300, 70 ${y}, 140 ${y}`} fill="none" stroke="oklch(0.72 0.19 352)" stroke-width="5" stroke-linecap="round" />;
+            })}
+          </svg>
+          <div class="targets">
+            {fig.items.map((it) => <div class="target"><b>{label(it)}</b>{note(it) && <span>{note(it)}</span>}</div>)}
+          </div>
+        </div>
+      )}
+
+      {fig.type === "grid" && (
+        <div class={`grid ${n === 4 ? "g2" : ""}`}>
+          {fig.items.map((it) => <div class="tile"><i></i><b>{label(it)}</b>{note(it) && <span>{note(it)}</span>}</div>)}
+        </div>
+      )}
+    </div>
+
+    <div class="foot">
+      <svg viewBox="0 0 125 102" aria-hidden="true">
+        <path fill="oklch(0.82 0.09 195)" d="M60 2 C95 -3 122 18 124 48 C126 78 100 100 62 101 C26 102 -2 82 0 50 C2 20 28 7 60 2 Z" />
+        <rect x="-20" y="58" width="180" height="12" fill={fig.tone === "light" ? "oklch(0.965 0.006 85)" : "oklch(0.245 0.045 220)"} transform="rotate(-7 62 64)" />
+      </svg>
+      pebbleinteractive.com
+    </div>
+  </div>
+</body>
+</html>

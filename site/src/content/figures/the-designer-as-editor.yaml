@@ -1,0 +1,12 @@
+figures:
+  - id: screen-checklist
+    type: checklist
+    eyebrow: Reviewing a generated screen
+    title: Seven checks before a screen goes any further
+    items: [Purpose, Inventions, Tokens, States, Accessibility, Content, "What's missing"]
+  - id: generating-is-cheap
+    type: statement
+    tone: light
+    eyebrow: The designer as editor
+    title: Generating is cheap. *Reviewing is the work.*
+    note: Have the requirement and the system open beside the draft, and look for what's missing as well as what's wrong.

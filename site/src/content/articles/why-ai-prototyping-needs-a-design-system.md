@@ -15,6 +15,8 @@ It won't look like *your* settings page. The spacing will be close to yours but 
 
 That's the core problem with AI prototyping without a design system: you get plausible output, fast, and the plausibility hides how much of it is wrong.
 
+![Comparison: what AI makes without a design system (nearly-right spacing, odd buttons, stray colours, unlabelled toggles, invented components) and with one (your spacing, components, palette, built-in labels and states, buildable).](/figures/why-ai-prototyping-needs-a-design-system/plausible-vs-system.png "wide: Plausible isn't the same as usable.")
+
 ## Fast is not the bottleneck any more
 
 For most of the history of product design, making the thing was the slow part. A prototype took days, so teams tested fewer ideas and argued more about the ones they had.
@@ -50,6 +52,8 @@ The same principle applies to the content inside the prototype. In a business po
 ## What to fix first if your system isn't ready
 
 Most design systems were written for people, not tools. If you want AI prototypes that hold up, these are the gaps that matter most:
+
+![Checklist: name tokens by purpose, document when to use each component, keep design and code in step, write examples, make docs readable by machines.](/figures/why-ai-prototyping-needs-a-design-system/ready-for-ai.png "wide: Five fixes that make a design system ready for AI tools.")
 
 - **Name tokens by purpose, not appearance.** `accent` tells a tool when to use it; `teal-500` doesn't.
 - **Document when to use each component, not just how.** A sentence of guidance prevents a hundred wrong choices.

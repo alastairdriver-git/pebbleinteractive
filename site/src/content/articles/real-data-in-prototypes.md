@@ -17,6 +17,8 @@ That second conversation is the one you want. It's also the one most prototypes 
 
 Placeholder content is designed to fit. Names are short, numbers are round, lists have exactly six items and nothing ever fails to load. Every screen looks balanced because the content was chosen to make it look balanced.
 
+![Comparison of placeholder data (short names, round numbers, six items, nothing fails) and real data (long names, varying decimals, empty balances, gaps).](/figures/real-data-in-prototypes/placeholder-vs-real.png "wide: Placeholder data is chosen to fit. Real data isn't.")
+
 Real content isn't like that. Company names run to three lines. Prices have four decimal places in one currency and none in another. A wallet can be empty, or hold a tiny amount that rounds to zero. Charts have gaps on the days markets were closed.
 
 You only find these things when real data arrives, and in most projects that happens after the design is signed off. That's the most expensive time to discover a problem.
@@ -38,6 +40,8 @@ That changed the conversations around the prototype in three ways:
 ## Doing it safely
 
 Real data doesn't mean customer data. The rule we follow is simple: **public data, yes; personal or client-confidential data, never.**
+
+![Checklist for using real data safely: cache a snapshot, show the source, check the terms, fail visibly.](/figures/real-data-in-prototypes/real-data-safely.png "wide: Public data, yes. Personal or confidential data, never.")
 
 Market prices, exchange rates, public company registers, open government datasets and map data are all fair game. Anything that identifies a real customer, or that a client hasn't explicitly cleared for use, stays out.
 

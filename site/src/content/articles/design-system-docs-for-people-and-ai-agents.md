@@ -19,6 +19,8 @@ That changes what good documentation looks like.
 
 Give an AI tool your component library with no guidance and the results are predictable. These are general failings, and we see them often.
 
+![Six things AI tools get wrong without documentation: invent components, use raw values, pick the wrong variant, guess the API, skip the quiet parts, copy old patterns.](/figures/design-system-docs-for-people-and-ai-agents/what-agents-get-wrong.png "wide: What AI tools get wrong when the documentation isn't there.")
+
 - **It invents components.** If the tool doesn't know you have an empty state component, it writes a new one. Then another on the next screen.
 - **It uses raw values.** Without token names and their purposes, you get hex colours and pixel values that are close to yours but not the same.
 - **It picks the wrong variant.** A primary button for a destructive action. Three primary buttons on one screen. The component exists, but nothing told the tool which one fits.
@@ -43,6 +45,8 @@ In our work with BrightLocal, one strand is exactly this: improving how product 
 ## What to write
 
 For each component, a short page that answers the same questions in the same order.
+
+![Checklist of what to document for each component, from what it's for to a common mistake.](/figures/design-system-docs-for-people-and-ai-agents/what-to-write.png "wide: What to write down for every component.")
 
 - **What it's for.** One sentence.
 - **When to use it.** The situations it was designed for.

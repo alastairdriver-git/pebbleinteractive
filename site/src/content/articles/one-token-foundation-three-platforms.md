@@ -19,6 +19,8 @@ The fix is to make the basic decisions once, in one place, and let every platfor
 
 A design token is a named decision. Instead of a hex value scattered through three codebases, there is one entry called something like `accent`, and every platform reads its value from the same source.
 
+![Diagram: one token foundation feeding the iOS app, the provider platform and the admin.](/figures/one-token-foundation-three-platforms/one-foundation.png "wide: One foundation, inherited by every platform.")
+
 A token foundation is the full set of those decisions: colour, type, spacing and the other raw materials every screen is made from. It sits underneath the components. Change a token and everything built on it changes with it.
 
 That is the whole idea. The hard part is deciding what belongs in the foundation and what doesn't.
@@ -36,6 +38,8 @@ Three platforms came out of one design system, and Pocket Films launched on iOS.
 ## What to share
 
 Some decisions should be the same everywhere, with no exceptions.
+
+![Comparison of what to share across platforms (colour, type, spacing, shape, meaning and names) and what to let diverge (navigation, density, platform controls, input, text size settings).](/figures/one-token-foundation-three-platforms/share-or-diverge.png "wide: Share the foundations. Let the platform conventions differ.")
 
 - **Colour, by purpose.** Name colours for what they do, such as `surface`, `text`, `accent` and `danger`, not for what they look like. A purpose name works in light mode, dark mode and a brand theme. `blue-500` works in one of them.
 - **The type scale.** A small set of sizes and weights with clear roles: heading, body, caption. Platforms can render them with different technology, but the steps should match.

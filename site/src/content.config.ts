@@ -105,6 +105,30 @@ const products = defineCollection({
     }),
 });
 
+/* Diagram cards for articles: one YAML file per article (named after it),
+   holding that article's figures. Rendered by src/pages/figure-cards and
+   screenshotted by `pnpm og` into public/figures/<article>/<id>.png. */
+const figureItem = z.union([z.string(), z.object({ label: z.string(), note: z.string().optional() })]);
+const figures = defineCollection({
+  loader: glob({ pattern: "**/*.yaml", base: "./src/content/figures" }),
+  schema: z.object({
+    figures: z.array(
+      z.object({
+        id: z.string(),
+        type: z.enum(["checklist", "steps", "comparison", "flow", "fanout", "grid", "statement"]),
+        tone: z.enum(["dark", "light"]).default("dark"),
+        eyebrow: z.string().optional(),
+        title: z.string(),
+        items: z.array(figureItem).default([]), // checklist, steps, flow, grid
+        left: z.object({ label: z.string(), items: z.array(z.string()) }).optional(), // comparison
+        right: z.object({ label: z.string(), items: z.array(z.string()) }).optional(),
+        source: z.string().optional(), // fanout: the one thing at the root
+        note: z.string().optional(), // statement: supporting line
+      }),
+    ),
+  }),
+});
+
 export const collections = {
   pages: defineCollection({
     loader: glob({ pattern: "**/*.md", base: "./src/content/pages" }),
@@ -113,4 +137,5 @@ export const collections = {
   work,
   articles,
   products,
+  figures,
 };

@@ -1,6 +1,8 @@
-// Generate social thumbnails: screenshot every built /og-cards/<slug>/ page
-// into public/og/<slug>.png (1200×630). Run with `pnpm og` from the repo root
-// (it builds first), then commit the PNGs. Needs Google Chrome installed locally.
+// Generate images from built card pages, then commit the PNGs:
+//  - social thumbnails: /og-cards/<slug>/     → public/og/<slug>.png      (1200×630)
+//  - article diagrams:  /figure-cards/<slug>/ → public/figures/<slug>.png (1600×1000)
+// Run with `pnpm og` from the repo root (it builds first). Needs Google Chrome.
+// `pnpm og -- figures` or `-- og` renders just one set.
 import { createServer } from "node:http";
 import { readFile, mkdir, readdir, stat } from "node:fs/promises";
 import { join, dirname, extname } from "node:path";
@@ -11,7 +13,11 @@ import { promisify } from "node:util";
 const run = promisify(execFile);
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
-const out = join(root, "public", "og");
+const SETS = [
+  { name: "og", dir: "og-cards", out: join(root, "public", "og"), size: "1200,630" },
+  { name: "figures", dir: "figure-cards", out: join(root, "public", "figures"), size: "1600,1000" },
+];
+const only = process.argv.slice(2).find((a) => SETS.some((s) => s.name === a));
 const CHROME =
   process.env.CHROME ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
@@ -42,18 +48,24 @@ async function cards(dir, prefix = "") {
   return found;
 }
 
-const slugs = await cards(join(dist, "og-cards"));
-for (const slug of slugs) {
-  const file = join(out, `${slug}.png`);
-  await mkdir(dirname(file), { recursive: true });
-  await run(CHROME, [
-    "--headless=new", "--disable-gpu", "--hide-scrollbars",
-    "--window-size=1200,630", "--force-device-scale-factor=1",
-    "--virtual-time-budget=6000",
-    `--screenshot=${file}`,
-    `http://127.0.0.1:${port}/og-cards/${slug}/`,
-  ]);
-  console.log(`og: public/og/${slug}.png`);
+let total = 0;
+for (const set of SETS) {
+  if (only && set.name !== only) continue;
+  let slugs = [];
+  try { slugs = await cards(join(dist, set.dir)); } catch { continue; }
+  for (const slug of slugs) {
+    const file = join(set.out, `${slug}.png`);
+    await mkdir(dirname(file), { recursive: true });
+    await run(CHROME, [
+      "--headless=new", "--disable-gpu", "--hide-scrollbars",
+      `--window-size=${set.size}`, "--force-device-scale-factor=1",
+      "--virtual-time-budget=6000",
+      `--screenshot=${file}`,
+      `http://127.0.0.1:${port}/${set.dir}/${slug}/`,
+    ]);
+    console.log(`og: public/${set.name}/${slug}.png`);
+    total++;
+  }
 }
 server.close();
-console.log(`og: ${slugs.length} thumbnail(s) written`);
+console.log(`og: ${total} image(s) written`);

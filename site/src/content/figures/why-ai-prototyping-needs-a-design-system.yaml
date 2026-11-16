@@ -1,0 +1,22 @@
+figures:
+  - id: plausible-vs-system
+    type: comparison
+    eyebrow: AI prototyping
+    title: What AI makes, with and without a design system
+    left:
+      label: Without a system
+      items: [Spacing that's nearly yours, Buttons a slightly different shape, A colour you don't use, A toggle with no label, Components nobody built]
+    right:
+      label: With your system
+      items: [Your spacing scale, Your components, "Your palette, by purpose", Labels and states built in, Buildable as designed]
+  - id: ready-for-ai
+    type: checklist
+    tone: light
+    eyebrow: Fix these first
+    title: Make your design system ready for AI
+    items:
+      - Name tokens by purpose, not appearance
+      - Document when to use each component, not just how
+      - Keep design and code in step
+      - Write examples
+      - Make the docs readable by machines

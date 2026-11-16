@@ -37,6 +37,8 @@ At Glint, the onboarding flow for business accounts was built from the complianc
 
 Run through these before you show a generated screen to anyone.
 
+![Checklist for reviewing a generated screen: purpose, inventions, tokens, states, accessibility, content, what's missing.](/figures/the-designer-as-editor/screen-checklist.png "wide: Seven checks before a generated screen goes any further.")
+
 - **Purpose.** Can you say in one sentence what the person is here to do? Is that the most obvious thing on the screen?
 - **Inventions.** Is every component one you already have? AI tools like to add a new card style, a new badge, a new kind of button. Each one is a decision nobody made.
 - **Tokens.** Do colour, type and spacing come from your tokens, or are they close but not the same? Near misses are the hardest to spot and the most expensive later.
@@ -72,6 +74,8 @@ At BrightLocal, prototypes are reviewed like code in the design system repositor
 When the same correction comes up three times, stop making it by hand. Write it down where the tool will read it: a line of usage guidance, a clearer token name, a worked example. Good editors keep a style guide for the same reason. It saves them from having the same argument every week.
 
 This is where judgement compounds. A correction made on one screen fixes one screen. A correction made in the design system fixes every screen that comes after it, whoever or whatever makes it.
+
+![Statement: generating is cheap, reviewing is the work.](/figures/the-designer-as-editor/generating-is-cheap.png "wide:")
 
 ## What to take from this
 

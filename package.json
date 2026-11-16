@@ -7,7 +7,8 @@
     "dev": "pnpm --filter pebbleinteractive-site dev",
     "build": "pnpm --filter pebbleinteractive-site build",
     "preview": "pnpm --filter pebbleinteractive-site preview",
-    "og": "pnpm --filter pebbleinteractive-site og"
+    "og": "pnpm --filter pebbleinteractive-site og",
+    "links": "pnpm --filter pebbleinteractive-site links"
   },
   "pnpm": {
     "overrides": {

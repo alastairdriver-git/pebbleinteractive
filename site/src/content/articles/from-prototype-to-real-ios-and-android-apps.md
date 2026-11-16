@@ -17,6 +17,8 @@ What a design system and a good prototype can do is remove most of the guesswork
 
 Native iOS apps are commonly built with SwiftUI and native Android apps with Jetpack Compose. Neither reads CSS. If your colours, type and spacing only exist as web styles, each app team will retype them by hand, and they'll drift from that day on.
 
+![Diagram: one source of design tokens feeding SwiftUI on iOS, Jetpack Compose on Android, and web components.](/figures/from-prototype-to-real-ios-and-android-apps/one-token-source.png "wide: One token source, three platforms.")
+
 ![Pocket Films iOS app screens built on the shared token foundation](/work/pocket-films/pocketfilms-gallery01-image2.jpg "wide: A native iOS app built on the same tokens as the web platform (Pocket Films).")
 
 The fix is to keep tokens in a neutral format, such as a JSON file, and generate what each platform needs from it: CSS variables for web, Swift for iOS, Kotlin for Android. This is an established practice, and there are well-known open source tools for it.
@@ -49,6 +51,8 @@ Web prototypes are quick to make, easy to share with a link and cheap to change.
 ## What needs to be built natively to judge
 
 Some things a web prototype can only approximate. For these, build a small native version early instead of waiting for the full app.
+
+![Comparison of what to prototype on the web first (flow, content, data, awkward cases) and what must be built natively to judge (navigation, keyboard, system features, performance, text size, offline).](/figures/from-prototype-to-real-ios-and-android-apps/web-or-native.png "wide: Test what you can on the web; build natively to judge the rest.")
 
 - **Navigation and gestures.** How moving between screens feels, including swipes and back behaviour.
 - **The keyboard.** How forms behave when the keyboard is up, which keyboard type appears, how fields move.

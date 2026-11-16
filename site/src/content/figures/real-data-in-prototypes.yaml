@@ -1,0 +1,21 @@
+figures:
+  - id: placeholder-vs-real
+    type: comparison
+    eyebrow: Prototype content
+    title: Placeholder data hides what real data shows
+    left:
+      label: Placeholder data
+      items: [Short names, Round numbers, Six items in every list, Nothing ever fails to load]
+    right:
+      label: Real data
+      items: [Names that run to three lines, "Four decimal places, or none", Empty and tiny balances, Gaps on days markets closed]
+  - id: real-data-safely
+    type: checklist
+    tone: light
+    eyebrow: Doing it safely
+    title: Public data, yes. Personal or confidential data, never.
+    items:
+      - Cache a snapshot for demos
+      - Show where the data comes from
+      - Check the terms before showing it publicly
+      - If the feed is down, say so on screen

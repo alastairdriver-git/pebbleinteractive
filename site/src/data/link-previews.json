@@ -1,0 +1,10 @@
+{
+  "https://a2ui.org/": {
+    "url": "https://a2ui.org/",
+    "title": "A2UI — Build delightful, fast, reliable agentic experiences",
+    "description": "An open-source generative UI framework with an agent-optimized streaming protocol, native web and mobile renderers, and multi-language agent SDKs.",
+    "site": "a2ui.org",
+    "image": "/link-previews/a2ui-org.png",
+    "fetched": "2026-11-16"
+  }
+}

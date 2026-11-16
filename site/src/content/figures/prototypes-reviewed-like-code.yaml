@@ -1,0 +1,23 @@
+figures:
+  - id: how-to-start
+    type: flow
+    eyebrow: Prototypes reviewed like code
+    title: How to start
+    items:
+      - Pick one flow
+      - Give prototypes a home
+      - Write a pull request template
+      - Agree what review covers
+      - Add guidance as you go
+      - Make it easy to look
+  - id: review-vs-critique
+    type: comparison
+    tone: light
+    eyebrow: Know the limits
+    title: What review catches, and what still needs critique
+    left:
+      label: Still needs critique
+      items: [Is this the right idea?, Does it meet the need?, What did research say?]
+    right:
+      label: Pull request review catches
+      items: [Wrong components, Missing states, Values outside the tokens, Accessibility basics]

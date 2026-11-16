@@ -1,0 +1,22 @@
+figures:
+  - id: how-a2ui-works
+    type: flow
+    eyebrow: A2UI
+    title: How an agent builds a screen from your components
+    items:
+      - { label: The agent decides, note: A screen will help more than text }
+      - { label: It composes, note: Only from your catalogue }
+      - { label: It streams JSON, note: Data, never code }
+      - { label: You render it, note: With your own components }
+  - id: what-a2ui-asks
+    type: checklist
+    tone: light
+    eyebrow: Getting ready for A2UI
+    title: What it asks of your design system
+    items:
+      - A clear, limited set of components
+      - Components that describe themselves
+      - Purpose-named tokens and themes
+      - Every state handled inside the component
+      - Parity across platforms
+      - Written guidance on combinations

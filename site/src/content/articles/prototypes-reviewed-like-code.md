@@ -61,6 +61,8 @@ It comes down to three things.
 
 It's worth being clear about the limits.
 
+![Comparison of what pull request review catches (wrong components, missing states, values outside the tokens, accessibility basics) and what still needs design critique.](/figures/prototypes-reviewed-like-code/review-vs-critique.png "wide: Review catches the wrong parts. Critique asks if it's the right idea.")
+
 - **Prototype code isn't production code.** It proves a direction. It usually still needs to be built properly, with real data, tests and error handling.
 - **Review shouldn't slow exploration.** Early ideas can be rough and plentiful. The pull request is for the direction you want others to take seriously.
 - **Code review isn't a design critique.** A pull request is good at catching wrong components and missing states. It's less good for asking whether this is the right idea at all. Keep doing research and critique as well. At BrightLocal the prototypes sit alongside ongoing research into usability and feasibility, not in place of it.
@@ -69,6 +71,8 @@ It's worth being clear about the limits.
 ## How to start
 
 You don't need to change everything at once.
+
+![Six steps: pick one flow, give prototypes a home, write a pull request template, agree what review covers, add guidance as you go, make it easy to look.](/figures/prototypes-reviewed-like-code/how-to-start.png "wide: Six steps to start reviewing prototypes like code.")
 
 1. **Pick one flow.** Choose something real but contained, and prototype it with your actual components.
 2. **Give prototypes a home.** A clearly named folder in the design system repository, or a sibling repository that depends on it, kept apart from production code.
