@@ -8,7 +8,7 @@
 .pa2-demo { border-radius: calc(var(--radius) * 1.6); overflow: hidden; background: oklch(var(--camel)); color: oklch(var(--camel-foreground)); font-size: 1rem; line-height: 1.5; }
 .pa2-demo-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid oklch(1 0 0 / .1); }
 .pa2-prompt { display: flex; align-items: baseline; gap: .6rem; font-weight: 550; font-size: 1.02rem; text-wrap: pretty; }
-.pa2-prompt-who { flex: none; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .15rem .5rem; border-radius: 999px; background: oklch(var(--pink)); color: oklch(var(--pink-foreground)); }
+.pa2-prompt-who { flex: none; font-size: .78rem; font-weight: 700; letter-spacing: 0; padding: .15rem .5rem; border-radius: 999px; background: oklch(var(--pink)); color: oklch(var(--pink-foreground)); }
 .pa2-tabs { display: flex; gap: .25rem; }
 .pa2-tabs button { font: inherit; font-size: .85rem; font-weight: 600; padding: .35rem .8rem; border-radius: 999px; border: 0; background: transparent; color: oklch(var(--camel-foreground) / .7); cursor: pointer; }
 .pa2-tabs button[aria-selected="true"] { background: oklch(1 0 0 / .12); color: oklch(var(--camel-foreground)); }
@@ -18,7 +18,7 @@
 .pa2-streaming { margin-top: 1rem; text-align: center; font-size: var(--text-sm); color: oklch(var(--muted-foreground)); }
 .pa2-json { margin: 0; max-height: 26rem; overflow: auto; padding: 1rem 1.2rem; border-radius: var(--radius); background: oklch(var(--camel)); color: oklch(var(--camel-foreground)); font-size: .78rem; line-height: 1.55; }
 .pa2-log { display: flex; flex-direction: column; gap: .4rem; padding: .9rem 1.25rem 1.1rem; font-size: .85rem; }
-.pa2-log-label { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: oklch(var(--accent-on-camel)); }
+.pa2-log-label { font-size: .82rem; font-weight: 650; letter-spacing: 0; color: oklch(var(--accent-on-camel)); }
 .pa2-log pre { margin: 0; padding: 0; background: none; color: oklch(var(--camel-foreground)); font-size: .78rem; white-space: pre-wrap; }
 .pa2-log .pa2-muted { color: oklch(var(--camel-foreground) / .6); }
 
@@ -43,7 +43,7 @@
 .pa2-card, .pa2-demo { font-family: var(--font-sans, "Mona Sans", system-ui, sans-serif); }
 .pa2-card { --pa2-card-bg: oklch(var(--card)); display: flex; flex-direction: column; gap: 1.25rem; padding: 1.5rem; border-radius: calc(var(--radius) * 1.4); background: var(--pa2-card-bg); border: 1px solid oklch(var(--border)); color: oklch(var(--foreground)); text-align: left; }
 .pa2-card-head { display: flex; flex-direction: column; gap: .45rem; }
-.pa2-eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; font-variation-settings: "wdth" 115; color: oklch(var(--s-accent, var(--accent))); }
+.pa2-eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-size: .85rem; font-weight: 650; letter-spacing: -0.005em; font-variation-settings: "wdth" 115; color: oklch(var(--s-accent, var(--accent))); }
 .pa2-mark { width: 1.25rem; height: auto; color: oklch(var(--s-accent, var(--accent))); flex: none; }
 .pa2-title { margin: 0; font-family: var(--font-display, var(--font-sans)); font-size: 1.5rem; line-height: 1.1; font-weight: 650; font-variation-settings: "wdth" 115; letter-spacing: -0.025em; text-wrap: balance; }
 .pa2-heading { margin: 0; font-size: .95rem; font-weight: 650; font-variation-settings: "wdth" 112; letter-spacing: -0.005em; }

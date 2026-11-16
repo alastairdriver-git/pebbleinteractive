@@ -19,7 +19,7 @@ export const organization = () => ({
   image: abs("/og.png"),
   email: "hello@pebbleinteractive.com",
   description:
-    "Design systems studio. Pebble Interactive designs and builds for domains where detail compounds: tokens, components, prototypes and front-end code.",
+    "Design systems studio. Pebble Interactive designs and builds design systems, prototypes and front-end code for fintech, healthcare and SaaS teams.",
   foundingDate: "2012-05-10",
   address: { "@type": "PostalAddress", addressLocality: "Brighton", addressCountry: "GB" },
   areaServed: "GB",

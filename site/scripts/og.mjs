@@ -10,7 +10,20 @@ import { fileURLToPath } from "node:url";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 
-const run = promisify(execFile);
+const exec = promisify(execFile);
+// Headless Chrome sometimes exits non-zero after writing its output, or fails
+// to start. Retry up to three times; accept the run if the file was written.
+const { stat: statFile, rm } = await import("node:fs/promises");
+async function run(cmd, args) {
+  const out = args.find((a) => a.startsWith("--screenshot=") || a.startsWith("--print-to-pdf="))?.split("=").slice(1).join("=");
+  for (let i = 0; i < 3; i++) {
+    if (out) await rm(out, { force: true });
+    try { return await exec(cmd, args); } catch (e) {
+      if (out && (await statFile(out).then((s) => s.size > 0, () => false))) return;
+      if (i === 2) throw e;
+    }
+  }
+}
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
 const SETS = [

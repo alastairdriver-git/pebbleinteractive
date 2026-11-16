@@ -37,9 +37,9 @@ const n = fig.items.length;
     padding: 84px 96px 72px; font-family: "Mona Sans", system-ui, sans-serif; }
   .dark { background: var(--ink); color: var(--cream); --muted: oklch(0.965 0.006 85 / .66); --panel: var(--ink-2); --panel-2: var(--ink-3); --rule: oklch(1 0 0 / .12); }
   .light { background: var(--cream); color: var(--ink); --muted: oklch(0.245 0.045 220 / .62); --panel: oklch(1 0 0); --panel-2: var(--stone); --rule: var(--line); }
-  .blob { position: absolute; right: -180px; top: -220px; width: 640px; height: 560px; border-radius: 52% 48% 55% 45% / 50% 55% 45% 50%; background: var(--pink); opacity: .12; }
-  .light .blob { opacity: .22; }
-  .eyebrow { font-size: 28px; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; font-variation-settings: "wdth" 115; color: var(--teal); }
+  .pebble { position: absolute; right: -120px; top: -110px; width: 470px; height: auto; transform: rotate(-14deg); fill: var(--pink); }
+  .light .pebble { fill: var(--pink); }
+  .eyebrow { font-size: 34px; font-weight: 650; letter-spacing: -0.005em; font-variation-settings: "wdth" 115; color: var(--teal); }
   .light .eyebrow { color: var(--teal-deep); }
   h1 { margin-top: 18px; font-size: 76px; line-height: 1.04; letter-spacing: -0.025em; font-weight: 680; font-variation-settings: "wdth" 115; text-wrap: balance; max-width: 1200px; }
   .body { flex: 1; display: flex; flex-direction: column; justify-content: center; margin: 40px 0 28px; min-height: 0; }
@@ -107,7 +107,7 @@ const n = fig.items.length;
 </head>
 <body>
   <div class={`card ${fig.tone} ${fig.type === "statement" ? "statement" : ""}`}>
-    <div class="blob"></div>
+    <svg class="pebble" viewBox="0 0 125 102" aria-hidden="true"><path d="M60 2 C95 -3 122 18 124 48 C126 78 100 100 62 101 C26 102 -2 82 0 50 C2 20 28 7 60 2 Z" /></svg>
     <div class="eyebrow">{fig.eyebrow ?? "Pebble Interactive"}</div>
     {fig.type === "statement"
       ? <h1 set:html={fig.title.replace(/\*(.+?)\*/g, "<em>$1</em>")} />

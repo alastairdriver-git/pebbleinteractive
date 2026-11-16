@@ -40,7 +40,7 @@ const { eyebrow, title, kicker, image } = Astro.props;
     display: grid; grid-template-columns: 1fr 470px;
   }
   .text { display: flex; flex-direction: column; justify-content: space-between; padding: 64px 48px 56px 72px; }
-  .eyebrow { font-size: 21px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(0.82 0.09 195); font-variation-settings: "wdth" 115; }
+  .eyebrow { font-size: 27px; font-weight: 620; letter-spacing: -0.005em; color: oklch(0.82 0.09 195); font-variation-settings: "wdth" 115; }
   .kicker { margin-top: 28px; font-size: 30px; font-weight: 600; opacity: .8; font-variation-settings: "wdth" 110; }
   h1 { margin-top: 10px; font-size: 54px; line-height: 1.06; letter-spacing: -0.02em; font-weight: 650; font-variation-settings: "wdth" 115; text-wrap: balance; }
   .brand { display: flex; align-items: center; gap: 14px; font-size: 26px; font-weight: 650; font-variation-settings: "wdth" 110; }
@@ -51,14 +51,13 @@ const { eyebrow, title, kicker, image } = Astro.props;
   .card.text-only { grid-template-columns: 1fr; }
   .card.text-only .text { padding: 72px 96px 64px 72px; }
   .card.text-only h1 { font-size: 72px; max-width: 18ch; }
-  .card.text-only::after {
-    content: ""; position: absolute; right: -120px; top: -120px; width: 460px; height: 460px; border-radius: 50%;
-    background: oklch(0.82 0.09 195 / .14);
-  }
+  .card .pebble { position: absolute; right: -120px; top: -110px; width: 430px; height: auto; transform: rotate(-14deg); fill: oklch(0.72 0.19 352); display: none; }
+  .card.text-only .pebble { display: block; }
 </style>
 </head>
 <body>
   <div class={image ? "card" : "card text-only"}>
+    <svg class="pebble" viewBox="0 0 125 102" aria-hidden="true"><path d="M60 2 C95 -3 122 18 124 48 C126 78 100 100 62 101 C26 102 -2 82 0 50 C2 20 28 7 60 2 Z" /></svg>
     <div class="text">
       <div>
         <div class="eyebrow">{eyebrow}</div>

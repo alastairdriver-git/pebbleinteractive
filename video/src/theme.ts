@@ -29,7 +29,6 @@ export const eyebrow = (size: number) => ({
   fontSize: size,
   fontWeight: 600,
   fontVariationSettings: '"wdth" 115',
-  letterSpacing: "0.14em",
-  textTransform: "uppercase" as const,
+  letterSpacing: "-0.005em",
   color: C.accent,
 });

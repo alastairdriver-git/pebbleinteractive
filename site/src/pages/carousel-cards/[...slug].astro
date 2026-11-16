@@ -36,10 +36,12 @@ const I = (name: string) => (Icons as any)[name] ?? Icons.Circle;
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 1080px; }
   .slide { width: 1080px; height: 1350px; position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 96px 96px 88px; background: var(--cw-ground); color: var(--cw-text); font-family: var(--pb-font); break-after: page; }
-  .blob { position: absolute; right: -200px; top: -240px; width: 720px; height: 640px; border-radius: 52% 48% 55% 45% / 50% 55% 45% 50%; background: var(--pb-pink); opacity: .16; }
-  .cw-pink .blob { background: var(--pb-ink); opacity: .08; }
-  .cw-mint .blob { background: var(--pb-navy); opacity: .07; }
-  .top { display: flex; justify-content: space-between; align-items: center; font-size: 30px; font-weight: 650; font-variation-settings: "wdth" 110; position: relative; }
+  /* A solid pebble, partly off the edge, in a contrasting brand colour. */
+  .pebble { position: absolute; right: -150px; top: -120px; width: 520px; height: auto; transform: rotate(-14deg); fill: var(--pb-pink); }
+  .cw-cream .pebble { fill: var(--pb-pink); }
+  .cw-pink .pebble { fill: var(--pb-ink); }
+  .cw-mint .pebble { fill: var(--pb-navy); }
+  .top { display: flex; justify-content: space-between; align-items: center; font-size: 30px; font-weight: 650; font-variation-settings: "wdth" 110; position: relative; padding-right: 300px; }
   .brand { display: flex; align-items: center; gap: 14px; }
   .brand svg { width: 50px; height: 41px; }
   .count { font-size: 26px; font-weight: 600; color: var(--cw-muted); }
@@ -47,7 +49,7 @@ const I = (name: string) => (Icons as any)[name] ?? Icons.Circle;
   .pill { align-self: flex-start; padding: 12px 26px; border-radius: 999px; background: var(--cw-fill); color: var(--cw-fill-text); font-size: 30px; font-weight: 700; font-variation-settings: "wdth" 110; }
   h1 { font-size: 104px; line-height: 1.0; letter-spacing: -0.035em; font-weight: 690; font-variation-settings: "wdth" 115; text-wrap: balance; }
   h2 { font-size: 76px; line-height: 1.04; letter-spacing: -0.03em; font-weight: 680; font-variation-settings: "wdth" 115; text-wrap: balance; }
-  .eyebrow { font-size: 28px; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; font-variation-settings: "wdth" 115; color: var(--cw-accent); }
+  .eyebrow { font-size: 36px; font-weight: 650; letter-spacing: -0.005em; font-variation-settings: "wdth" 115; color: var(--cw-accent); }
   .big { font-size: 64px; line-height: 1.16; letter-spacing: -0.02em; font-weight: 620; font-variation-settings: "wdth" 110; text-wrap: balance; }
   .lede { font-size: 40px; line-height: 1.35; color: var(--cw-muted); text-wrap: pretty; }
   .icon { display: grid; place-items: center; width: 120px; height: 120px; border-radius: 30px; background: var(--cw-fill); color: var(--cw-fill-text); }
@@ -62,7 +64,7 @@ const I = (name: string) => (Icons as any)[name] ?? Icons.Circle;
 <body>
   {slides.map((s, i) => (
     <section class={`slide cw-${(s as any).cw}`}>
-      <div class="blob"></div>
+      <svg class="pebble" viewBox="0 0 125 102" aria-hidden="true"><path d="M60 2 C95 -3 122 18 124 48 C126 78 100 100 62 101 C26 102 -2 82 0 50 C2 20 28 7 60 2 Z" /></svg>
       <div class="top">
         <div class="brand">
           <svg viewBox="0 0 125 102" aria-hidden="true">
@@ -71,7 +73,7 @@ const I = (name: string) => (Icons as any)[name] ?? Icons.Circle;
           </svg>
           Pebble Interactive
         </div>
-        <span class="count">{start + i + 1} / {total}</span>
+        
       </div>
       <div class="body">
         {s.kind === "hook" && (<><span class="pill">{s.pill}</span><h1>{s.title}</h1></>)}
@@ -83,7 +85,7 @@ const I = (name: string) => (Icons as any)[name] ?? Icons.Circle;
           <ul class="list">{s.items.map((x) => { const C = I(x.icon); return <li><span class="mk"><C size={32} strokeWidth={2.2} /></span>{x.title}</li>; })}</ul></>)}
         {s.kind === "cta" && (<><span class="eyebrow">{s.title}</span><h2>{s.price === "Free" ? "Get it free" : s.price === "Coming soon" ? "Coming soon" : `Get it for ${s.price}`}</h2><span class="cta">{s.price === "Free" ? "Download free" : s.price === "Coming soon" ? "Join the list" : "Buy now"}</span><span class="url">{s.url}</span></>)}
       </div>
-      {s.kind === "hook" && <span class="swipe">Swipe →</span>}
+      <span class="swipe">{s.kind === "hook" ? "Swipe →" : `${start + i + 1} / ${total}`}</span>
     </section>
   ))}
 </body>

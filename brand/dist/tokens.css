@@ -1,0 +1,60 @@
+/* Generated from tokens.json by build.mjs. Do not edit. */
+:root {
+  --pb-ink: oklch(0.245 0.045 220);
+  --pb-ink-raised: oklch(0.3 0.045 220);
+  --pb-cream: oklch(0.965 0.006 85);
+  --pb-stone: oklch(0.935 0.008 85);
+  --pb-teal: oklch(0.45 0.095 195);
+  --pb-teal-light: oklch(0.82 0.09 195);
+  --pb-mint: oklch(0.9 0.065 195);
+  --pb-navy: oklch(0.27 0.07 255);
+  --pb-pink: oklch(0.72 0.19 352);
+  --pb-pink-soft: oklch(0.95 0.04 352);
+  --pb-font: "Mona Sans", system-ui, sans-serif;
+  --pb-heading-width: 115;
+  --pb-heading-weight: 650;
+  --pb-heading-tracking: -0.03em;
+  --pb-radius: 0.625rem;
+}
+
+/* Colourways: set on any container; children read --cw-* */
+.cw-ink {
+  --cw-ground: oklch(0.245 0.045 220);
+  --cw-text: oklch(0.965 0.006 85);
+  --cw-muted: oklch(0.965 0.006 85 / 0.7);
+  --cw-accent: oklch(0.82 0.09 195);
+  --cw-fill: oklch(0.72 0.19 352);
+  --cw-fill-text: oklch(0.245 0.045 220);
+  background: var(--cw-ground);
+  color: var(--cw-text);
+}
+.cw-cream {
+  --cw-ground: oklch(0.965 0.006 85);
+  --cw-text: oklch(0.245 0.045 220);
+  --cw-muted: oklch(0.245 0.045 220 / 0.65);
+  --cw-accent: oklch(0.45 0.095 195);
+  --cw-fill: oklch(0.72 0.19 352);
+  --cw-fill-text: oklch(0.245 0.045 220);
+  background: var(--cw-ground);
+  color: var(--cw-text);
+}
+.cw-pink {
+  --cw-ground: oklch(0.72 0.19 352);
+  --cw-text: oklch(0.245 0.045 220);
+  --cw-muted: oklch(0.245 0.045 220 / 0.75);
+  --cw-accent: oklch(0.245 0.045 220);
+  --cw-fill: oklch(0.245 0.045 220);
+  --cw-fill-text: oklch(0.72 0.19 352);
+  background: var(--cw-ground);
+  color: var(--cw-text);
+}
+.cw-mint {
+  --cw-ground: oklch(0.9 0.065 195);
+  --cw-text: oklch(0.27 0.07 255);
+  --cw-muted: oklch(0.27 0.07 255 / 0.72);
+  --cw-accent: oklch(0.27 0.07 255);
+  --cw-fill: oklch(0.27 0.07 255);
+  --cw-fill-text: oklch(0.9 0.065 195);
+  background: var(--cw-ground);
+  color: var(--cw-text);
+}
