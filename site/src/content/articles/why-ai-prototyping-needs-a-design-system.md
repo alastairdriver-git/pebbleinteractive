@@ -37,6 +37,8 @@ A design system is a set of decisions written down: which colours, which type si
 
 When a prototype is made from real components and real tokens, it's no longer a picture of an interface. It's an early version of one.
 
+![BrightLocal Location Manager prototype listing one business across Google, Apple Maps, Bing, Facebook and Yelp](/work/brightlocal/bl-lm-listings.png "wide: A BrightLocal prototype built from its own design system, shown with sample data.")
+
 At BrightLocal, prototypes sit in the design system repository and go through the same pull request review as production code, with usage guidance written into Storybook. That does two useful things. Developers can see exactly which components a design uses and spot anything new before it's built. And designers get feedback on feasibility while the idea is still cheap to change.
 
 Neither would be possible if the prototype were AI output with its own invented styles.

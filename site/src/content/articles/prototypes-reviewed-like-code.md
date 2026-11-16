@@ -19,6 +19,8 @@ There is a simpler arrangement. Put the prototype where the code lives and revie
 
 BrightLocal is a UK local SEO platform that is rebuilding its product. We're embedded in its Product Design team, building working prototypes across the product, from listings and Location Manager to reviews, so teams can test new directions before committing engineering time.
 
+![BrightLocal Location Manager screen map showing every screen and the routes between them](/work/brightlocal/bl-screen-map.jpg "wide: A BrightLocal screen map: every screen and the routes between them, platform by platform.")
+
 One strand of that work is about how design reaches code. Prototypes are reviewed like code in the design system repository, with usage guidance written into Storybook. It's a way of working the in-house team now shares.
 
 The rest of this article is about what that arrangement involves and what it changes.

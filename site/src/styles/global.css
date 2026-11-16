@@ -29,6 +29,15 @@
   --font-heading-tracking: -0.035em; /* a smidge past tracking-tight (-0.025em) */
 }
 
+/* Site width: Grade's widest container (maxW="xl") is 96rem, too wide for
+   reading. Cap every container on the site, header and footer included. */
+:root { --site-max: 76rem; }
+[data-gds-part="container"].max-w-\[96rem\] { max-width: var(--site-max); }
+
+/* Typography defaults: no orphans in running text, balanced headings. */
+p, li, dd, dt, blockquote, figcaption, td { text-wrap: pretty; }
+h1, h2, h3, h4 { text-wrap: balance; }
+
 h1, h2, h3,
 .font-display {
   font-variation-settings: "wdth" var(--font-heading-width);
@@ -120,6 +129,12 @@ h1, h2, h3,
   /* Accent for use ON the dark camel band — same teal family lifted to
      AA-contrast lightness against --camel (L 0.245). */
   --accent-on-camel: 0.82 0.09 195;
+  /* Citrus: a bright lime-yellow second accent. A FILL colour (highlights,
+     markers, pills, progress, on the dark band); never small text on the
+     light ground, where it fails contrast. Text on citrus is --citrus-foreground. */
+  --citrus: 0.93 0.19 118;
+  --citrus-foreground: 0.245 0.045 220;
+  --citrus-soft: 0.97 0.08 118;
   --border: 0.900 0.006 85;
   --input: 0.900 0.006 85;
   --ring: 0.420 0.070 210;
@@ -261,13 +276,15 @@ h1, h2, h3,
 .article-row { display: flex; flex-direction: column; gap: .75rem; padding: 2.25rem 0; text-decoration: none; color: inherit; }
 .article-row:hover h2 { color: oklch(var(--accent)); }
 .article-meta { font-size: var(--text-sm); color: oklch(var(--muted-foreground)); }
-.article-head { display: flex; flex-direction: column; gap: 1.25rem; max-width: 52rem; margin-top: 2.5rem; }
+/* Article pages: one centred reading column; wide figures break out of it. */
+.article-shell { max-width: 44rem; margin-inline: auto; }
+.article-head { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2.5rem; }
 .article-byline { display: flex; flex-wrap: wrap; gap: .5rem; font-size: var(--text-sm); color: oklch(var(--muted-foreground)); padding-top: 1.25rem; border-top: 1px solid oklch(var(--border)); }
 .article-byline a { color: oklch(var(--foreground)); font-weight: 600; text-decoration: none; }
 .article-draft { align-self: flex-start; font-size: var(--text-sm); font-weight: 600; padding: .25rem .75rem; border-radius: 999px; background: oklch(0.93 0.08 85); color: oklch(0.35 0.08 70); }
 .article-hero { margin: 3rem 0 0; }
 .article-hero img { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid oklch(var(--border)); }
-.article-body { max-width: 42rem; margin-top: 3rem; }
+.article-body { margin-top: 3rem; }
 .article-body blockquote { margin: 2em 0; padding-left: 1.25rem; border-left: 2px solid oklch(var(--accent)); font-family: var(--font-display); font-size: 1.35rem; line-height: 1.4; }
 .article-body code { font-size: .9em; padding: .1em .35em; border-radius: 4px; background: oklch(var(--muted)); }
 .article-body pre { padding: 1rem 1.25rem; border-radius: var(--radius); background: oklch(var(--muted)); overflow-x: auto; font-size: .9rem; line-height: 1.6; }
@@ -316,3 +333,127 @@ h1, h2, h3,
 .notfound-articles { list-style: none; margin: 1.25rem 0 0; padding: 0; display: flex; flex-direction: column; gap: .75rem; }
 .notfound-articles a { font-size: var(--text-lg); color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .notfound-articles a:hover { color: oklch(var(--accent)); }
+
+/* ── Article typography ───────────────────────────────────────
+   A reading system of its own: a ~68ch measure, a larger body size,
+   a lead paragraph, citrus markers. Used only by .article-prose. */
+.article-prose {
+  max-width: 44rem;
+  font-size: clamp(1.125rem, calc(1.07rem + 0.25vw), 1.25rem);
+  line-height: 1.72;
+  color: oklch(var(--foreground) / 0.88);
+  hanging-punctuation: first;
+  font-feature-settings: "kern", "liga", "calt";
+}
+.article-prose > * + * { margin-top: 1.25em; }
+.article-prose > p:first-child {
+  font-size: 1.22em;
+  line-height: 1.55;
+  color: oklch(var(--foreground));
+  font-weight: 450;
+}
+.article-prose h2 {
+  position: relative;
+  margin-top: 2.6em;
+  padding-top: 1.1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, calc(1.6rem + 0.6vw), 2.25rem);
+  line-height: 1.15;
+  color: oklch(var(--foreground));
+}
+.article-prose h2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.75rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: oklch(var(--citrus));
+}
+.article-prose h3 {
+  margin-top: 2em;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, calc(1.22rem + 0.3vw), 1.5rem);
+  line-height: 1.25;
+  color: oklch(var(--foreground));
+}
+.article-prose h2 + *, .article-prose h3 + * { margin-top: 0.6em; }
+.article-prose strong { color: oklch(var(--foreground)); font-weight: 620; }
+.article-prose em { font-style: italic; }
+.article-prose a {
+  color: oklch(var(--foreground));
+  text-decoration: underline;
+  text-decoration-color: oklch(var(--accent));
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: background-color .15s;
+}
+.article-prose a:hover { background: oklch(var(--citrus) / 0.55); text-decoration-color: oklch(var(--foreground)); }
+.article-prose mark { background: linear-gradient(transparent 55%, oklch(var(--citrus)) 0); color: inherit; padding: 0 .1em; }
+.article-prose ul, .article-prose ol { padding-left: 0; }
+.article-prose ul { list-style: none; }
+.article-prose ul > li { position: relative; padding-left: 1.6em; }
+.article-prose ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0.15em;
+  top: 0.62em;
+  width: 0.62em;
+  height: 0.5em;
+  border-radius: 60% 50% 55% 45% / 55% 60% 45% 50%;
+  background: oklch(var(--citrus));
+  box-shadow: inset 0 -0.12em 0 oklch(var(--citrus-foreground) / 0.18);
+}
+.article-prose ol { list-style: none; counter-reset: step; }
+.article-prose ol > li { position: relative; padding-left: 2.4em; counter-increment: step; }
+.article-prose ol > li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.12em;
+  width: 1.6em;
+  height: 1.6em;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: oklch(var(--citrus));
+  color: oklch(var(--citrus-foreground));
+  font-family: var(--font-display);
+  font-size: 0.8em;
+  font-weight: 700;
+  font-variation-settings: "wdth" 110;
+}
+.article-prose li + li { margin-top: 0.6em; }
+.article-prose blockquote {
+  margin: 2.2em 0;
+  padding: 0.2em 0 0.2em 1.4rem;
+  border-left: 0.35rem solid oklch(var(--citrus));
+  font-family: var(--font-display);
+  font-size: 1.45em;
+  line-height: 1.3;
+  font-weight: 560;
+  letter-spacing: -0.015em;
+  color: oklch(var(--foreground));
+}
+.article-prose blockquote p { margin: 0; }
+.article-prose hr { border: 0; height: 1rem; margin: 3em 0; background: radial-gradient(circle, oklch(var(--citrus)) 0.3rem, transparent 0.32rem) center / 1.6rem 1rem repeat-x; max-width: 4.8rem; margin-inline: auto; }
+.article-prose code { font-size: 0.88em; padding: 0.12em 0.4em; border-radius: 6px; background: oklch(var(--muted)); color: oklch(var(--foreground)); }
+.article-prose pre { padding: 1.1rem 1.3rem; border-radius: var(--radius); background: oklch(var(--camel)); color: oklch(var(--camel-foreground)); overflow-x: auto; font-size: 0.85em; line-height: 1.6; }
+.article-prose pre code { background: none; padding: 0; color: inherit; }
+.article-prose figure { margin: 2.5em 0; }
+.article-prose figure.wide { width: min(64rem, calc(100vw - 2rem)); margin-left: 50%; transform: translateX(-50%); }
+.article-prose figure img, .article-prose figure video { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid oklch(var(--border)); background: oklch(var(--muted)); }
+.article-prose figcaption { margin-top: 0.75rem; font-size: var(--text-sm); line-height: 1.5; color: oklch(var(--muted-foreground)); }
+.article-prose figcaption::before { content: ""; display: inline-block; width: 0.55em; height: 0.55em; margin-right: 0.5em; border-radius: 999px; background: oklch(var(--citrus)); vertical-align: 0.05em; }
+.article-prose table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+.article-prose th, .article-prose td { text-align: left; padding: 0.6em 0.8em 0.6em 0; border-bottom: 1px solid oklch(var(--border)); vertical-align: top; }
+.article-prose th { font-weight: 620; color: oklch(var(--foreground)); }
+
+/* Series pill and reading progress on article pages. */
+.article-series { align-self: flex-start; display: inline-flex; align-items: center; gap: .5rem; padding: .35rem .85rem; border-radius: 999px; background: oklch(var(--citrus)); color: oklch(var(--citrus-foreground)); font-size: var(--text-sm); font-weight: 650; font-variation-settings: "wdth" 112; letter-spacing: 0.02em; }
+.reading-progress { position: fixed; inset: 0 0 auto 0; height: 4px; z-index: 60; background: oklch(var(--citrus)); transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
+@supports (animation-timeline: scroll()) {
+  .reading-progress { animation: reading-progress linear both; animation-timeline: scroll(root); }
+  @keyframes reading-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+}

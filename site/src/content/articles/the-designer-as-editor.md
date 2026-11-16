@@ -27,6 +27,8 @@ The difficulty is that AI drafts are fluent. A wireframe with rough edges invite
 
 An editor without a brief or a house style is only giving opinions. The same is true here. Before you review anything, you need two things written down: what the screen is for, and what your system allows.
 
+![Glint business onboarding, choosing the business type](/work/glint/gl-kyb.png "Glint onboarding was built from the compliance specification, which is what every generated screen gets checked against.")
+
 In our work with BrightLocal, prototypes start from requirement documents, an expert UX audit and BrightLocal's own design system. When a generated screen comes back, there is something to hold it up against. Does it meet the requirement? Does it deal with the problem the audit found? Is it made from the system's components, or has it invented its own?
 
 At Glint, the onboarding flow for business accounts was built from the compliance officer's data-capture specification, and it branches on business type to meet US and UK ownership rules. No amount of taste tells you whether that flow is right. The specification does. A tool can draft a tidy, plausible onboarding form in seconds. Only a person reading it line by line against the spec can say that it asks the right questions of the right kind of business.

@@ -17,6 +17,8 @@ What a design system and a good prototype can do is remove most of the guesswork
 
 Native iOS apps are commonly built with SwiftUI and native Android apps with Jetpack Compose. Neither reads CSS. If your colours, type and spacing only exist as web styles, each app team will retype them by hand, and they'll drift from that day on.
 
+![Pocket Films iOS app screens built on the shared token foundation](/work/pocket-films/pocketfilms-gallery01-image2.jpg "wide: A native iOS app built on the same tokens as the web platform (Pocket Films).")
+
 The fix is to keep tokens in a neutral format, such as a JSON file, and generate what each platform needs from it: CSS variables for web, Swift for iOS, Kotlin for Android. This is an established practice, and there are well-known open source tools for it.
 
 Nobody changes a colour inside an app. They change it at the source and every platform updates.
@@ -36,6 +38,8 @@ Some things should differ on purpose. Navigation, system controls such as date p
 ## What to prototype on web first
 
 Web prototypes are quick to make, easy to share with a link and cheap to change. That makes them the right place to settle anything that isn't specific to a phone.
+
+![Glint business onboarding prototype, choosing the business type](/work/glint/gl-kyb.png "Flows and branching are cheap to test on the web first: Glint business onboarding.")
 
 - **The flow.** Which steps, in what order, with what branching. At Glint, business onboarding was a step-by-step flow built from the compliance spec, branching on business type to meet US and UK ownership rules. That logic is the same on any platform, and it is far cheaper to get right in a prototype.
 - **The content.** Wording, labels, error messages, what information appears where.

@@ -25,6 +25,8 @@ You only find these things when real data arrives, and in most projects that hap
 
 Glint is a gold and silver payments platform with its own Mastercard. When we designed and prototyped its business accounts for the UK and US, the portal needed to be good enough to show partners before anything was built.
 
+![Glint business portal wallets for gold, silver and US dollars](/work/glint/gl-wallets.png "wide: Glint business portal wallets, valued with real market prices.")
+
 So every price and chart in the prototype came from real, public market data. Wallets for gold, silver and US dollars were valued at real prices, and the buying and selling flows were priced with the same data.
 
 That changed the conversations around the prototype in three ways:
@@ -49,6 +51,8 @@ A few practical habits help:
 ## When sample data is the right choice
 
 Real data isn't always possible, or right. For BrightLocal, whose product manages businesses' listings and reviews across platforms, the prototypes use sample data. The real thing would mean real businesses' details, and the value of the prototype lies in the workflow rather than in any particular business.
+
+![BrightLocal Location Manager prototype with sample business listings](/work/brightlocal/bl-lm-listings.png "BrightLocal prototypes use sample data: the workflow matters more than any one business.")
 
 Good sample data borrows the awkwardness of the real thing: long names, missing fields, odd characters, a location with no reviews and one with thousands. If you have to make it up, make it up badly, on purpose.
 

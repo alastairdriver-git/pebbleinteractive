@@ -27,6 +27,8 @@ That is the whole idea. The hard part is deciding what belongs in the foundation
 
 Pocket Films is an AI-powered marketplace that connects filmmakers with creative service providers. It serves two very different audiences: production teams sourcing locations, crew and equipment, and providers who want to be found. That meant three surfaces from the start: a mobile app, a provider web platform and a system admin.
 
+![Pocket Films design system: type scale, colour tokens and components](/work/pocket-films/pocketfilms-design-systems.webp "wide: The Pocket Films design system. One set of tokens behind the app, the provider platform and the admin.")
+
 We led design from the beginning, so we had the chance to do this properly before any drift set in. We built a single token foundation that every surface inherited from. Colour, type, spacing and components were defined once and cascaded to the iOS app, the provider platform and the admin, with light, dark and brand themes.
 
 Three platforms came out of one design system, and Pocket Films launched on iOS.
@@ -45,6 +47,8 @@ Some decisions should be the same everywhere, with no exceptions.
 ## What to let diverge
 
 Sharing a foundation does not mean making every platform look identical. People use a phone, a web platform and an admin tool in different ways, and each platform has habits its users already know.
+
+![Pocket Films iOS app screens: messages, map search and a studio profile](/work/pocket-films/pocketfilms-gallery01-image2.jpg "Same tokens, native patterns: the Pocket Films iOS app.")
 
 - **Navigation.** A phone app and a wide web platform need different ways of getting around. Forcing one pattern onto both makes at least one of them worse.
 - **Density.** An admin tool is used all day by people who want to see a lot at once. A consumer app wants more room. Use the same spacing scale, but pick different steps from it.

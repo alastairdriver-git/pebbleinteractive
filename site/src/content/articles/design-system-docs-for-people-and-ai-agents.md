@@ -32,6 +32,8 @@ None of this is the tool being careless. It is filling gaps. The gaps are in the
 
 Every design system has two layers of knowledge. The first is what exists: components, properties, tokens. Most teams document that reasonably well, often automatically.
 
+![BrightLocal Location Manager prototype](/work/brightlocal/bl-lm-listings.png "A BrightLocal prototype. Guidance in the design system decides which components a tool reaches for.")
+
 The second layer is judgement. When to use a modal and when a new page. Why there's only one primary action per view. What to do when a table has too many columns. This layer mostly lives in people's heads and in old chat threads. New starters pick it up by asking around.
 
 An AI agent can't ask around. So the work is to move the second layer into writing.

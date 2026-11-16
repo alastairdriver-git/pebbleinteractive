@@ -48,15 +48,17 @@ const ld = graph(
   <link slot="head" rel="alternate" type="application/rss+xml" title="Pebble Interactive articles" href="/rss.xml" />
   {d.draft && <meta slot="head" name="robots" content="noindex" />}
 
+  <div class="reading-progress" aria-hidden="true"></div>
   <Section pad="lg">
     <Container maxW="xl">
+      <div class="article-shell">
       <nav aria-label="Breadcrumb" class="work-crumbs">
         <a href="/">Home</a><span aria-hidden="true">/</span><a href="/articles">Articles</a>
       </nav>
       <header class="article-head">
         {d.draft && <p class="article-draft">Draft: not published</p>}
-        <span class="eyebrow">{d.series}</span>
-        <h1 class="text-balance font-display text-4xl leading-[1.05] tracking-tight sm:text-6xl">{d.title}</h1>
+        <span class="article-series">{d.series}</span>
+        <h1 class="text-balance font-display text-4xl leading-[1.05] tracking-tight sm:text-5xl">{d.title}</h1>
         <p class="text-pretty text-xl leading-relaxed text-muted-foreground">{d.description}</p>
         <p class="article-byline">
           <span><a href={AUTHOR.url} rel="author">{AUTHOR.name}</a>, {AUTHOR.role}</span>
@@ -67,8 +69,9 @@ const ld = graph(
         </p>
       </header>
       {d.image && <figure class="article-hero"><img src={d.image} alt={d.imageAlt ?? ""} /></figure>}
-      <div class="article-body es-prose">
+      <div class="article-body article-prose">
         <Content />
+      </div>
       </div>
     </Container>
   </Section>
