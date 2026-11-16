@@ -1,0 +1,21 @@
+figures:
+  - id: choosing-the-catalogue
+    type: flow
+    eyebrow: A2UI catalogues
+    title: How we choose what goes in a catalogue
+    items:
+      - { label: List the screens, note: The five you most want agents to build }
+      - { label: Sketch them, note: As trees of your components }
+      - { label: Keep what recurs, note: Used once is a candidate to leave out }
+      - { label: Describe each one, note: A sentence an agent can follow }
+  - id: props-carry-meaning
+    type: comparison
+    tone: light
+    eyebrow: Component properties
+    title: Properties carry meaning. Components carry the look.
+    left:
+      label: Keep inside the component
+      items: [Colours, Pixel sizes and fonts, "Hover, focus and disabled states", Which tone a status gets]
+    right:
+      label: Expose as properties
+      items: [Text that can bind to data, Variant and tone, Status, Labels on generic inputs, Actions]

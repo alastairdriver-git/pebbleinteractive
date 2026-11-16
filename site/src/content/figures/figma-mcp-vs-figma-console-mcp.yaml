@@ -1,0 +1,22 @@
+figures:
+  - id: what-each-is-for
+    type: grid
+    eyebrow: Figma and MCP
+    title: What each server is best at
+    items:
+      - { label: Design context for code, note: Official Figma MCP }
+      - { label: Code Connect, note: Official Figma MCP }
+      - { label: Library search, note: Official Figma MCP }
+      - { label: Variables in bulk, note: Figma Console MCP }
+      - { label: Health audits, note: Figma Console MCP }
+      - { label: Design and code parity, note: Figma Console MCP }
+  - id: how-we-use-them
+    type: flow
+    tone: light
+    eyebrow: Design system work
+    title: How we use the two together
+    items:
+      - { label: Set up variables, note: Console MCP }
+      - { label: Read design context, note: Figma MCP }
+      - { label: Map components, note: Code Connect }
+      - { label: Audit and check parity, note: Console MCP }
