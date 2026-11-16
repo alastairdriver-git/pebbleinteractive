@@ -51,6 +51,17 @@ Files: `site/src/content/articles/<slug>.md`, Markdown body plus frontmatter (sc
 - The homepage shows the latest three published articles; the section is hidden until one is published.
 - Topics and running order: the content plan (articles 5, 6, 9, 1, 7, 2 first).
 
+### Visuals in articles
+
+Every article should have 2 to 4 visuals. All of these go in the Markdown on a line of their own:
+
+- **Images:** `![Alt text](/path.png "Caption")`. Start the caption with `wide:` to break out of the reading column. MP4s work the same way (looping, muted). Use real case study media from `site/public/work/`; no stock or invented UI.
+- **Diagram cards:** branded 1600×1000 PNGs from `site/src/content/figures/<article-slug>.yaml` (types: checklist, steps, comparison, flow, fanout, grid, statement; `tone: dark|light`; in a statement title, `*text*` is highlighted). Quote any list item containing a comma. Run `pnpm og` (or `pnpm og -- figures`), then embed `/figures/<article>/<id>.png`. Card content must come from the article itself.
+- **Link cards:** a bare URL on its own line becomes a preview card. Run `pnpm links` to fetch and save the metadata (`site/src/data/link-previews.json`) and image (`site/public/link-previews/`); pages without an og:image get a screenshot.
+- **Live A2UI demos:** `{{a2ui name}}` renders a real surface from Pebble's catalogue (`a2ui/`, package `@pebble/a2ui`) using `a2ui/examples/<name>.json`, with a Messages tab, Replay and an action log. Messages are protocol 1.0: data bindings are `{"@path": "/x"}` (not `{"path"}`, which validates but never resolves); template child lists stay `{"componentId": "...", "path": "/list"}`. Enum props can't be bound; use DynamicString. Test the demo in the browser before publishing.
+
+Typography: articles use `.article-prose` (centred 44rem column, lead paragraph, pink markers). Pink (`--pink`) is a fill colour only, never small text on the light background.
+
 ## Products
 
 Files: `site/src/content/products/<slug>.md`, frontmatter plus a short Markdown body. `status` is `draft` (hidden in production), `soon` (listed as coming soon, noindex) or `live`. A live product needs `checkoutUrl` (the Lemon Squeezy checkout link) or, if `price: 0`, a `downloadUrl`; the build fails otherwise. Live products get `Product` + `Offer` JSON-LD and the Lemon Squeezy overlay checkout. Never put client IP (screens, specs, data) in a product.
