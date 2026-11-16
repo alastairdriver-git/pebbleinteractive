@@ -11,7 +11,7 @@ import * as Icons from "lucide-react";
 import { SITE, NAV, FONT_HREF } from "../../lib/site.config";
 import JsonLd from "../../components/JsonLd.astro";
 import Subscribe from "../../components/Subscribe.astro";
-import { getProducts, formatPrice } from "../../lib/content";
+import { getProducts, formatPrices } from "../../lib/content";
 import { graph, organization, website, webPage, product, breadcrumbs, SITE_URL } from "../../lib/seo";
 
 export async function getStaticPaths() {
@@ -25,7 +25,7 @@ const path = `/products/${entry.id}`;
 const og = `/og/products/${entry.id}.png`;
 const live = d.status === "live";
 const free = d.price === 0;
-const price = live ? formatPrice(d.price, d.currency) : "Coming soon";
+const price = live ? formatPrices(d.price, d.currency, d.priceGbp) : "Coming soon";
 const icon = (name: string) => (Icons as any)[name] ?? Icons.Circle;
 const inside = d.inside.length ? d.inside : d.includes.map((t) => ({ icon: "Check", title: t, body: "" }));
 
@@ -47,10 +47,10 @@ if (d.faqs.length)
     mainEntity: d.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
   });
 const ld = graph(...nodes);
-/* Lemon Squeezy: overlay checkout when lemon.js loads; otherwise the hosted checkout. */
-const checkout = d.checkoutUrl ? `${d.checkoutUrl}${d.checkoutUrl.includes("?") ? "&" : "?"}embed=1` : undefined;
+/* Polar hosted checkout (merchant of record: tax handled there). */
+const checkout = d.checkoutUrl;
 const notify = `mailto:hello@pebbleinteractive.com?subject=${encodeURIComponent(`Tell me when ${d.title} is out`)}`;
-const cta = live && checkout ? { href: checkout, label: `Buy now · ${price}`, cls: "lemonsqueezy-button" }
+const cta = live && checkout ? { href: checkout, label: `Buy now · ${price}`, cls: "" }
   : live && free && d.downloadUrl ? { href: d.downloadUrl, label: "Download free", cls: "" }
   : null;
 ---
@@ -75,7 +75,7 @@ const cta = live && checkout ? { href: checkout, label: `Buy now · ${price}`, c
             <div class="product-hero-actions">
               {cta ? <a href={cta.href} class={`product-cta ${cta.cls}`} download={free ? true : undefined}>{cta.label}</a>
                    : <a href={notify} class="product-cta">Email me when it's out</a>}
-              {!free && live && <span class="product-hero-note">Instant download. VAT handled at checkout.</span>}
+              {!free && live && <span class="product-hero-note">Instant download. Secure checkout by Polar, with VAT and sales tax handled for you.</span>}
               {free && live && <span class="product-hero-note">No sign-up needed.</span>}
               {!live && <span class="product-hero-note">Coming soon</span>}
             </div>
@@ -201,5 +201,4 @@ const cta = live && checkout ? { href: checkout, label: `Buy now · ${price}`, c
     </Container>
   </Section>
 
-  {live && checkout && <script is:inline src="https://assets.lemonsqueezy.com/lemon.js" defer></script>}
 </BaseLayout>

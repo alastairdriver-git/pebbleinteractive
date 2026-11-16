@@ -2,7 +2,9 @@
 title: Case study kit for freelancers and studios
 summary: A one-page case study template and a structure guide, so every project you write up reads clearly and prints well.
 price: 15
-status: soon
+priceGbp: 12
+status: live
+checkoutUrl: https://buy.polar.sh/polar_cl_8cIwOVdB1eSbpSMtmdyhq8nn5MOLLqs3WUFg21fsFKb
 format: One-page case study template
 includes:
   - "A one-page case study template in HTML and CSS that prints to A4 and reads as a web page"
@@ -11,7 +13,7 @@ includes:
   - "A five-page structure guide with eight before-and-after rewrites"
   - "A render script for macOS and Linux, and printing notes for Windows"
 forWho: Designers, developers and consultants who need case studies for tenders, applications and portfolios, and want them short enough that people actually read them.
-order: 2
+order: 4
 keywords: [case study template, portfolio, freelance, design case study, PDF template]
 image: /products/case-study-kit/preview.png
 imageAlt: The case study kit, showing a finished one-page case study and the structure guide

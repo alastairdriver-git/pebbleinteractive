@@ -2,7 +2,9 @@
 title: Supplier-ready policy pack for small studios
 summary: Eighteen plain-English company policies and a guide to answering procurement due diligence forms, ready to adapt and adopt.
 price: 19
-status: soon
+priceGbp: 15
+status: live
+checkoutUrl: https://buy.polar.sh/polar_cl_EPKalCqCJ12zXr5dqwSfJlNDnz1viwEbH6lVe2Vsmrl
 format: Word and PDF policy pack
 includes:
   - "Eighteen plain-English policies, from anti-bribery and modern slavery to data protection, information security and business continuity"
@@ -11,7 +13,7 @@ includes:
   - "A seven-page guide to answering supplier due diligence forms"
   - "A supplier register template with a gifts and hospitality sheet"
 forWho: Freelancers, studios and small consultancies applying to supplier lists, frameworks or public sector work, who are asked for policies they've never had to write.
-order: 1
+order: 3
 keywords: [company policies, procurement, due diligence, supplier, small business, tender]
 image: /products/supplier-ready-policy-pack/preview.png
 imageAlt: The supplier-ready policy pack, a stack of policy pages, guide and supplier register

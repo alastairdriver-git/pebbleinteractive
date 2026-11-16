@@ -88,8 +88,9 @@ const products = defineCollection({
       summary: z.string(), // one sentence for cards and meta
       price: z.number(), // in `currency`; 0 = free
       currency: z.string().default("USD"),
+      priceGbp: z.number().optional(), // shown alongside; Polar charges UK buyers in GBP
       status: z.enum(["draft", "soon", "live"]).default("draft"),
-      checkoutUrl: z.string().url().optional(), // Lemon Squeezy checkout link
+      checkoutUrl: z.string().url().optional(), // Polar checkout link
       downloadUrl: z.string().optional(), // free products: direct file
       format: z.string(), // e.g. "PDF and editable Word files"
       includes: z.array(z.string()).min(1),

@@ -29,4 +29,8 @@ export const formatDate = (d: Date) =>
 export const formatPrice = (price: number, currency = "USD") =>
   price === 0
     ? "Free"
-    : new Intl.NumberFormat("en-GB", { style: "currency", currency, maximumFractionDigits: price % 1 ? 2 : 0 }).format(price);
+    : new Intl.NumberFormat(currency === "USD" ? "en-US" : "en-GB", { style: "currency", currency, maximumFractionDigits: price % 1 ? 2 : 0 }).format(price);
+
+/** "$19 · £15" when a GBP price is set. */
+export const formatPrices = (price: number, currency = "USD", gbp?: number) =>
+  price === 0 ? "Free" : gbp ? `${formatPrice(price, currency)} · £${gbp}` : formatPrice(price, currency);

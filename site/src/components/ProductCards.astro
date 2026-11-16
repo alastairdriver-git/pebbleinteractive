@@ -1,6 +1,6 @@
 ---
 /* Product cards, shared by /products and article footers. */
-import { formatPrice } from "../lib/content";
+import { formatPrices } from "../lib/content";
 interface Props {
   items: any[]; // CollectionEntry<"products">[]
 }
@@ -18,7 +18,7 @@ const { items } = Astro.props;
         <h2 class="text-balance font-display text-2xl tracking-tight">{p.data.title}</h2>
         <p class="text-pretty text-muted-foreground">{p.data.summary}</p>
         <span class="product-price">
-          {p.data.status === "live" ? formatPrice(p.data.price, p.data.currency) : "Coming soon"}
+          {p.data.status === "live" ? formatPrices(p.data.price, p.data.currency, p.data.priceGbp) : "Coming soon"}
           {p.data.status === "draft" && " · Draft"}
         </span>
       </div>
