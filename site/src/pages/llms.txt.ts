@@ -15,17 +15,19 @@ export async function GET() {
 
 Contact: hello@pebbleinteractive.com
 
+Every article and product is also available as Markdown: add .md to its address.
+
 ## Case studies
 
 ${work.map((w) => line(`${w.data.client}: ${w.data.title}`, `/work/${w.id}`, w.data.intro)).join("\n")}
 
 ## Articles
 
-${articles.map((a) => line(a.data.title, `/articles/${a.id}`, a.data.description)).join("\n")}
+${articles.map((a) => line(a.data.title, `/articles/${a.id}.md`, a.data.description)).join("\n")}
 
 ## Products
 
-${products.map((p) => line(p.data.title, `/products/${p.id}`, p.data.summary)).join("\n")}
+${products.map((p) => line(p.data.title, `/products/${p.id}.md`, p.data.summary)).join("\n")}
 
 ## Optional
 

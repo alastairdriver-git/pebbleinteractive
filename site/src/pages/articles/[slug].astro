@@ -48,6 +48,7 @@ const ld = graph(
   {d.updated && <meta slot="head" property="article:modified_time" content={d.updated.toISOString()} />}
   <meta slot="head" property="article:author" content={AUTHOR.name} />
   <link slot="head" rel="alternate" type="application/rss+xml" title="Pebble Interactive articles" href="/rss.xml" />
+  {!d.draft && <link slot="head" rel="alternate" type="text/markdown" title="Markdown version" href={`${path}.md`} />}
   {d.draft && <meta slot="head" name="robots" content="noindex" />}
 
   <div class="reading-progress" aria-hidden="true"></div>

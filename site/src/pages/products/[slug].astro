@@ -59,6 +59,7 @@ const cta = live && checkout ? { href: checkout, label: `Buy now · ${price}`, c
 
 <BaseLayout site={SITE} nav={NAV} fontHref={FONT_HREF} title={`${d.title} — Pebble Interactive`} description={d.summary} image={d.image ?? og}>
   <JsonLd slot="head" data={ld} />
+  {d.status !== "draft" && <link slot="head" rel="alternate" type="text/markdown" title="Markdown version" href={`${path}.md`} />}
   {d.status === "draft" && <meta slot="head" name="robots" content="noindex" />}
 
   {/* Shown after a Polar purchase (?purchased=1), revealed by the script below */}
