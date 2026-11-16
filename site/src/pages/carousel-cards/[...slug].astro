@@ -7,17 +7,25 @@ import { getCollection } from "astro:content";
 import * as Icons from "lucide-react";
 import "@pebble/brand/tokens.css";
 
-import { slidesFor, type Slide } from "../../lib/carousel";
+import { slidesFor, slidesForWork, type Slide } from "../../lib/carousel";
 
 export async function getStaticPaths() {
   const products = (await getCollection("products")).filter((p) => p.data.status !== "draft");
-  return products.flatMap((p) => {
+  const productPaths = products.flatMap((p) => {
     const slides = slidesFor(p);
     return [
       ...slides.map((slide, i) => ({ params: { slug: `${p.id}/${i + 1}` }, props: { slides: [slide], total: slides.length, start: i } })),
       { params: { slug: `${p.id}/all` }, props: { slides, total: slides.length, start: 0 } },
     ];
   });
+  const work = (await getCollection("work")).flatMap((w) => {
+    const slides = slidesForWork(w);
+    return [
+      ...slides.map((slide, i) => ({ params: { slug: `work/${w.id}/${i + 1}` }, props: { slides: [slide], total: slides.length, start: i } })),
+      { params: { slug: `work/${w.id}/all` }, props: { slides, total: slides.length, start: 0 } },
+    ];
+  });
+  return [...productPaths, ...work];
 }
 
 const { slides, total, start } = Astro.props as { slides: Slide[]; total: number; start: number };
@@ -77,8 +85,9 @@ const I = (name: string) => (Icons as any)[name] ?? Icons.Circle;
       </div>
       <div class="body">
         {s.kind === "hook" && (<><span class="pill">{s.pill}</span><h1>{s.title}</h1></>)}
-        {s.kind === "problem" && (<><span class="eyebrow">The problem</span><p class="big">{s.text}</p></>)}
-        {s.kind === "outcomes" && (<><span class="eyebrow">What you'll be able to do</span>
+        {s.kind === "problem" && (<><span class="eyebrow">{s.label ?? "The problem"}</span><p class="big">{s.text}</p></>)}
+        {s.kind === "read" && (<><span class="eyebrow">Case study</span><h2>Read how we did it</h2><span class="cta">Read the case study</span><span class="url">{s.url}</span></>)}
+        {s.kind === "outcomes" && (<><span class="eyebrow">{s.label ?? "What you'll be able to do"}</span>
           <ul class="list">{s.items.map((o) => { const C = I("Check"); return <li><span class="mk"><C size={34} strokeWidth={3} /></span>{o}</li>; })}</ul></>)}
         {s.kind === "point" && (() => { const C = I(s.icon); return (<><span class="icon"><C size={60} strokeWidth={2} /></span><h2>{s.title}</h2><p class="lede">{s.body}</p></>); })()}
         {s.kind === "inside" && (<><span class="eyebrow">What's inside</span>

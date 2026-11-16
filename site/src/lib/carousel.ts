@@ -1,11 +1,12 @@
 /* Carousel slides for a product, from its brief. Used by src/pages/carousel-cards. */
 export type Slide =
   | { kind: "hook"; pill: string; title: string }
-  | { kind: "problem"; text: string }
+  | { kind: "problem"; text: string; label?: string }
   | { kind: "point"; icon: string; title: string; body: string }
-  | { kind: "outcomes"; items: string[] }
+  | { kind: "outcomes"; items: string[]; label?: string }
   | { kind: "inside"; items: { icon: string; title: string }[] }
-  | { kind: "cta"; title: string; price: string; url: string };
+  | { kind: "cta"; title: string; price: string; url: string }
+  | { kind: "read"; title: string; url: string };
 
 export function slidesFor(p: any): (Slide & { cw: string })[] {
   const d = p.data;
@@ -25,3 +26,20 @@ export function slidesFor(p: any): (Slide & { cw: string })[] {
   }));
 }
 
+
+/** Carousel for a case study: client and title, the brief, each work
+    stream, what it demonstrates, then "read the case study". */
+export function slidesForWork(w: any): (Slide & { cw: string })[] {
+  const d = w.data;
+  const icons = ["Compass", "Layers", "Code", "Sparkles"];
+  const s: Slide[] = [{ kind: "hook", pill: d.category, title: `${d.client}: ${d.title}` }];
+  s.push({ kind: "problem", text: d.brief, label: "The brief" });
+  d.workstreams.forEach((ws: any, i: number) => s.push({ kind: "point", icon: icons[i % icons.length], title: ws.title, body: ws.body }));
+  s.push({ kind: "outcomes", items: d.demonstrates.map((x: any) => x.skill), label: "What this demonstrates" });
+  s.push({ kind: "read", title: d.client, url: `pebbleinteractive.com/work/${w.id}` });
+  let n = 0;
+  return s.map((x) => ({
+    ...x,
+    cw: x.kind === "hook" ? "ink" : x.kind === "problem" ? "cream" : x.kind === "outcomes" || x.kind === "read" ? "pink" : n++ % 2 ? "ink" : "mint",
+  }));
+}
