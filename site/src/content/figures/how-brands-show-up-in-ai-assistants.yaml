@@ -1,0 +1,45 @@
+figures:
+  - id: paid-and-organic
+    type: comparison
+    tone: light
+    eyebrow: Paid and organic
+    title: What money can buy
+    left:
+      label: "Not for sale, say the companies"
+      items:
+        - What the answer says
+        - Organic Google ranking
+        - Organic Copilot responses
+        - "Anything in Claude, which has no ads"
+    right:
+      label: For sale, and labelled
+      items:
+        - Sponsored ads below ChatGPT answers
+        - '"Sponsored" ads in AI Overviews and AI Mode'
+        - Ads below Copilot answers
+        - Shopping and product ad placements
+  - id: where-answers-come-from
+    type: grid
+    eyebrow: Local and product answers
+    title: Where AI assistants get their facts
+    items:
+      - { label: Google Business Profile, note: "AI Overviews, AI Mode and Gemini" }
+      - { label: Bing Places, note: Bing and Copilot }
+      - { label: Apple Business, note: "Apple Maps, Siri and Safari" }
+      - { label: Yelp and review sites, note: "Yelp is licensed to ChatGPT" }
+      - { label: Merchant feeds, note: "Google, Microsoft, ChatGPT, Perplexity" }
+      - { label: Your own website, note: Found through each assistant's search }
+  - id: what-to-do
+    type: checklist
+    tone: light
+    eyebrow: AI visibility
+    title: What to do, in order
+    items:
+      - Claim and complete your listings
+      - Make the facts match everywhere
+      - Earn reviews and reply to them
+      - Send product feeds
+      - Add structured data
+      - Write answer-first pages
+      - Get cited by what AI reads
+      - Measure across many runs

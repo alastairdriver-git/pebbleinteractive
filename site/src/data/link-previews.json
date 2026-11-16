@@ -46,5 +46,29 @@
     "site": "A2UI",
     "image": "/link-previews/a2ui-org-concepts-catalogs.png",
     "fetched": "2026-11-16"
+  },
+  "https://blogs.bing.com/webmaster/2026/2/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview/": {
+    "url": "https://blogs.bing.com/webmaster/2026/2/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview/",
+    "title": "Introducing AI Performance in Bing Webmaster Tools Public Preview",
+    "description": "Now in public preview, AI Performance in Bing Webmaster Tools shows when your site is cited in AI‑generated answers across Microsoft Copilot, AI‑generated summaries in Bing, and select partner integrations.…",
+    "site": "Microsoft Bing Blog",
+    "image": "/link-previews/blogs-bing-com-webmaster-2026-2-Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview.png",
+    "fetched": "2026-11-16"
+  },
+  "https://blog.google/products/ads-commerce/ads-in-ai-mode-global/": {
+    "url": "https://blog.google/products/ads-commerce/ads-in-ai-mode-global/",
+    "title": "Ads in AI Mode expand to new markets.",
+    "description": "Google is expanding AI Mode ads to 10 new countries, including Canada and India. See how these relevant sponsored results improve your search experience.",
+    "site": "Google",
+    "image": "/link-previews/blog-google-products-ads-commerce-ads-in-ai-mode-global.png",
+    "fetched": "2026-11-16"
+  },
+  "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide": {
+    "url": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+    "title": "Google's guide to optimizing for generative AI features on Google Search",
+    "description": "Learn how to optimize your website for Google Search's generative AI features, including official best practices, technical SEO advice, and emerging AI agent guidance.",
+    "site": "Google for Developers",
+    "image": "/link-previews/developers-google-com-search-docs-fundamentals-ai-optimization-guide.jpg",
+    "fetched": "2026-11-16"
   }
 }
