@@ -19,6 +19,7 @@ export const NAV: NavItem[] = [
   { label: "Work", href: "/work" },
   { label: "Articles", href: "/articles" },
   { label: "Products", href: "/products" },
+  { label: "Contact", href: "/contact" },
 ];
 
 /** Article byline. */

@@ -1,0 +1,198 @@
+---
+/* Contact: a short brief form. Posts to the submit-lead Supabase edge
+   function, which stores the lead in pebble-studio and emails a notification.
+   Options must match OPTIONS in that function (it ignores unknown values). */
+import "../styles/global.css";
+import BaseLayout from "@grade/astro-kit/BaseLayout.astro";
+import { Section, Container } from "@gradeui/ui";
+import { SITE, NAV, FONT_HREF } from "../lib/site.config";
+import JsonLd from "../components/JsonLd.astro";
+import { graph, organization, website, webPage, breadcrumbs } from "../lib/seo";
+
+const ENDPOINT = "https://bsgozddtqobbhvllerrw.supabase.co/functions/v1/submit-lead";
+
+const services = ["Design system audit", "New design system", "Design system refresh", "Design tokens", "Component library", "Accessibility", "A2UI and agent interfaces", "MCP and AI tooling", "Product design", "Prototyping", "Training and workshops", "Something else"];
+const sizes = ["Just me", "2 to 10", "11 to 50", "51 to 200", "201 to 1,000", "Over 1,000"];
+const ds = ["Yes, mature", "Yes, but it needs work", "Starting one", "No", "Not sure"];
+const engagements = ["A project", "A monthly retainer", "Not sure yet"];
+const projectBudgets = ["Under £10k", "£10k to £25k", "£25k to £50k", "£50k to £100k", "Over £100k", "Not sure yet"];
+const retainerBudgets = ["Under £5k a month", "£5k to £10k a month", "£10k to £20k a month", "Over £20k a month", "Not sure yet"];
+const timelines = ["As soon as possible", "In the next month", "1 to 3 months", "3 to 6 months", "Just exploring"];
+
+const path = "/contact";
+const title = "Start a project";
+const description = "Tell us about your design system, product or AI work. We reply within two working days.";
+const ld = graph(organization(), website(), { ...webPage({ path, name: title, description }), "@type": "ContactPage" }, breadcrumbs([{ name: "Home", path: "/" }, { name: "Contact", path }]));
+const id = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+---
+
+<BaseLayout site={SITE} nav={NAV} fontHref={FONT_HREF} title={`${title} — Pebble Interactive`} description={description}>
+  <JsonLd slot="head" data={ld} />
+
+  <div class="bg-camel">
+    <Section pad="lg">
+      <Container maxW="xl">
+        <div class="contact-hero">
+          <span class="eyebrow">Contact</span>
+          <h1 class="text-balance font-display text-4xl leading-[1.08] tracking-tight sm:text-6xl">Tell us what you're working on</h1>
+          <p class="max-w-2xl text-pretty text-xl leading-[1.45] opacity-85">A few questions so we can come back with something useful, not a sales call. It takes about two minutes.</p>
+        </div>
+      </Container>
+    </Section>
+  </div>
+
+  <Section pad="lg">
+    <Container maxW="xl">
+      <div class="contact-grid">
+        <form class="contact-form" id="contact-form" novalidate data-endpoint={ENDPOINT}>
+          <fieldset>
+            <legend>About you</legend>
+            <p class="contact-hint">Only your name and email are required.</p>
+            <div class="contact-fields">
+              <label>Your name<input name="name" autocomplete="name" required /></label>
+              <label>Work email<input name="email" type="email" autocomplete="email" required /></label>
+              <label>Your role<input name="role" autocomplete="organization-title" /></label>
+              <label>Company<input name="company" autocomplete="organization" /></label>
+              <label>Website<input name="website" type="text" inputmode="url" autocomplete="url" placeholder="example.com" /></label>
+              <label>Company size
+                <select name="company_size"><option value="">Choose one</option>{sizes.map((s) => <option>{s}</option>)}</select>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>What do you need help with?</legend>
+            <p class="contact-hint">Choose as many as you like.</p>
+            <div class="contact-chips">
+              {services.map((s) => (<label class="contact-chip"><input type="checkbox" name="services" value={s} /><span>{s}</span></label>))}
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Do you have a design system?</legend>
+            <div class="contact-chips">
+              {ds.map((s) => (<label class="contact-chip"><input type="radio" name="has_design_system" value={s} /><span>{s}</span></label>))}
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>How would you like to work?</legend>
+            <div class="contact-chips">
+              {engagements.map((s) => (<label class="contact-chip"><input type="radio" name="engagement" value={s} /><span>{s}</span></label>))}
+            </div>
+            <label class="contact-budget">Budget
+              <select name="budget" id="contact-budget">
+                <option value="">Choose one</option>
+                <optgroup label="For a project" data-for="project">{projectBudgets.map((s) => <option>{s}</option>)}</optgroup>
+                <optgroup label="Each month" data-for="retainer">{retainerBudgets.filter((s) => s !== "Not sure yet").map((s) => <option>{s}</option>)}</optgroup>
+              </select>
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>When would you like to start?</legend>
+            <div class="contact-chips">
+              {timelines.map((s) => (<label class="contact-chip"><input type="radio" name="timeline" value={s} /><span>{s}</span></label>))}
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Anything else?</legend>
+            <div class="contact-fields one">
+              <label>Tell us about the work
+                <textarea name="message" rows="5" placeholder="What's the product, what's not working, and what would good look like?"></textarea>
+              </label>
+              <label>How did you hear about us?<input name="heard_from" /></label>
+            </div>
+          </fieldset>
+
+          {/* Hidden from people; bots fill it in. */}
+          <label class="contact-trap" aria-hidden="true">Fax<input name="fax" tabindex="-1" autocomplete="off" /></label>
+
+          <div class="contact-submit">
+            <button type="submit" class="product-cta">Send</button>
+            <p class="contact-hint">We'll only use your details to reply. See <a href="/privacy">our privacy notice</a>.</p>
+          </div>
+          <p class="contact-status" id="contact-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="contact-aside">
+          <div class="cw-band cw-mint contact-next">
+            <h2>What happens next</h2>
+            <ol>
+              <li>We read it and reply within two working days.</li>
+              <li>A 30-minute call to understand the work.</li>
+              <li>A short written proposal with scope, timing and cost.</li>
+            </ol>
+          </div>
+          <div class="contact-direct">
+            <h2>Rather email?</h2>
+            <p><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+          </div>
+        </aside>
+      </div>
+
+      <div class="cw-band cw-mint contact-thanks" id="contact-thanks" hidden>
+        <h2>Thank you. We've got it.</h2>
+        <p>We'll reply within two working days. In the meantime, our <a href="/work">case studies</a> and <a href="/articles">articles</a> show how we work.</p>
+      </div>
+    </Container>
+  </Section>
+
+  <script is:inline>
+    (function () {
+      var form = document.getElementById("contact-form");
+      if (!form) return;
+      var started = Date.now();
+      var status = document.getElementById("contact-status");
+      var budget = document.getElementById("contact-budget");
+      // Show the budget bands that fit the way they want to work.
+      function syncBudget() {
+        var e = (form.querySelector('input[name="engagement"]:checked') || {}).value || "";
+        var want = e === "A project" ? "project" : e === "A monthly retainer" ? "retainer" : "";
+        budget.querySelectorAll("optgroup").forEach(function (g) {
+          var show = !want || g.dataset.for === want;
+          g.hidden = !show; g.disabled = !show;
+        });
+        if (budget.selectedOptions[0] && budget.selectedOptions[0].parentElement.disabled) budget.value = "";
+      }
+      form.querySelectorAll('input[name="engagement"]').forEach(function (r) { r.addEventListener("change", syncBudget); });
+      syncBudget();
+
+      form.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var fd = new FormData(form);
+        var name = String(fd.get("name") || "").trim(), email = String(fd.get("email") || "").trim();
+        if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+          status.textContent = "Please add your name and a valid email address.";
+          (name ? form.email : form.name).focus();
+          return;
+        }
+        var body = {
+          name: name, email: email,
+          role: fd.get("role"), company: fd.get("company"), website: fd.get("website"),
+          company_size: fd.get("company_size"), services: fd.getAll("services"),
+          has_design_system: fd.get("has_design_system"), engagement: fd.get("engagement"),
+          budget: fd.get("budget"), timeline: fd.get("timeline"),
+          message: fd.get("message"), heard_from: fd.get("heard_from"),
+          fax: fd.get("fax"), elapsed: Date.now() - started,
+          source_page: document.referrer || location.href,
+        };
+        var btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true; status.textContent = "Sending…";
+        fetch(form.dataset.endpoint, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) })
+          .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+          .then(function (res) {
+            if (!res.ok) throw new Error(res.j && res.j.error);
+            form.hidden = true;
+            document.querySelector(".contact-aside").hidden = true;
+            var t = document.getElementById("contact-thanks"); t.hidden = false; t.scrollIntoView({ block: "center" });
+          })
+          .catch(function (e) {
+            btn.disabled = false;
+            status.textContent = (e && e.message) || "Something went wrong. Please email hello@pebbleinteractive.com.";
+          });
+      });
+    })();
+  </script>
+</BaseLayout>

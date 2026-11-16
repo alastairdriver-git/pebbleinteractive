@@ -547,3 +547,46 @@ h1, h2, h3,
 .product-thanks a { color: var(--cw-text); text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
 
 .product-hero-shot { width: 100%; max-width: 44rem; height: auto; justify-self: center; }
+
+/* ── Contact ─────────────────────────────────────────────── */
+.contact-hero { display: flex; flex-direction: column; gap: 1.25rem; max-width: 52rem; }
+.contact-grid { display: grid; gap: 3rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 64rem) { .contact-grid { grid-template-columns: minmax(0, 1fr) 20rem; align-items: start; } .contact-aside { position: sticky; top: 6rem; } }
+.contact-form { display: flex; flex-direction: column; gap: 2.5rem; }
+.contact-form fieldset { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .9rem; min-width: 0; }
+.contact-form legend { font-family: var(--font-display, inherit); font-size: var(--text-2xl, 1.5rem); font-weight: 700; font-variation-settings: "wdth" 110; letter-spacing: -0.02em; padding: 0; margin-bottom: .9rem; }
+.contact-fields { display: grid; gap: 1rem 1.25rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 40rem) { .contact-fields:not(.one) { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.contact-form label:not(.contact-chip) { display: flex; flex-direction: column; gap: .4rem; font-weight: 600; font-size: .95rem; }
+.contact-form input:not([type=checkbox]):not([type=radio]), .contact-form select, .contact-form textarea {
+  font: inherit; font-weight: 400; color: oklch(var(--foreground)); background: oklch(var(--background));
+  border: 1.5px solid oklch(var(--border)); border-radius: calc(var(--radius) * .75); padding: .75rem .9rem; width: 100%;
+}
+.contact-form textarea { resize: vertical; line-height: 1.5; }
+.contact-form input:focus-visible, .contact-form select:focus-visible, .contact-form textarea:focus-visible { outline: 3px solid oklch(var(--ring, var(--foreground))); outline-offset: 1px; border-color: oklch(var(--foreground)); }
+.contact-optional { font-weight: 400; color: oklch(var(--muted-foreground)); font-size: .85rem; }
+.contact-hint { color: oklch(var(--muted-foreground)); font-size: .95rem; margin: 0; }
+.contact-chips { display: flex; flex-wrap: wrap; gap: .6rem; }
+.contact-chip { position: relative; cursor: pointer; }
+.contact-chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.contact-chip span { display: inline-flex; align-items: center; padding: .6rem 1rem; border-radius: 999px; border: 1.5px solid oklch(var(--border)); background: oklch(var(--background)); font-size: .95rem; transition: background .12s, border-color .12s; }
+.contact-chip:hover span { border-color: oklch(var(--foreground) / .5); }
+.contact-chip input:checked + span { background: oklch(var(--camel)); color: oklch(var(--camel-foreground)); border-color: oklch(var(--camel)); }
+.contact-chip input:focus-visible + span { outline: 3px solid oklch(var(--ring, var(--foreground))); outline-offset: 2px; }
+.contact-budget { max-width: 24rem; margin-top: .4rem; }
+.contact-trap { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.contact-submit { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
+.contact-submit button { border: 0; cursor: pointer; font: inherit; font-weight: 700; }
+.contact-submit button:disabled { opacity: .6; cursor: wait; }
+.contact-status:empty { display: none; }
+.contact-status { font-weight: 600; margin: 0; }
+.contact-aside { display: flex; flex-direction: column; gap: 1.25rem; }
+.contact-next, .contact-thanks { border-radius: var(--radius); padding: 1.5rem 1.6rem; }
+.contact-next h2, .contact-direct h2, .contact-thanks h2 { font-size: 1.2rem; font-weight: 700; font-variation-settings: "wdth" 110; margin: 0 0 .75rem; }
+.contact-next ol { margin: 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: .6rem; }
+.contact-direct { padding: 0 .25rem; }
+.contact-direct p { margin: 0; }
+.contact-thanks { max-width: 44rem; }
+.contact-thanks h2 { font-size: 1.6rem; }
+.contact-thanks p { margin: 0; font-size: 1.1rem; }
+.legal-prose { max-width: 44rem; }
