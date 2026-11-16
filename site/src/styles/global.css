@@ -538,3 +538,10 @@ h1, h2, h3,
 .cw-band .product-highlight p { color: var(--cw-muted); }
 .cw-mint .product-icon { background: var(--pb-navy); color: var(--pb-mint); }
 .cw-white .product-previews img { box-shadow: 0 12px 30px oklch(0.245 0.045 220 / .1); }
+
+/* Post-purchase thank-you banner */
+.product-thanks { padding: 1.5rem 0; }
+.product-thanks-inner { display: flex; gap: 1rem; align-items: flex-start; }
+.product-thanks-inner p { margin: 0; max-width: 46rem; line-height: 1.5; }
+.product-thanks-title { font-size: var(--text-lg); font-weight: 650; font-variation-settings: "wdth" 110; margin-bottom: .25rem !important; }
+.product-thanks a { color: var(--cw-text); text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }

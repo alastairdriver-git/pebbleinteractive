@@ -59,6 +59,19 @@ const cta = live && checkout ? { href: checkout, label: `Buy now · ${price}`, c
   <JsonLd slot="head" data={ld} />
   {d.status === "draft" && <meta slot="head" name="robots" content="noindex" />}
 
+  {/* Shown after a Polar purchase (?purchased=1), revealed by the script below */}
+  <div class="cw-band cw-mint product-thanks" id="purchased" hidden>
+    <Container maxW="xl">
+      <div class="product-thanks-inner">
+        <span class="product-icon" aria-hidden="true"><Icons.PartyPopper size={22} strokeWidth={2} /></span>
+        <div>
+          <p class="product-thanks-title">Thank you. {d.title} is yours.</p>
+          <p>Your download link is on its way to your email. You can also download it any time from <a href="https://polar.sh/pebble-interactive-ltd/portal" target="_blank" rel="noopener">your Polar account</a>. Any problems, email <a href="mailto:hello@pebbleinteractive.com">hello@pebbleinteractive.com</a>.</p>
+        </div>
+      </div>
+    </Container>
+  </div>
+
   {/* Hero: the outcome, the price, the action */}
   <div class="bg-camel product-hero">
     <Section pad="lg">
@@ -201,4 +214,15 @@ const cta = live && checkout ? { href: checkout, label: `Buy now · ${price}`, c
     </Container>
   </Section>
 
+  <script is:inline>
+    (function () {
+      var q = new URLSearchParams(location.search);
+      if (q.get("purchased") === "1") {
+        var el = document.getElementById("purchased");
+        if (el) { el.hidden = false; }
+        // Keep the private session token out of the address bar and history.
+        history.replaceState(null, "", location.pathname);
+      }
+    })();
+  </script>
 </BaseLayout>
