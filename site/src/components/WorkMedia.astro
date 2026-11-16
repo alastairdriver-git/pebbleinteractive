@@ -1,0 +1,18 @@
+---
+/* An image or video with an optional caption, for case study pages. */
+interface Props {
+  m: { image?: string; imageAlt?: string; video?: string; poster?: string; caption?: string };
+}
+const { m } = Astro.props;
+---
+
+<figure class="work-media">
+  {m.video ? (
+    <video controls preload="metadata" poster={m.poster}>
+      <source src={m.video} type="video/mp4" />
+    </video>
+  ) : m.image ? (
+    <img src={m.image} alt={m.imageAlt ?? ""} loading="lazy" />
+  ) : null}
+  {m.caption && <figcaption>{m.caption}</figcaption>}
+</figure>

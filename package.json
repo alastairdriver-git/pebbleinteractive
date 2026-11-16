@@ -2,11 +2,16 @@
   "name": "pebbleinteractive-astro-site",
   "private": true,
   "version": "0.0.0",
-  "description": "Pebble Interactive site on the Grade × Astro markdown-driven kit.",
+  "description": "Pebble Interactive site on the Grade \u00d7 Astro markdown-driven kit.",
   "scripts": {
     "dev": "pnpm --filter pebbleinteractive-site dev",
     "build": "pnpm --filter pebbleinteractive-site build",
-    "preview": "pnpm --filter pebbleinteractive-site preview"
+    "preview": "pnpm --filter pebbleinteractive-site preview",
+    "og": "pnpm --filter pebbleinteractive-site og"
   },
-  "pnpm": { "overrides": { "@gradeui/ui": "4.0.1" } }
+  "pnpm": {
+    "overrides": {
+      "@gradeui/ui": "4.0.1"
+    }
+  }
 }

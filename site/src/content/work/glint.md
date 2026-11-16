@@ -6,42 +6,40 @@ intro: Glint, a gold and silver payments platform with its own Mastercard, is la
 sector: Fintech
 role: Product design and prototyping
 period: August – November 2026
+hero:
+  image: /work/glint/gl-wallets.png
+  imageAlt: Glint business portal wallets for gold, silver and US dollars, valued with real LBMA prices
+  caption: Business portal wallets (US edition), valued with real LBMA prices.
+
+brief: Glint's head of engineering set out three needs. A business web portal for UK and US accounts, good enough to show partners. Onboarding built from the compliance officer's data-capture specification. And a single design system the app, the web and the brand could all draw on.
+
+workstreams:
+  - title: Business portal
+    body: Onboarding through buying, storing and selling gold and silver, priced with real market data, so Glint could show partners a credible business account before building it.
+  - title: Regulated onboarding
+    body: A step-by-step flow built from the compliance spec, branching on business type to meet US and UK ownership rules.
+    image: /work/glint/gl-kyb.png
+    imageAlt: Business onboarding, choosing the business type
+    caption: Business onboarding. The business type sets the questions that follow.
+  - title: Design system in code
+    body: Glint's app design system brought into code from Figma, alongside its brand guidelines.
+
+outcome: A working product to show partners, and a design system and specifications Glint's developers build from.
+
+demonstrates:
+  - skill: Scoping and concept design
+    evidence: A brief and a compliance spec turned into a working product.
+  - skill: Regulated markets
+    evidence: US and UK identity and ownership rules designed into the flow.
+  - skill: Real data in concepts
+    evidence: Public market data behind every price and chart.
+
+link:
+  label: Read the one-page case study (PDF)
+  href: /case-studies/case-study-glint-short.pdf
+
 thumb: /work/glint/thumb.png
-heroImage: /work/glint/gl-wallets.png
-heroAlt: Glint business portal wallets for gold, silver and US dollars, valued with real LBMA prices
 order: 1
 year: "2026"
 keywords: [fintech, business accounts, KYB onboarding, design system, prototyping, precious metals]
 ---
-
-<p class="cs-tag">Business portal</p>
-
-## A working business account, end to end
-
-<p class="cs-sub">From onboarding through buying, storing and selling gold and silver.</p>
-
-We built a working business portal for UK and US businesses: onboarding, dashboard, buying and selling gold and silver, vault choice, a US dollar wallet, bank accounts and activity. Prices and charts use real LBMA auction data, so Glint could show partners a credible business account before building it.
-
-<p class="cs-tag">Regulated onboarding</p>
-
-## Onboarding built from the compliance spec
-
-<p class="cs-sub">A step-by-step flow that branches on business type.</p>
-
-We turned the compliance officer's data-capture specification into a step-by-step onboarding flow that meets US and UK ownership rules. The business type decides which questions follow, so applicants never see questions that don't apply to them.
-
-<figure class="cs-fig"><img src="/work/glint/gl-kyb.png" alt="Business onboarding: choosing the business type" loading="lazy"><figcaption>Business onboarding: the business type sets the questions that follow.</figcaption></figure>
-
-<p class="cs-tag">Design system</p>
-
-## The design system, in code
-
-<p class="cs-sub">One source for the app, the web and the brand.</p>
-
-We brought Glint's app design system into code from Figma, alongside its brand guidelines, so the portal, the apps and the brand all draw on the same tokens, type and components.
-
-<p class="cs-tag">Outcome</p>
-
-## A product to show partners, and a system to build from
-
-A working product to show partners, and a design system and specifications Glint's developers build from.

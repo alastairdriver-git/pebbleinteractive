@@ -6,43 +6,40 @@ intro: BrightLocal, a UK local SEO platform, is rebuilding its product. Pebble d
 sector: B2B SaaS
 role: Embedded in the Product Design team
 period: June 2026 – ongoing
+hero:
+  image: /work/brightlocal/bl-lm-listings.png
+  imageAlt: BrightLocal Location Manager prototype showing one business's listings across platforms
+  caption: Location Manager prototype. One business's listings across platforms, with sample data.
+
+brief: BrightLocal keeps businesses' listings, rankings and reviews in step across Google, Apple Maps, Bing, Facebook, Yelp and data aggregators, and is rebuilding its platform. Its product teams needed to test new directions before committing engineering time, working from requirement documents, an expert UX audit and BrightLocal's own design system.
+
+workstreams:
+  - title: Product concepts
+    body: Working prototypes across the product, from listings and Location Manager to reviews, with ongoing research into usability and feasibility, ending in recommended directions and a prioritised list of improvements.
+    image: /work/brightlocal/bl-screen-map.jpg
+    imageAlt: Location Manager screen map
+    caption: Location Manager screen map. Every screen and the routes between them, platform by platform.
+  - title: Design to code
+    body: Prototypes reviewed like code in the design system repository, with usage guidance written into Storybook.
+  - title: AI for design systems
+    body: Improving how product and design teams use AI, by making design system documentation work for people and AI agents alike.
+
+outcome: Clear recommendations the product team could act on, and a way of working the in-house team now shares.
+
+demonstrates:
+  - skill: Evidence gathering and evaluation
+    evidence: Requirements audit and ongoing usability and feasibility research.
+  - skill: Conclusions and recommendations
+    evidence: Recommended directions and a prioritised list of improvements.
+  - skill: Leaving the client able to carry on
+    evidence: A shared prototype workflow and Storybook guidance.
+
+link:
+  label: Read the one-page case study (PDF)
+  href: /case-studies/case-study-brightlocal-short.pdf
+
 thumb: /work/brightlocal/thumb.png
-heroImage: /work/brightlocal/bl-lm-listings.png
-heroAlt: BrightLocal Location Manager prototype showing one business's listings across platforms, with sample data
 order: 2
 year: "2026"
 keywords: [B2B SaaS, local SEO, prototyping, design system, Storybook, AI]
 ---
-
-<p class="cs-tag">Product concepts</p>
-
-## Prototypes across the product
-
-<p class="cs-sub">From listings and Location Manager to reviews.</p>
-
-We built working prototypes across the product, from listings and Location Manager to reviews, with ongoing research into usability and feasibility. Each round ended in recommended directions and a prioritised list of improvements the product team could act on.
-
-<div class="cs-figs">
-  <figure><img src="/work/brightlocal/bl-screen-map.jpg" alt="Location Manager screen map" loading="lazy"><figcaption>Location Manager screen map: every screen and the routes between them, platform by platform.</figcaption></figure>
-  <figure><img src="/work/brightlocal/bl-geogrid.png" alt="Geo-grid ranking report" loading="lazy"><figcaption>A geo-grid ranking report, built to render inside an AI assistant. Mock data.</figcaption></figure>
-</div>
-
-<p class="cs-tag">Design to code</p>
-
-## Prototypes reviewed like code
-
-<p class="cs-sub">Bringing design and development together.</p>
-
-Prototypes now live in the design system repository and go through the same pull-request review as code, with usage guidance written into Storybook.
-
-<p class="cs-tag">AI for design systems</p>
-
-## Documentation for people and AI agents
-
-Improving how product and design teams use AI, by making design system documentation work for people and AI agents alike.
-
-<p class="cs-tag">Outcome</p>
-
-## Clear recommendations, and a shared way of working
-
-Clear recommendations the product team could act on, and a way of working the in-house team now shares.

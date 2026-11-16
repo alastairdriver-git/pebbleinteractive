@@ -3,12 +3,13 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
-  "description": "Pebble Interactive — content + theme layer on the vendored Grade × Astro kit.",
+  "description": "Pebble Interactive \u2014 content + theme layer on the vendored Grade \u00d7 Astro kit.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "og": "astro build && node scripts/og.mjs"
   },
   "dependencies": {
     "@grade/astro-kit": "workspace:*",
