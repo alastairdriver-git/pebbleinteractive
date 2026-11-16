@@ -5,7 +5,7 @@ series: Design systems in practice
 pubDate: 2026-11-16
 draft: false
 related: [pocket-films]
-products: [design-tokens-guide, token-naming-cheat-sheet]
+products: [design-tokens-guide, design-tokens-starter-guide, token-naming-cheat-sheet]
 keywords: [design tokens, multi-platform design system, iOS design system, theming, dark mode, design systems]
 ---
 

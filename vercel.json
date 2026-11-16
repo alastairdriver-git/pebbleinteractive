@@ -50,5 +50,22 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/products/a2ui-in-one-page",
+      "destination": "/products/a2ui-starter-guide",
+      "permanent": true
+    },
+    {
+      "source": "/products/a2ui-in-one-page.md",
+      "destination": "/products/a2ui-starter-guide.md",
+      "permanent": true
+    },
+    {
+      "source": "/downloads/a2ui-in-one-page.pdf",
+      "destination": "/downloads/a2ui-starter-guide.pdf",
+      "permanent": true
+    }
   ]
 }

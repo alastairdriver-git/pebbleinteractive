@@ -4,7 +4,7 @@ description: With A2UI 1.0, an agent can only place components from your catalog
 series: AI in the design process
 pubDate: 2026-11-16
 draft: false
-products: [a2ui-catalogue-guide, a2ui-in-one-page]
+products: [a2ui-catalogue-guide, a2ui-starter-guide]
 keywords: [A2UI, A2UI catalogue, component catalogue, generative UI, AI agents, design systems, catalog.json, agent interfaces]
 ---
 

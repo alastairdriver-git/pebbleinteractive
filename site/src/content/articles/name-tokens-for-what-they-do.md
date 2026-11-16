@@ -5,7 +5,7 @@ series: Design systems in practice
 pubDate: 2026-11-16
 draft: false
 related: [pocket-films]
-products: [design-tokens-guide, token-naming-cheat-sheet]
+products: [design-tokens-guide, design-tokens-starter-guide, token-naming-cheat-sheet]
 keywords: [design token naming, semantic tokens, token naming convention, design tokens, DTCG, primitive tokens, component tokens, dark mode, high contrast, design systems]
 ---
 
