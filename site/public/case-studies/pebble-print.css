@@ -91,8 +91,17 @@ body {
 }
 /* Screen preview: show A4 sheets on stone */
 @media screen {
-  body { background: var(--stone); padding: 24px 0; }
-  .doc { width: 210mm; margin: 0 auto; background: #fff; padding: 18mm; box-shadow: 0 1px 2px rgb(0 0 0 / .08), 0 8px 30px rgb(0 0 0 / .06); }
+  /* On screen this is a normal web page, not a paper preview */
+  body { background: #fff; padding: 0; }
+  .doc { max-width: 960px; margin: 0 auto; padding: 40px 32px 72px; }
+  .doc.onepage { --t-body: 16px; --t-lead: 20px; --t-h1: 44px; --t-h3: 18px; --t-small: 14px; --gap: 24px; }
+  .doc .facts dt { font-size: 12px; }
+  .doc .facts dd { font-size: 15px; }
+  .doc .fig figcaption { font-size: 13px; }
+  .doc .map, .doc.onepage .map { font-size: 15px; }
+  .doc .band .eyebrow { font-size: 20px; }
+  .doc .client-logo { height: 22px; }
+  .doc .cols { gap: 0 40px; }
 }
 
 h1, h2, h3, .display {
