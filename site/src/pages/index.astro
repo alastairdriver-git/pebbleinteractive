@@ -91,6 +91,28 @@ const services = [
     </Container>
   </Section>
 
+  {/* Free tools — ink colourway band */}
+  <div class="cw-band cw-ink">
+    <Section pad="lg">
+      <Container maxW="xl">
+        <div class="home-tools">
+          <div class="flex flex-col gap-4">
+            <span class="eyebrow">Free tools</span>
+            <h2 class="max-w-3xl text-balance font-display text-3xl tracking-tight sm:text-4xl">How healthy is your design system?</h2>
+            <p class="max-w-prose text-pretty text-xl leading-relaxed text-muted-foreground">
+              Twenty-four questions in six areas, from tokens to AI readiness. Fifteen minutes with your team, and you'll know what to fix first.
+            </p>
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+              <a href="/products/design-system-health-check" class="product-cta">Get the free health check</a>
+              <a href="/products" class="home-tools-link">All products →</a>
+            </div>
+          </div>
+          <img src="/products/design-system-health-check/page-1.png" alt="The design system health check, a one-page checklist" class="home-tools-image" loading="lazy" />
+        </div>
+      </Container>
+    </Section>
+  </div>
+
   {/* Latest articles — only once something is published */}
   {articles.length > 0 && (
     <Section pad="lg">
@@ -108,6 +130,7 @@ const services = [
   )}
 
   {/* Sectors — inline editorial strip */}
+  <div class="cw-band cw-pink">
   <Section pad="lg">
     <Container maxW="xl">
       <span class="eyebrow">Where we work</span>
@@ -125,8 +148,10 @@ const services = [
       </p>
     </Container>
   </Section>
+  </div>
 
   {/* AI-first — tools strip */}
+  <div class="cw-band cw-mint">
   <Section pad="lg">
     <Container maxW="xl">
       <span class="eyebrow">How we build</span>
@@ -142,6 +167,7 @@ const services = [
       </div>
     </Container>
   </Section>
+  </div>
 
   {/* Grade — full-bleed band */}
   <div class="bg-camel">

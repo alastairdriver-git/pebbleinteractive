@@ -24,6 +24,9 @@
 /* Pebble A2UI catalogue styles (shared with Pebble Studio). */
 @import "@pebble/a2ui/styles.css";
 
+/* Pebble brand tokens and colourways (shared with cards, carousels, PDFs). */
+@import "@pebble/brand/tokens.css";
+
 /* Fonts — Mona Sans variable. Headings ride the wdth axis wider and the
    wght axis fatter than body; both are tokens so they're one-line tunes. */
 :root {
@@ -512,3 +515,16 @@ h1, h2, h3,
 .product-final { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2rem; }
 .product-final > div { max-width: 44rem; }
 .product-previews:has(figure:only-child) { max-width: 40rem; }
+
+/* ── Colourway bands (from @pebble/brand) ─────────────────── */
+.cw-band { background: var(--cw-ground); color: var(--cw-text); }
+.cw-band .eyebrow, .cw-band .text-accent { color: var(--cw-accent); }
+.cw-band .text-muted-foreground { color: var(--cw-muted); }
+.cw-band .text-foreground { color: var(--cw-text); }
+.cw-band .border-border { border-color: color-mix(in oklch, var(--cw-text) 18%, transparent); }
+.cw-band .product-cta { background: var(--cw-fill); color: var(--cw-fill-text) !important; }
+.cw-band.cw-ink .product-cta { background: var(--pb-pink); color: var(--pb-ink) !important; }
+.home-tools { display: grid; gap: 2.5rem; align-items: center; }
+@media (min-width: 900px) { .home-tools { grid-template-columns: 1.3fr 1fr; gap: 4rem; } }
+.home-tools-image { width: 100%; max-width: 26rem; justify-self: center; border-radius: var(--radius); transform: rotate(3deg); box-shadow: 0 30px 60px oklch(0 0 0 / .4); }
+.home-tools-link { font-weight: 600; color: var(--cw-text); text-decoration: underline; text-underline-offset: 4px; }
