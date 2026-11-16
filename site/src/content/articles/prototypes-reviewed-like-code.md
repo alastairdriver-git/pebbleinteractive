@@ -5,7 +5,7 @@ series: Design systems in practice
 pubDate: 2026-11-16
 draft: false
 related: [brightlocal]
-products: [design-system-health-check]
+products: [advanced-design-system-audit, design-system-health-check]
 keywords: [prototyping, pull requests, design to code, Storybook, design system repository, design handoff]
 ---
 

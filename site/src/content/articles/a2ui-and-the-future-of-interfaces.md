@@ -5,7 +5,7 @@ series: AI in the design process
 pubDate: 2026-11-16
 draft: false
 related: [brightlocal]
-products: [design-system-health-check]
+products: [a2ui-catalogue-guide, a2ui-in-one-page]
 keywords: [A2UI, generative UI, AI agents, design systems, component catalogue, agent interfaces]
 ---
 

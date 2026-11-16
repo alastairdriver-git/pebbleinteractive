@@ -5,7 +5,7 @@ series: Design systems in practice
 pubDate: 2026-11-16
 draft: false
 related: [glint, pocket-films]
-products: [design-system-health-check]
+products: [design-tokens-guide, token-naming-cheat-sheet]
 keywords: [native apps, SwiftUI, Jetpack Compose, design tokens, iOS and Android design system, AI coding tools]
 ---
 

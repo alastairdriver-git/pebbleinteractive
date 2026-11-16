@@ -11,7 +11,8 @@ import * as Icons from "lucide-react";
 import { SITE, NAV, FONT_HREF } from "../../lib/site.config";
 import JsonLd from "../../components/JsonLd.astro";
 import Subscribe from "../../components/Subscribe.astro";
-import { getProducts, formatPrices } from "../../lib/content";
+import { getProducts, getArticles, formatPrices } from "../../lib/content";
+import ArticleCards from "../../components/ArticleCards.astro";
 import { graph, organization, website, webPage, product, breadcrumbs, SITE_URL } from "../../lib/seo";
 
 export async function getStaticPaths() {
@@ -27,6 +28,7 @@ const live = d.status === "live";
 const free = d.price === 0;
 const price = live ? formatPrices(d.price, d.currency, d.priceGbp) : "Coming soon";
 const icon = (name: string) => (Icons as any)[name] ?? Icons.Circle;
+const related = (await getArticles()).filter((a) => a.data.products.some((r: any) => r.id === entry.id)).slice(0, 3);
 const inside = d.inside.length ? d.inside : d.includes.map((t) => ({ icon: "Check", title: t, body: "" }));
 
 const nodes: object[] = [
@@ -180,6 +182,13 @@ const cta = live && checkout ? { href: checkout, label: `Buy now · ${price}`, c
         <p class="work-lead">{d.forWho}</p>
         <div class="es-prose product-about"><Content /></div>
       </section>
+
+      {related.length > 0 && (
+        <section class="product-section">
+          <h2 class="product-h2">Related reading</h2>
+          <ArticleCards items={related} />
+        </section>
+      )}
 
       {d.faqs.length > 0 && (
         <section class="product-section">

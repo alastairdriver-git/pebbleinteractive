@@ -5,7 +5,7 @@ series: AI in the design process
 pubDate: 2026-11-16
 draft: false
 related: [brightlocal]
-products: [design-system-health-check]
+products: [design-system-mcp-guide, mcp-for-designers]
 keywords: [design system documentation, AI agents, Storybook, usage guidance, design tokens, AI in design]
 ---
 

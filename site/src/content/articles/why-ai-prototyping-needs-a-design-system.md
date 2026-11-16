@@ -5,7 +5,7 @@ series: AI in the design process
 pubDate: 2026-11-16
 draft: false
 related: [brightlocal, glint]
-products: [design-system-health-check]
+products: [design-tokens-guide, design-system-mcp-guide]
 keywords: [AI prototyping, design systems, design tokens, generative UI, prototyping]
 ---
 

@@ -5,7 +5,7 @@ series: Curating AI output
 pubDate: 2026-11-16
 draft: false
 related: [brightlocal, glint]
-products: [design-system-health-check]
+products: [advanced-design-system-audit, design-system-health-check]
 keywords: [AI design review, design judgement, curating AI output, design systems, prototyping, design critique]
 ---
 
