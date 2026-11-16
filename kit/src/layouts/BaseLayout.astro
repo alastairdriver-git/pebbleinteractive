@@ -101,5 +101,8 @@ const ogImage = image ? new URL(image, Astro.site ?? Astro.url).href : undefined
         els.forEach((el) => io.observe(el));
       }
     </script>
+    {/* Vercel Web Analytics: cookie-free page views. Starts recording once
+        Analytics is enabled for the project in the Vercel dashboard. */}
+    {import.meta.env.PROD && <script is:inline defer src="/_vercel/insights/script.js"></script>}
   </body>
 </html>
