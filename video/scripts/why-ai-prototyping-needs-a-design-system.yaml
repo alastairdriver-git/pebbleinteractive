@@ -1,0 +1,60 @@
+# Video script for the article of the same name.
+# Edit freely, then set approved: true. Only approved scripts are voiced
+# with Ali's ElevenLabs voice; unapproved ones can use --preview.
+title: Why AI prototyping needs a design system
+eyebrow: AI in the design process
+url: pebbleinteractive.com/articles
+approved: false
+scenes:
+  - type: title
+    eyebrow: AI in the design process
+    kicker: Pebble Interactive
+    title: Why AI prototyping needs a design system
+    say: >
+      AI can make a screen in seconds. But without a design system,
+      what you get is plausible, and wrong.
+
+  - type: statement
+    text: Plausible isn't the same as usable.
+    say: >
+      The spacing is nearly yours. The buttons are a slightly different shape.
+      There's a colour you don't use, and a toggle with no label.
+      Each one is small. Together, it can't ship.
+
+  - type: points
+    heading: What a design system gives AI
+    points:
+      - Tokens limit the choices
+      - Components replace invention
+      - Guidance carries judgement
+    say: >
+      A design system is your decisions, written down. Tokens limit the choices.
+      Components replace invention. And usage guidance carries the judgement
+      a tool can't guess.
+
+  - type: media
+    src: /work/brightlocal/bl-screen-map.jpg
+    caption: BrightLocal. Prototypes built from the design system and reviewed like code.
+    say: >
+      At BrightLocal, our prototypes live in the design system repository and go
+      through pull requests, just like production code. Developers can see which
+      components a design uses before anything is built.
+
+  - type: points
+    heading: Make your system ready for AI
+    points:
+      - Name tokens by purpose
+      - Document when, not just how
+      - Keep Figma and code in step
+      - Write docs machines can read
+    say: >
+      To get there, name tokens by purpose, not by colour. Document when to use
+      each component, not just how. Keep Figma and code in step. And write docs
+      that machines can read.
+
+  - type: end
+    cta: Read the full article
+    url: pebbleinteractive.com/articles
+    say: >
+      When options are cheap, judgement is what's scarce. A design system is how
+      that judgement scales. Read the full article at pebbleinteractive dot com.

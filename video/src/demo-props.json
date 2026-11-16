@@ -1,0 +1,12 @@
+{
+  "meta": { "title": "Demo", "eyebrow": "Pebble Interactive", "url": "pebbleinteractive.com" },
+  "mode": "preview",
+  "scenes": [
+    { "type": "title", "eyebrow": "Demo", "title": "Run pnpm video <slug> to render a real script", "kicker": "Pebble Interactive" },
+    { "type": "end", "cta": "pebbleinteractive.com", "url": "pebbleinteractive.com" }
+  ],
+  "voice": [
+    { "audio": null, "duration": 3, "words": [] },
+    { "audio": null, "duration": 2, "words": [] }
+  ]
+}

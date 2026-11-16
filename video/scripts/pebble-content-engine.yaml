@@ -1,0 +1,66 @@
+# Showcase: a tour of what's been built for Pebble's content and products.
+title: How Pebble's content engine works
+eyebrow: Behind the scenes
+url: pebbleinteractive.com
+approved: false
+scenes:
+  - type: title
+    eyebrow: Behind the scenes
+    kicker: Pebble Interactive
+    title: How Pebble's content engine works
+    say: >
+      This is a quick tour of the content engine we've built for Pebble Interactive.
+      Case studies, articles, products and video, all from one website.
+
+  - type: media
+    src: /showcase/work.png
+    caption: Six case studies, one structure.
+    say: >
+      It starts with the work. Six case studies, each in exactly the same structure:
+      the brief, what we did, the outcome, and what it demonstrates.
+      The site won't even build if one breaks the pattern.
+
+  - type: media
+    src: /og/work/glint.png
+    caption: Social thumbnails, generated from the content.
+    say: >
+      Every page gets its own branded social image, generated automatically
+      from the content. No design work for each post.
+
+  - type: media
+    src: /showcase/article.png
+    caption: Articles drawn from real projects.
+    say: >
+      Articles come straight from the case studies. Drafts stay private until
+      they're edited and approved, then publish with structured data
+      and an RSS feed for cross-posting.
+
+  - type: media
+    src: /showcase/products.png
+    caption: Products, sold through Lemon Squeezy.
+    say: >
+      Templates and guides we already use become products. A policy pack,
+      a case study kit, and a free design system health check for newsletter subscribers.
+
+  - type: points
+    heading: And now, video
+    points:
+      - A script from each article
+      - Narrated in Ali's own voice
+      - Branded scenes and captions
+      - Short, wide and audio from one script
+    say: >
+      And now, video. A script is drafted from each article, narrated in Ali's own
+      voice with ElevenLabs, and rendered as branded scenes with captions.
+      One script makes a short, a wide explainer, and an audio version.
+
+  - type: statement
+    text: Write once. Publish everywhere.
+    say: >
+      Write once, publish everywhere, with a person approving every step.
+
+  - type: end
+    cta: More soon
+    url: pebbleinteractive.com
+    say: >
+      That's the Pebble content engine. More soon, at pebbleinteractive dot com.

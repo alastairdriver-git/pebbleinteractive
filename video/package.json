@@ -1,0 +1,25 @@
+{
+  "name": "pebble-video",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Branded narrated videos from Pebble articles and case studies (Remotion + ElevenLabs). Not part of the site workspace, so Vercel never installs it.",
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "voice": "node tools/voice.mjs",
+    "render": "node tools/render.mjs",
+    "video": "node tools/make.mjs"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.544",
+    "@remotion/fonts": "4.0.544",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.544",
+    "yaml": "2.8.1"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.8",
+    "typescript": "5.8.3"
+  }
+}
