@@ -12,7 +12,7 @@ headline: Understand MCP in five minutes, without reading any code
 problem: Everyone's talking about MCP, and AI tools keep inventing UI that ignores your design system. Most explanations are written for engineers.
 outcomes:
   - Explain MCP to your team in plain words
-  - See where your design system fits: design files, code and docs, guidance files
+  - "See where your design system fits: design files, code and docs, guidance files"
   - Know exactly what to ask your developers for
   - Take five concrete first steps
 highlights:
