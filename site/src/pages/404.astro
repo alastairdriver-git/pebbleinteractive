@@ -1,0 +1,68 @@
+---
+/* Not found. Vercel serves the built 404.html for any missing path. */
+import "../styles/global.css";
+import BaseLayout from "@grade/astro-kit/BaseLayout.astro";
+import { Section, Container } from "@gradeui/ui";
+import { SITE, NAV, FONT_HREF } from "../lib/site.config";
+import { getArticles } from "../lib/content";
+
+const latest = (await getArticles()).slice(0, 3);
+const links = [
+  { href: "/", label: "Home", body: "What Pebble Interactive does" },
+  { href: "/work", label: "Work", body: "Case studies from fintech, healthcare and SaaS" },
+  { href: "/articles", label: "Articles", body: "Design systems and AI, from real projects" },
+];
+---
+
+<BaseLayout site={SITE} nav={NAV} fontHref={FONT_HREF} title="Page not found — Pebble Interactive" description="This page doesn't exist, or it has moved.">
+  <meta slot="head" name="robots" content="noindex" />
+
+  <div class="mesh-hero">
+    <Section pad="xl">
+      <Container maxW="xl">
+        <div class="notfound">
+          <div class="flex flex-col gap-6">
+            <span class="eyebrow">404</span>
+            <h1 class="text-balance font-display text-4xl leading-[1.04] tracking-tight sm:text-6xl lg:text-7xl">
+              This pebble has rolled away
+            </h1>
+            <p class="max-w-prose text-pretty text-xl leading-relaxed text-muted-foreground">
+              The page you're looking for doesn't exist, or it has moved. Try one of these instead.
+            </p>
+          </div>
+          <svg class="notfound-mark" viewBox="0 0 125 102" aria-hidden="true">
+            <path fill="currentColor" d="M60 2 C95 -3 122 18 124 48 C126 78 100 100 62 101 C26 102 -2 82 0 50 C2 20 28 7 60 2 Z" />
+          </svg>
+        </div>
+      </Container>
+    </Section>
+  </div>
+
+  <Section pad="lg">
+    <Container maxW="xl">
+      <div class="notfound-links">
+        {links.map((l) => (
+          <a href={l.href} class="notfound-link">
+            <span class="font-display text-2xl tracking-tight">{l.label} →</span>
+            <span class="text-muted-foreground">{l.body}</span>
+          </a>
+        ))}
+      </div>
+
+      {latest.length > 0 && (
+        <div class="mt-16">
+          <span class="eyebrow">Latest articles</span>
+          <ul class="notfound-articles">
+            {latest.map((a) => (
+              <li><a href={`/articles/${a.id}`}>{a.data.title}</a></li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <p class="mt-12 text-muted-foreground">
+        Still stuck? Email <a href={`mailto:${SITE.email}`} class="work-all">{SITE.email}</a>
+      </p>
+    </Container>
+  </Section>
+</BaseLayout>

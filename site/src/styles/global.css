@@ -302,3 +302,17 @@ h1, h2, h3,
 .product-includes { margin: 0; padding-left: 1.2rem; }
 .product-includes li { margin-bottom: .6rem; line-height: 1.6; font-size: var(--text-lg); }
 .product-includes li::marker { color: oklch(var(--accent)); }
+
+/* ── 404 ──────────────────────────────────────────────────── */
+.notfound { display: grid; gap: 3rem; align-items: center; }
+@media (min-width: 900px) { .notfound { grid-template-columns: 1fr 18rem; } }
+.notfound-mark { width: 12rem; height: auto; color: oklch(var(--accent)); opacity: .9; transform: rotate(-12deg) translateX(1rem); animation: pebble-roll 1.2s cubic-bezier(.2,.8,.2,1) both; }
+@media (min-width: 900px) { .notfound-mark { width: 100%; } }
+@keyframes pebble-roll { from { transform: rotate(-200deg) translateX(-8rem); opacity: 0; } to { transform: rotate(-12deg) translateX(1rem); opacity: .9; } }
+@media (prefers-reduced-motion: reduce) { .notfound-mark { animation: none; } }
+.notfound-links { display: grid; gap: 0; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); border-top: 1px solid oklch(var(--border)); }
+.notfound-link { display: flex; flex-direction: column; gap: .4rem; padding: 1.75rem 1.5rem 1.75rem 0; border-bottom: 1px solid oklch(var(--border)); text-decoration: none; color: inherit; }
+.notfound-link:hover span:first-child { color: oklch(var(--accent)); }
+.notfound-articles { list-style: none; margin: 1.25rem 0 0; padding: 0; display: flex; flex-direction: column; gap: .75rem; }
+.notfound-articles a { font-size: var(--text-lg); color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.notfound-articles a:hover { color: oklch(var(--accent)); }
