@@ -4,6 +4,8 @@ import { getCollection } from "astro:content";
 import BaseLayout from "@grade/astro-kit/BaseLayout.astro";
 import PageBody from "@grade/astro-kit/PageBody.astro";
 import { SITE, NAV, FONT_HREF } from "../lib/site.config";
+import JsonLd from "../components/JsonLd.astro";
+import { graph, organization, website, webPage, breadcrumbs } from "../lib/seo";
 
 export async function getStaticPaths() {
   const pages = await getCollection("pages");
@@ -14,6 +16,16 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { data } = page;
+const path = `/${page.id}`;
+const ld = graph(
+  organization(),
+  website(),
+  webPage({ path, name: data.title, description: data.metaDescription }),
+  breadcrumbs([
+    { name: "Home", path: "/" },
+    { name: data.title, path },
+  ]),
+);
 ---
 
 <BaseLayout
@@ -24,5 +36,6 @@ const { data } = page;
   description={data.metaDescription}
   image={data.banner || undefined}
 >
+  <JsonLd slot="head" data={ld} />
   <PageBody page={page} site={SITE} />
 </BaseLayout>

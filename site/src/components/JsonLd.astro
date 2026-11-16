@@ -1,0 +1,9 @@
+---
+/* Renders schema.org JSON-LD. Use inside BaseLayout as <JsonLd slot="head" data={...} />. */
+interface Props {
+  data: object;
+}
+const { data } = Astro.props;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(data)} />

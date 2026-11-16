@@ -1,0 +1,112 @@
+---
+import "../../styles/global.css";
+import { getCollection, render } from "astro:content";
+import BaseLayout from "@grade/astro-kit/BaseLayout.astro";
+import { Section, Container } from "@gradeui/ui";
+import { SITE, NAV, FONT_HREF } from "../../lib/site.config";
+import JsonLd from "../../components/JsonLd.astro";
+import { graph, organization, website, webPage, caseStudy, breadcrumbs } from "../../lib/seo";
+
+export async function getStaticPaths() {
+  const all = (await getCollection("work")).sort((a, b) => a.data.order - b.data.order);
+  return all.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: { entry, next: all[(i + 1) % all.length] },
+  }));
+}
+
+const { entry, next } = Astro.props;
+const d = entry.data;
+const { Content } = await render(entry);
+const path = `/work/${entry.id}`;
+const facts = [
+  ["Client", d.client],
+  ["Sector", d.sector],
+  ...(d.period ? [["Period", d.period]] : []),
+  ["Role", d.role],
+];
+const ld = graph(
+  organization(),
+  website(),
+  webPage({ path, name: `${d.client}: ${d.title}`, description: d.intro }),
+  caseStudy(entry.id, d),
+  breadcrumbs([
+    { name: "Home", path: "/" },
+    { name: "Work", path: "/work" },
+    { name: d.client, path },
+  ]),
+);
+---
+
+<BaseLayout
+  site={SITE}
+  nav={NAV}
+  fontHref={FONT_HREF}
+  title={`${d.client}: ${d.title} — Pebble Interactive`}
+  description={d.intro}
+  image={d.ogImage ?? d.thumb}
+>
+  <JsonLd slot="head" data={ld} />
+
+  <Section pad="lg">
+    <Container maxW="xl">
+      <nav aria-label="Breadcrumb" class="work-crumbs">
+        <a href="/">Home</a><span aria-hidden="true">/</span><a href="/work">Work</a><span aria-hidden="true">/</span><span>{d.client}</span>
+      </nav>
+      <div class="mt-10 flex flex-col gap-5">
+        <span class="eyebrow">{d.category}</span>
+        <h1 class="max-w-4xl text-balance font-display text-4xl leading-[1.05] tracking-tight sm:text-6xl">{d.title}</h1>
+        <p class="max-w-3xl text-pretty text-xl leading-relaxed text-muted-foreground">{d.intro}</p>
+      </div>
+      <dl class="work-facts">
+        {facts.map(([k, v]) => (
+          <div><dt>{k}</dt><dd>{v}</dd></div>
+        ))}
+      </dl>
+      {d.heroVideo ? (
+        <figure class="work-hero">
+          <video controls preload="metadata" poster={d.heroPoster}>
+            <source src={d.heroVideo} type="video/mp4" />
+          </video>
+        </figure>
+      ) : d.heroImage ? (
+        <figure class="work-hero">
+          <img src={d.heroImage} alt={d.heroAlt ?? ""} />
+        </figure>
+      ) : null}
+    </Container>
+  </Section>
+
+  <Section pad="lg">
+    <Container maxW="xl">
+      <article class="work-body">
+        <Content />
+      </article>
+
+      {d.testimonial && (
+        <figure class="work-quote">
+          <blockquote>“{d.testimonial.quote}”</blockquote>
+          <figcaption><strong>{d.testimonial.name}</strong>, {d.testimonial.role}</figcaption>
+        </figure>
+      )}
+
+      {d.link && (
+        <p class="work-link">
+          <a href={d.link.href} target="_blank" rel="noopener">{d.link.label} →</a>
+        </p>
+      )}
+    </Container>
+  </Section>
+
+  <div class="bg-camel">
+    <Section pad="lg">
+      <Container maxW="xl">
+        <a href={`/work/${next.id}`} class="work-next">
+          <span class="eyebrow">Next case study</span>
+          <span class="mt-3 block text-balance font-display text-3xl tracking-tight sm:text-4xl">{next.data.client}: {next.data.title} →</span>
+        </a>
+        <p class="mt-8"><a href="/work" class="work-all">All work</a></p>
+      </Container>
+    </Section>
+  </div>
+</BaseLayout>

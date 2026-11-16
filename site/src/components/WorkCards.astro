@@ -1,0 +1,22 @@
+---
+/* Case study cards, shared by /work and the homepage. */
+interface Props {
+  items: any[]; // CollectionEntry<"work">[]
+}
+const { items } = Astro.props;
+---
+
+<div class="work-cards">
+  {items.map((e) => (
+    <a href={`/work/${e.id}`} class="work-card">
+      <div class="work-card-media">
+        <img src={e.data.thumb} alt={`${e.data.client} case study`} loading="lazy" />
+      </div>
+      <div class="work-card-body">
+        <span class="eyebrow">{e.data.category}</span>
+        <h2 class="text-balance font-display text-2xl tracking-tight">{e.data.client}</h2>
+        <p class="text-pretty text-muted-foreground">{e.data.title}</p>
+      </div>
+    </a>
+  ))}
+</div>

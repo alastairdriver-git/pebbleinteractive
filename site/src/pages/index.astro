@@ -4,6 +4,22 @@ import BaseLayout from "@grade/astro-kit/BaseLayout.astro";
 import { Section, Container } from "@gradeui/ui";
 import { SITE, NAV, FONT_HREF } from "../lib/site.config";
 import AiToolLogos from "../components/AiToolLogos.astro";
+import JsonLd from "../components/JsonLd.astro";
+import WorkCards from "../components/WorkCards.astro";
+import { getCollection } from "astro:content";
+import { graph, organization, founder, website, webPage } from "../lib/seo";
+
+const work = (await getCollection("work")).sort((a, b) => a.data.order - b.data.order);
+const ld = graph(
+  organization(),
+  founder(),
+  website(),
+  webPage({
+    path: "/",
+    name: "Pebble Interactive — Systemised design for complex products",
+    description: "Pebble Interactive designs and builds for domains where detail compounds: tokens, components, and documentation that hold up as the product grows.",
+  }),
+);
 
 const sectors = ["SaaS", "Mobile apps", "Websites", "Medtech", "Fintech"];
 
@@ -23,6 +39,7 @@ const services = [
   title="Pebble Interactive — Systemised design for complex products"
   image="/og.png"
 >
+  <JsonLd slot="head" data={ld} />
   {/* Hero — left-aligned, editorial, mesh-gradient ground */}
   <div class="mesh-hero">
   <Section pad="xl">
@@ -52,6 +69,22 @@ const services = [
             <p class="max-w-prose text-balance text-lg leading-relaxed text-muted-foreground sm:pt-1">{s.body}</p>
           </div>
         ))}
+      </div>
+    </Container>
+  </Section>
+
+  {/* Selected work — latest case studies */}
+  <Section pad="lg">
+    <Container maxW="xl">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <span class="eyebrow">Selected work</span>
+          <h2 class="mt-4 max-w-3xl text-balance font-display text-3xl tracking-tight sm:text-4xl">Case studies</h2>
+        </div>
+        <a href="/work" class="work-all">All work →</a>
+      </div>
+      <div class="mt-10">
+        <WorkCards items={work.slice(0, 3)} />
       </div>
     </Container>
   </Section>

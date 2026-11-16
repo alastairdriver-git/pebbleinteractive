@@ -1,0 +1,43 @@
+---
+import "../../styles/global.css";
+import { getCollection } from "astro:content";
+import BaseLayout from "@grade/astro-kit/BaseLayout.astro";
+import { Section, Container } from "@gradeui/ui";
+import { SITE, NAV, FONT_HREF } from "../../lib/site.config";
+import JsonLd from "../../components/JsonLd.astro";
+import WorkCards from "../../components/WorkCards.astro";
+import { graph, organization, website, webPage, workList, breadcrumbs } from "../../lib/seo";
+
+const all = (await getCollection("work")).sort((a, b) => a.data.order - b.data.order);
+const description =
+  "Case studies from Pebble Interactive: design systems, prototypes and product design for fintech, healthcare, marketplaces and SaaS.";
+const ld = graph(
+  organization(),
+  website(),
+  webPage({ path: "/work", name: "Work", description, type: "CollectionPage" }),
+  workList(all.map((e) => ({ slug: e.id, client: e.data.client, title: e.data.title }))),
+  breadcrumbs([
+    { name: "Home", path: "/" },
+    { name: "Work", path: "/work" },
+  ]),
+);
+---
+
+<BaseLayout site={SITE} nav={NAV} fontHref={FONT_HREF} title="Work — Pebble Interactive" description={description} image="/og.png">
+  <JsonLd slot="head" data={ld} />
+
+  <Section pad="lg">
+    <Container maxW="xl">
+      <div class="flex flex-col gap-5">
+        <span class="eyebrow">Work</span>
+        <h1 class="max-w-4xl text-balance font-display text-4xl leading-[1.05] tracking-tight sm:text-6xl">Selected case studies</h1>
+        <p class="max-w-3xl text-pretty text-xl leading-relaxed text-muted-foreground">
+          Design systems, prototypes and product design for regulated, data-heavy products, from fintech and healthcare to marketplaces and SaaS.
+        </p>
+      </div>
+      <div class="mt-14">
+        <WorkCards items={all} />
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
