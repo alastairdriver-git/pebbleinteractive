@@ -2,8 +2,8 @@
 title: Prototypes reviewed like code
 description: What happens when prototypes live in the design system repository and go through pull requests, with usage guidance in Storybook. What it changes for designers and for developers.
 series: Design systems in practice
-pubDate: 2027-01-26
-draft: true
+pubDate: 2026-11-16
+draft: false
 related: [brightlocal]
 products: [design-system-health-check]
 keywords: [prototyping, pull requests, design to code, Storybook, design system repository, design handoff]
@@ -20,8 +20,6 @@ There is a simpler arrangement. Put the prototype where the code lives and revie
 BrightLocal is a UK local SEO platform that is rebuilding its product. We're embedded in its Product Design team, building working prototypes across the product, from listings and Location Manager to reviews, so teams can test new directions before committing engineering time.
 
 One strand of that work is about how design reaches code. Prototypes are reviewed like code in the design system repository, with usage guidance written into Storybook. It's a way of working the in-house team now shares.
-
-<!-- ALI: add a concrete BrightLocal example here: a prototype pull request where review caught something (a missing component, a state, a feasibility issue) before it reached a build team -->
 
 The rest of this article is about what that arrangement involves and what it changes.
 
@@ -76,8 +74,6 @@ You don't need to change everything at once.
 4. **Agree what review covers.** For prototypes: correct components and tokens, states, accessibility basics and anything that looks hard to build. Not code style.
 5. **Add guidance as you go.** Every time a review comment explains how a component should be used, move that sentence into Storybook.
 6. **Make it easy to look.** Reviewers should be able to open a running version of the prototype without setting anything up. A preview link on each pull request does this.
-
-<!-- ALI: confirm whether BrightLocal prototypes get preview deploys or are run locally, and adjust step 6 if needed -->
 
 ## Why it's worth it
 

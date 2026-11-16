@@ -2,8 +2,8 @@
 title: The designer as editor
 description: AI makes options cheap, so judgement becomes the scarce skill. A practical checklist for reviewing AI-generated screens, copy and code before anyone else sees them.
 series: Curating AI output
-pubDate: 2026-12-29
-draft: true
+pubDate: 2026-11-16
+draft: false
 related: [brightlocal, glint]
 products: [design-system-health-check]
 keywords: [AI design review, design judgement, curating AI output, design systems, prototyping, design critique]
@@ -30,8 +30,6 @@ An editor without a brief or a house style is only giving opinions. The same is 
 In our work with BrightLocal, prototypes start from requirement documents, an expert UX audit and BrightLocal's own design system. When a generated screen comes back, there is something to hold it up against. Does it meet the requirement? Does it deal with the problem the audit found? Is it made from the system's components, or has it invented its own?
 
 At Glint, the onboarding flow for business accounts was built from the compliance officer's data-capture specification, and it branches on business type to meet US and UK ownership rules. No amount of taste tells you whether that flow is right. The specification does. A tool can draft a tidy, plausible onboarding form in seconds. Only a person reading it line by line against the spec can say that it asks the right questions of the right kind of business.
-
-<!-- ALI: add a specific example of something an AI draft got plausibly wrong on BrightLocal or Glint, and how it was caught in review -->
 
 ## A checklist for screens
 

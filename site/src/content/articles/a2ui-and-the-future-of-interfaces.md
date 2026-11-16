@@ -2,8 +2,8 @@
 title: A2UI and the future of interfaces
 description: Interfaces may be moving from fixed screens to UI composed by an agent at the moment of need, from a catalogue of your own components. What A2UI is, and why it makes the design system matter more.
 series: AI in the design process
-pubDate: 2027-02-23
-draft: true
+pubDate: 2026-11-16
+draft: false
 related: [brightlocal]
 products: [design-system-health-check]
 keywords: [A2UI, generative UI, AI agents, design systems, component catalogue, agent interfaces]
@@ -58,8 +58,6 @@ If you want to be ready for this, the work is familiar. It's the same work that 
 - **Written guidance.** How components combine, and which combinations to avoid.
 
 In our work with BrightLocal, one strand is improving how product and design teams use AI, by making design system documentation work for people and AI agents alike. That work is aimed at how teams design and prototype today. But documentation that an agent can read and follow is the same foundation an approach like A2UI depends on.
-
-<!-- ALI: if you have built or tested an A2UI catalogue or renderer yourself, add a short first-hand account here: what you tried and what surprised you -->
 
 ## What stays the designer's job
 

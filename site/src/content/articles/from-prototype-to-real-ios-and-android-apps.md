@@ -2,8 +2,8 @@
 title: From prototype to real iOS and Android apps
 description: How to start thinking about building native apps from a design system and prototypes. One token source for SwiftUI and Jetpack Compose, component parity, and where a person still has to check.
 series: Design systems in practice
-pubDate: 2027-03-09
-draft: true
+pubDate: 2026-11-16
+draft: false
 related: [glint, pocket-films]
 products: [design-system-health-check]
 keywords: [native apps, SwiftUI, Jetpack Compose, design tokens, iOS and Android design system, AI coding tools]
@@ -22,8 +22,6 @@ The fix is to keep tokens in a neutral format, such as a JSON file, and generate
 Nobody changes a colour inside an app. They change it at the source and every platform updates.
 
 At Glint, the head of engineering asked for a single design system the app, the web and the brand could all draw on, and part of our work was bringing Glint's app design system into code from Figma, alongside its brand guidelines. At Pocket Films, a single token foundation meant colour, type, spacing and components were defined once and cascaded to the iOS app, the provider platform and the admin, with light, dark and brand themes.
-
-<!-- ALI: add how tokens reached the native Glint apps in practice: the source format, the tooling, and anything that went wrong along the way -->
 
 ## Aim for component parity, not identical components
 
@@ -55,8 +53,6 @@ Some things a web prototype can only approximate. For these, build a small nativ
 - **Text size and screen readers.** How the layout copes with the user's own settings.
 - **Being offline.** What the app does on a train with no signal.
 
-<!-- ALI: add a Glint example of something that only became clear on a real device, on iOS or Android, and what changed as a result -->
-
 ## Where AI coding tools help
 
 AI coding tools are useful here, within limits.
@@ -80,8 +76,6 @@ Some things shouldn't be taken on trust from generated code.
 **Regulated content.** Glint's business onboarding was built from the compliance officer's specification. A generated screen in a flow like that has to be checked against the specification by a person.
 
 **Real devices.** Simulators are useful but generous. Test on real phones, including an older, smaller, slower one.
-
-<!-- ALI: add your experience of App Store and Play Store review for Glint: what was asked for, and anything you'd tell another team to prepare in advance -->
 
 ## A sensible order of work
 

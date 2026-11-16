@@ -2,8 +2,8 @@
 title: Design system docs for people and AI agents
 description: Your design system documentation now has a second reader. What AI tools get wrong without it, what to write down, and why the same changes help people too.
 series: AI in the design process
-pubDate: 2027-02-09
-draft: true
+pubDate: 2026-11-16
+draft: false
 related: [brightlocal]
 products: [design-system-health-check]
 keywords: [design system documentation, AI agents, Storybook, usage guidance, design tokens, AI in design]
@@ -37,8 +37,6 @@ The second layer is judgement. When to use a modal and when a new page. Why ther
 An AI agent can't ask around. So the work is to move the second layer into writing.
 
 In our work with BrightLocal, one strand is exactly this: improving how product and design teams use AI, by making design system documentation work for people and AI agents alike. It sits next to another strand, where prototypes are reviewed like code in the design system repository with usage guidance written into Storybook. The two support each other. Review is where missing guidance gets noticed, and Storybook is where it gets written down.
-
-<!-- ALI: add a specific before and after from BrightLocal: a piece of guidance that was added, and what the AI tools did differently once it was there -->
 
 ## What to write
 

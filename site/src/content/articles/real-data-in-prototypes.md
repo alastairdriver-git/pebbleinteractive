@@ -2,8 +2,8 @@
 title: Real data in prototypes changes the conversation
 description: People react differently to real numbers. Why we put public data into prototypes wherever we can, how to do it safely, and when sample data is the better choice.
 series: AI in the design process
-pubDate: 2026-12-15
-draft: true
+pubDate: 2026-11-16
+draft: false
 related: [glint, brightlocal]
 products: [design-system-health-check]
 keywords: [prototyping, real data, fintech design, user research, AI prototyping]

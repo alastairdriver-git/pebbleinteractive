@@ -2,8 +2,8 @@
 title: Why AI prototyping needs a design system
 description: AI can make a screen in seconds. A design system is what makes that screen on brand, accessible and buildable, rather than plausible and wrong.
 series: AI in the design process
-pubDate: 2026-12-01
-draft: true
+pubDate: 2026-11-16
+draft: false
 related: [brightlocal, glint]
 products: [design-system-health-check]
 keywords: [AI prototyping, design systems, design tokens, generative UI, prototyping]

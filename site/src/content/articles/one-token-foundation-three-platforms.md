@@ -2,8 +2,8 @@
 title: One token foundation, three platforms
 description: Define colour, type and spacing once and let iOS, web and admin inherit them. What we shared across platforms at Pocket Films, and what we let each one do its own way.
 series: Design systems in practice
-pubDate: 2027-01-12
-draft: true
+pubDate: 2026-11-16
+draft: false
 related: [pocket-films]
 products: [design-system-health-check]
 keywords: [design tokens, multi-platform design system, iOS design system, theming, dark mode, design systems]
@@ -30,8 +30,6 @@ Pocket Films is an AI-powered marketplace that connects filmmakers with creative
 We led design from the beginning, so we had the chance to do this properly before any drift set in. We built a single token foundation that every surface inherited from. Colour, type, spacing and components were defined once and cascaded to the iOS app, the provider platform and the admin, with light, dark and brand themes.
 
 Three platforms came out of one design system, and Pocket Films launched on iOS.
-
-<!-- ALI: add how the tokens were actually stored and delivered to each platform at Pocket Films (Figma variables, a JSON source, a build step?), if you're happy to share it -->
 
 ## What to share
 
