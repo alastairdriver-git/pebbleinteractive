@@ -95,8 +95,9 @@ const products = defineCollection({
       format: z.string(), // e.g. "PDF and editable Word files"
       includes: z.array(z.string()).min(1),
       forWho: z.string(),
-      image: z.string().optional(),
+      image: z.string().optional(), // shop/social preview card (also the meta image)
       imageAlt: z.string().optional(),
+      heroImage: z.string().optional(), // product shot for the page hero (fanned pages, no title)
       sample: z.object({ label: z.string(), href: z.string() }).optional(),
       order: z.number(),
       // Marketing brief: the product page, carousel and marketing video are

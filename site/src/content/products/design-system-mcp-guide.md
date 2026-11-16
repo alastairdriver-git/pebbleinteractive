@@ -7,6 +7,7 @@ status: live
 checkoutUrl: https://buy.polar.sh/polar_cl_POULekIngN427y4ifxbSP3bE6J9G7F1em7VBk20fApX
 format: Guide and working MCP server
 image: /products/design-system-mcp-guide/preview.png
+heroImage: /products/design-system-mcp-guide/hero.png
 imageAlt: The MCP for your design system guide and starter server
 headline: Stop AI tools inventing UI. Give them your design system.
 problem: AI coding tools are fast, but without access to your design system they guess. You get near-miss colours, invented components and a review pile that cancels out the speed.

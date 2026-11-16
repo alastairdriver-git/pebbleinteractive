@@ -545,3 +545,5 @@ h1, h2, h3,
 .product-thanks-inner p { margin: 0; max-width: 46rem; line-height: 1.5; }
 .product-thanks-title { font-size: var(--text-lg); font-weight: 650; font-variation-settings: "wdth" 110; margin-bottom: .25rem !important; }
 .product-thanks a { color: var(--cw-text); text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
+
+.product-hero-shot { width: 100%; max-width: 40rem; height: auto; justify-self: center; }

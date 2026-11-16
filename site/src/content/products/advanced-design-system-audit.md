@@ -7,6 +7,7 @@ status: live
 checkoutUrl: https://buy.polar.sh/polar_cl_qH33Jaoh0keDTCgGlStQ1sLxpTZE48umDxqy04L68Sk
 format: PDF workbook and Excel scoring sheet
 image: /products/advanced-design-system-audit/preview.png
+heroImage: /products/advanced-design-system-audit/hero.png
 imageAlt: The advanced design system audit workbook, opened at the accessibility section
 headline: Audit your design system properly, without hiring someone to do it
 problem: The free health check tells you where you're drifting. Fixing it needs the detail, and most teams don't have a structured way to check tokens, components, accessibility and AI readiness in one pass.

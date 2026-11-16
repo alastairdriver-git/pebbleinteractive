@@ -93,7 +93,7 @@ const cta = live && checkout ? { href: checkout, label: `Buy now · ${price}`, c
               {!live && <span class="product-hero-note">Coming soon</span>}
             </div>
           </div>
-          {d.image && <img src={d.image} alt={d.imageAlt ?? ""} class="product-hero-image" />}
+          {(d.heroImage ?? d.image) && <img src={d.heroImage ?? d.image} alt={d.imageAlt ?? ""} class={d.heroImage ? "product-hero-shot" : "product-hero-image"} />}
         </div>
       </Container>
     </Section>

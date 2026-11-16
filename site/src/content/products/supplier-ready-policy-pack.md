@@ -16,6 +16,7 @@ forWho: Freelancers, studios and small consultancies applying to supplier lists,
 order: 3
 keywords: [company policies, procurement, due diligence, supplier, small business, tender]
 image: /products/supplier-ready-policy-pack/preview.png
+heroImage: /products/supplier-ready-policy-pack/hero.png
 imageAlt: The supplier-ready policy pack, a stack of policy pages, guide and supplier register
 headline: Answer a supplier due diligence form honestly, in an afternoon
 problem: Supplier lists and tenders ask small studios for a dozen policies at once. Most small companies already work responsibly, but have nothing written down, and the form is due this week.

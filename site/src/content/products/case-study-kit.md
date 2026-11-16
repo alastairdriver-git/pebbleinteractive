@@ -16,6 +16,7 @@ forWho: Designers, developers and consultants who need case studies for tenders,
 order: 4
 keywords: [case study template, portfolio, freelance, design case study, PDF template]
 image: /products/case-study-kit/preview.png
+heroImage: /products/case-study-kit/hero.png
 imageAlt: The case study kit, showing a finished one-page case study and the structure guide
 headline: Case studies people actually read, on one page
 problem: Most case studies are three pages of narrative that procurement teams and clients skim past. The work is good; the write-up buries it.

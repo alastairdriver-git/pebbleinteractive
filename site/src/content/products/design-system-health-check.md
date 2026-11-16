@@ -6,6 +6,7 @@ status: live
 downloadUrl: /downloads/design-system-health-check.pdf
 format: One-page PDF checklist
 image: /products/design-system-health-check/preview.png
+heroImage: /products/design-system-health-check/hero.png
 imageAlt: The design system health check, a one-page checklist with six scored sections
 headline: Find out where your design system is drifting, in fifteen minutes
 problem: Most design systems don't fail all at once. They drift, one near-copy component and one raw hex value at a time, until nobody trusts them. By the time it's obvious, it's expensive.
