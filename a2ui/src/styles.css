@@ -1,0 +1,100 @@
+/* Styles for Pebble's A2UI catalogue components and the live demo frame.
+   Uses the Pebble theme tokens (--foreground, --pink, --camel, ...), so the
+   host page must load the Pebble theme. Shared by the site and Pebble Studio. */
+/* ── Live A2UI demos (Pebble catalogue, @pebble/a2ui) ───────── */
+.article-prose .a2ui-demo-slot { margin: 2.5em 0; min-height: 12rem; }
+@media (min-width: 1100px) { .article-prose .a2ui-demo-slot { width: min(56rem, calc(100vw - 4rem)); margin-left: 50%; transform: translateX(-50%); } }
+.pa2-fallback { padding: 2rem; border: 1px dashed oklch(var(--border)); border-radius: var(--radius); color: oklch(var(--muted-foreground)); font-size: var(--text-sm); }
+.pa2-demo { border-radius: calc(var(--radius) * 1.6); overflow: hidden; background: oklch(var(--camel)); color: oklch(var(--camel-foreground)); font-size: 1rem; line-height: 1.5; }
+.pa2-demo-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid oklch(1 0 0 / .1); }
+.pa2-prompt { display: flex; align-items: baseline; gap: .6rem; font-weight: 550; font-size: 1.02rem; text-wrap: pretty; }
+.pa2-prompt-who { flex: none; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .15rem .5rem; border-radius: 999px; background: oklch(var(--pink)); color: oklch(var(--pink-foreground)); }
+.pa2-tabs { display: flex; gap: .25rem; }
+.pa2-tabs button { font: inherit; font-size: .85rem; font-weight: 600; padding: .35rem .8rem; border-radius: 999px; border: 0; background: transparent; color: oklch(var(--camel-foreground) / .7); cursor: pointer; }
+.pa2-tabs button[aria-selected="true"] { background: oklch(1 0 0 / .12); color: oklch(var(--camel-foreground)); }
+.pa2-tabs .pa2-replay { color: oklch(var(--pink)); }
+.pa2-demo-body { padding: 1.5rem; background: oklch(var(--background)); color: oklch(var(--foreground)); min-height: 14rem; }
+.pa2-surface { max-width: 36rem; margin-inline: auto; }
+.pa2-streaming { margin-top: 1rem; text-align: center; font-size: var(--text-sm); color: oklch(var(--muted-foreground)); }
+.pa2-json { margin: 0; max-height: 26rem; overflow: auto; padding: 1rem 1.2rem; border-radius: var(--radius); background: oklch(var(--camel)); color: oklch(var(--camel-foreground)); font-size: .78rem; line-height: 1.55; }
+.pa2-log { display: flex; flex-direction: column; gap: .4rem; padding: .9rem 1.25rem 1.1rem; font-size: .85rem; }
+.pa2-log-label { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: oklch(var(--accent-on-camel)); }
+.pa2-log pre { margin: 0; padding: 0; background: none; color: oklch(var(--camel-foreground)); font-size: .78rem; white-space: pre-wrap; }
+.pa2-log .pa2-muted { color: oklch(var(--camel-foreground) / .6); }
+
+/* Catalogue components. House style: Mona Sans, wide for headings and
+   actions; flat surfaces and pills; rows on a fixed grid so lists align. */
+.pa2-card, .pa2-demo { font-family: var(--font-sans, "Mona Sans", system-ui, sans-serif); }
+.pa2-card { --pa2-card-bg: oklch(var(--card)); display: flex; flex-direction: column; gap: 1.25rem; padding: 1.5rem; border-radius: calc(var(--radius) * 1.4); background: var(--pa2-card-bg); border: 1px solid oklch(var(--border)); color: oklch(var(--foreground)); text-align: left; }
+.pa2-card-head { display: flex; flex-direction: column; gap: .45rem; }
+.pa2-eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-size: .72rem; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; font-variation-settings: "wdth" 115; color: oklch(var(--accent)); }
+.pa2-mark { width: 1.25rem; height: auto; color: oklch(var(--accent)); flex: none; }
+.pa2-title { margin: 0; font-family: var(--font-display, var(--font-sans)); font-size: 1.5rem; line-height: 1.1; font-weight: 650; font-variation-settings: "wdth" 115; letter-spacing: -0.025em; text-wrap: balance; }
+.pa2-heading { margin: 0; font-size: .95rem; font-weight: 650; font-variation-settings: "wdth" 112; letter-spacing: -0.005em; }
+.pa2-text { margin: 0; font-size: .95rem; line-height: 1.5; text-wrap: pretty; }
+.pa2-muted { color: oklch(var(--muted-foreground)); }
+.pa2-small { font-size: .8rem; }
+.pa2-stack { display: flex; flex-direction: column; }
+.pa2-row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
+.pa2-justify-between { justify-content: space-between; }
+.pa2-justify-end { justify-content: flex-end; }
+.pa2-row .pa2-stat { flex: 1 1 0; min-width: 6.5rem; }
+.pa2-stat { display: flex; flex-direction: column; gap: .3rem; padding: .85rem 1rem; border-radius: var(--radius); background: oklch(var(--muted)); }
+.pa2-stat-value { font-size: 1.75rem; line-height: 1; font-weight: 700; font-variation-settings: "wdth" 115; letter-spacing: -0.03em; }
+.pa2-stat-label { font-size: .8rem; color: oklch(var(--muted-foreground)); }
+
+/* Flat pills */
+.pa2-pill { display: inline-flex; align-items: center; justify-content: center; min-width: 6.25rem; height: 1.5rem; padding: 0 .65rem; border-radius: 999px; font-size: .74rem; font-weight: 600; font-variation-settings: "wdth" 108; letter-spacing: .01em; white-space: nowrap; border: 0 !important; box-shadow: none !important; outline: 0; }
+.pa2-pill-neutral { background: oklch(var(--muted)); color: oklch(var(--muted-foreground)); }
+.pa2-pill-accent { background: oklch(0.93 0.035 210); color: oklch(0.36 0.07 215); }
+.pa2-pill-success { background: oklch(0.94 0.05 155); color: oklch(0.38 0.08 155); }
+.pa2-pill-warning { background: oklch(0.95 0.06 85); color: oklch(0.42 0.08 70); }
+.pa2-pill-pink { background: oklch(var(--pink)); color: oklch(var(--pink-foreground)); }
+
+/* Content rows: icon | title over "type · date" | status. One grid, so rows line up. */
+.pa2-item { --kind: var(--muted-foreground); width: 100%; display: grid; grid-template-columns: 2.5rem minmax(0, 1fr) auto; gap: 0 .9rem; align-items: center; min-height: 3.75rem; padding: .6rem .8rem .6rem .65rem; border: 1px solid oklch(var(--border)); border-radius: var(--radius); background: oklch(var(--card)); color: inherit; font: inherit; text-align: left; cursor: pointer; transition: border-color .15s, background-color .15s; }
+.pa2-item:hover { border-color: oklch(var(--pink)); }
+.pa2-item-icon { width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border-radius: calc(var(--radius) * .85); background: oklch(var(--kind-bg, var(--muted))); color: oklch(var(--kind-fg, var(--foreground))); }
+.pa2-item-text { display: flex; flex-direction: column; gap: .15rem; min-width: 0; }
+.pa2-item-title { font-weight: 620; font-size: .94rem; line-height: 1.3; font-variation-settings: "wdth" 104; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pa2-item-sub { font-size: .78rem; color: oklch(var(--muted-foreground)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pa2-kind-article { --kind-bg: 0.93 0.035 210; --kind-fg: 0.38 0.08 215; }
+.pa2-kind-social { --kind-bg: 0.94 0.03 250; --kind-fg: 0.42 0.1 255; }
+.pa2-kind-short, .pa2-kind-video { --kind-bg: 0.95 0.04 352; --kind-fg: 0.5 0.15 352; }
+.pa2-kind-newsletter { --kind-bg: 0.95 0.05 85; --kind-fg: 0.45 0.08 70; }
+.pa2-kind-launch { --kind-bg: 0.94 0.05 155; --kind-fg: 0.4 0.09 155; }
+@media (max-width: 520px) { .pa2-item .pa2-pill { min-width: 0; } }
+
+/* Buttons */
+.pa2-button { display: inline-flex; align-items: center; justify-content: center; height: 2.4rem; padding: 0 1.1rem; border-radius: 999px; border: 1px solid transparent; font: inherit; font-size: .88rem; font-weight: 620; font-variation-settings: "wdth" 112; cursor: pointer; transition: background-color .15s, color .15s, border-color .15s; }
+.pa2-button-primary { background: oklch(var(--foreground)); color: oklch(var(--background)); }
+.pa2-button-primary:hover { background: oklch(var(--accent)); }
+.pa2-button-secondary { background: transparent; border-color: oklch(var(--border)); color: oklch(var(--foreground)); }
+.pa2-button-secondary:hover { border-color: oklch(var(--foreground)); }
+.pa2-button-ghost { background: transparent; color: oklch(var(--muted-foreground)); }
+.pa2-button-ghost:hover { color: oklch(var(--foreground)); background: oklch(var(--muted)); }
+.pa2-button:focus-visible { outline: 2px solid oklch(var(--pink)); outline-offset: 2px; }
+
+.pa2-product { display: flex; flex-direction: column; gap: .45rem; padding: 1.1rem 1.2rem; border-radius: var(--radius); background: oklch(var(--pink-soft)); }
+.pa2-price { font-size: 1.5rem; font-weight: 700; font-variation-settings: "wdth" 115; letter-spacing: -0.02em; }
+.pa2-field { display: flex; flex-direction: column; gap: .4rem; }
+.pa2-field-label { font-size: .8rem; font-weight: 620; font-variation-settings: "wdth" 108; }
+.pa2-field input { font: inherit; padding: .55rem .75rem; border-radius: calc(var(--radius) * .7); border: 1px solid oklch(var(--border)); background: oklch(var(--card)); color: inherit; max-width: 14rem; }
+.pa2-chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+.pa2-chip { font: inherit; font-size: .85rem; font-weight: 550; padding: .35rem .85rem; border-radius: 999px; border: 1px solid oklch(var(--border)); background: oklch(var(--card)); color: inherit; cursor: pointer; }
+.pa2-chip.on { background: oklch(var(--pink)); border-color: transparent; color: oklch(var(--pink-foreground)); font-weight: 600; }
+.pa2-section { display: flex; flex-direction: column; gap: .6rem; }
+.pa2-section + .pa2-section { margin-top: .6rem; }
+.pa2-section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding-bottom: .35rem; border-bottom: 1px solid oklch(var(--border)); }
+.pa2-link { font-size: .92rem; font-weight: 600; color: oklch(var(--accent)); text-decoration: none; }
+.pa2-link:hover { text-decoration: underline; }
+.pa2-field input[type="text"] { max-width: none; width: 100%; }
+.pa2-clickable { cursor: pointer; transition: box-shadow .15s, transform .15s; }
+.pa2-clickable:hover { box-shadow: 0 0 0 2px oklch(var(--pink)); }
+.pa2-clickable:focus-visible, .pa2-item:focus-visible { outline: 2px solid oklch(var(--pink)); outline-offset: 2px; }
+
+/* Keep host page typography (e.g. article prose) out of surfaces. */
+.pa2-card .pa2-title, .pa2-card .pa2-heading, .pa2-card .pa2-text { margin: 0; padding: 0; }
+.pa2-card .pa2-title::before, .pa2-card .pa2-heading::before { content: none; }
+.pa2-card :where(ul, ol) { margin: 0; padding: 0; list-style: none; }
+.pa2-card :where(li)::before { content: none; }

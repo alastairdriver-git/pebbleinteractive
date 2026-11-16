@@ -7,12 +7,14 @@
   "exports": {
     ".": "./src/index.ts",
     "./demo": "./src/demo.tsx",
-    "./examples/*": "./examples/*"
+    "./examples/*": "./examples/*",
+    "./styles.css": "./src/styles.css"
   },
   "dependencies": {
     "@a2ui/react": "0.15.0",
     "@a2ui/web_core": "0.15.0",
-    "zod": "3.25.76"
+    "zod": "3.25.76",
+    "lucide-react": "0.562.0"
   },
   "peerDependencies": {
     "@gradeui/ui": "*",

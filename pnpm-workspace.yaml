@@ -5,3 +5,4 @@ packages:
   - "kit"
   - "site"
   - "a2ui"
+  - "admin"

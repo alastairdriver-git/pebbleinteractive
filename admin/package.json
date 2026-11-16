@@ -1,0 +1,35 @@
+{
+  "name": "pebble-studio",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Pebble Studio: Ali's private admin for Pebble's content schedule and products. Screens are A2UI surfaces built from the Pebble catalogue (@pebble/a2ui, on Grade).",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@a2ui/web_core": "0.15.0",
+    "@gradeui/ui": "4.0.1",
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.119.0",
+    "leaflet": "1.9.4",
+    "next": "16.4.6",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "zod": "3.25.76",
+    "@pebble/a2ui": "workspace:*",
+    "@a2ui/react": "0.15.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.5",
+    "@types/node": "24.10.1",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "tailwindcss": "4.3.5",
+    "tailwindcss-animate": "1.0.7",
+    "typescript": "5.9.3"
+  }
+}

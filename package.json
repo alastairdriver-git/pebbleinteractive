@@ -8,11 +8,14 @@
     "build": "pnpm --filter pebbleinteractive-site build",
     "preview": "pnpm --filter pebbleinteractive-site preview",
     "og": "pnpm --filter pebbleinteractive-site og",
-    "links": "pnpm --filter pebbleinteractive-site links"
+    "links": "pnpm --filter pebbleinteractive-site links",
+    "admin": "pnpm --filter pebble-studio dev"
   },
   "pnpm": {
     "overrides": {
-      "@gradeui/ui": "4.0.1"
+      "@gradeui/ui": "4.0.1",
+      "react": "19.2.7",
+      "react-dom": "19.2.7"
     }
   }
 }

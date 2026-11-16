@@ -6,6 +6,10 @@
 import { z } from "zod";
 import { Catalog, CommonSchemas } from "@a2ui/web_core/v1_0";
 import { createComponentImplementation } from "@a2ui/react";
+import { FileText, MessageSquareText, Clapperboard, Video, Mail, Rocket, Circle } from "lucide-react";
+/* Built from Grade components (Card, Badge, Button) and Grade's icon set,
+   themed with the Pebble tokens. House-style refinements (wide Mona Sans,
+   flat pills, aligned rows, the Pebble mark) live in styles.css. */
 import { Badge as GBadge, Button as GButton, Card as GCard } from "@gradeui/ui";
 
 export const CATALOG_ID = "https://www.pebbleinteractive.com/a2ui/catalog/v1.json";
@@ -25,6 +29,20 @@ const kids = (children: unknown, buildChild: (id: string, basePath?: string) => 
 
 const gap = { sm: "gap-2", md: "gap-4", lg: "gap-6" } as const;
 
+const PebbleMark = () => (
+  <svg className="pa2-mark" viewBox="0 0 125 102" aria-hidden="true">
+    <path fill="currentColor" d="M60 2 C95 -3 122 18 124 48 C126 78 100 100 62 101 C26 102 -2 82 0 50 C2 20 28 7 60 2 Z" />
+    <rect x="-20" y="58" width="180" height="12" fill="var(--pa2-card-bg, #fff)" transform="rotate(-7 62 64)" />
+  </svg>
+);
+
+/** Status pill: Grade Badge, soft variant, flattened in styles.css. */
+const BADGE_VARIANT: Record<string, string> = { neutral: "secondary", accent: "info-soft", success: "success-soft", warning: "warning-soft", pink: "highlight" };
+const sentence = (t: unknown) => { const x = String(t ?? ""); return x.charAt(0).toUpperCase() + x.slice(1); };
+const Pill = ({ tone, children }: { tone: string; children: React.ReactNode }) => (
+  <GBadge variant={(BADGE_VARIANT[tone] ?? "secondary") as any} {...({ rounded: "full" } as any)} className={`pa2-pill pa2-pill-${tone}`}>{typeof children === "string" ? sentence(children) : children}</GBadge>
+);
+
 /* ── Layout ─────────────────────────────────────────────── */
 const CardApi = api("Card", "A surface panel with an optional eyebrow and title. The usual root of a surface.", {
   eyebrow: S.DynamicString.optional(),
@@ -35,7 +53,7 @@ const Card = createComponentImplementation(CardApi, ({ props, buildChild }) => (
   <GCard className="pa2-card">
     {(props.eyebrow || props.title) && (
       <div className="pa2-card-head">
-        {props.eyebrow && <span className="pa2-eyebrow">{props.eyebrow}</span>}
+        {props.eyebrow && <span className="pa2-eyebrow"><PebbleMark />{props.eyebrow}</span>}
         {props.title && <h3 className="pa2-title">{props.title}</h3>}
       </div>
     )}
@@ -71,13 +89,12 @@ const Text = createComponentImplementation(TextApi, ({ props }) => (
   <p className={props.tone === "muted" ? "pa2-text pa2-muted" : "pa2-text"}>{props.text}</p>
 ));
 
-const badgeVariant = { neutral: "secondary", accent: "info-soft", pink: "highlight", success: "success-soft", warning: "warning-soft" } as const;
 const BadgeApi = api("Badge", "A short status label.", {
   text: S.DynamicString,
   tone: z.enum(["neutral", "accent", "pink", "success", "warning"]).optional(),
 });
 const Badge = createComponentImplementation(BadgeApi, ({ props }) => (
-  <GBadge variant={badgeVariant[props.tone ?? "neutral"] as any} className={`pa2-badge pa2-badge-${props.tone ?? "neutral"}`}>{props.text}</GBadge>
+  <Pill tone={props.tone ?? "neutral"}>{props.text}</Pill>
 ));
 
 const StatApi = api("Stat", "A single number with a label, for summaries.", {
@@ -99,7 +116,7 @@ const Button = createComponentImplementation(ButtonApi, ({ props }) => (
   <GButton
     size="md"
     variant={props.variant === "secondary" ? "outline" : props.variant === "ghost" ? "ghost" : "default"}
-    className={props.variant === "primary" || !props.variant ? "pa2-primary" : undefined}
+    className={`pa2-button pa2-button-${props.variant ?? "primary"}`}
     onClick={() => (props.action as any)?.()}
   >
     {props.label}
@@ -117,24 +134,55 @@ const DateField = createComponentImplementation(DateFieldApi, ({ props }) => (
   </label>
 ));
 
-const ChoiceApi = api("Choice", "Pick one option from a short list, bound to the data model.", {
+const ChoiceApi = api("Choice", "Pick one option from a short list, bound to the data model. An optional action fires after each choice (for filters).", {
   label: S.DynamicString,
   options: z.array(z.string()),
   value: S.DynamicString,
+  action: S.Action.optional(),
 });
 const Choice = createComponentImplementation(ChoiceApi, ({ props }) => (
   <div className="pa2-field">
     <span className="pa2-field-label">{props.label}</span>
     <div className="pa2-chips" role="radiogroup" aria-label={props.label}>
       {props.options.map((o: string) => (
-        <button type="button" role="radio" aria-checked={props.value === o} key={o} className={props.value === o ? "pa2-chip on" : "pa2-chip"} onClick={() => (props as any).setValue?.(o)}>{o}</button>
+        <button type="button" role="radio" aria-checked={props.value === o} key={o} className={props.value === o ? "pa2-chip on" : "pa2-chip"} onClick={() => { (props as any).setValue?.(o); setTimeout(() => (props.action as any)?.(), 0); }}>{o}</button>
       ))}
     </div>
   </div>
 ));
 
+const TextFieldApi = api("TextField", "A labelled single-line text input, bound to the data model.", {
+  label: S.DynamicString,
+  value: S.DynamicString,
+  placeholder: S.DynamicString.optional(),
+});
+const TextField = createComponentImplementation(TextFieldApi, ({ props }) => (
+  <label className="pa2-field">
+    <span className="pa2-field-label">{props.label}</span>
+    <input type="text" value={props.value ?? ""} placeholder={props.placeholder ?? ""} onChange={(e) => (props as any).setValue?.(e.target.value)} />
+  </label>
+));
+
+const SectionApi = api("Section", "A titled group inside a surface, for example a week or a status.", {
+  title: S.DynamicString,
+  hint: S.DynamicString.optional(),
+  children: S.ChildList,
+});
+const Section = createComponentImplementation(SectionApi, ({ props, buildChild }) => (
+  <section className="pa2-section">
+    <div className="pa2-section-head"><h4 className="pa2-heading">{props.title}</h4>{props.hint && <span className="pa2-muted pa2-small">{props.hint}</span>}</div>
+    <div className="pa2-stack gap-2">{kids(props.children, buildChild)}</div>
+  </section>
+));
+
+const LinkApi = api("Link", "A link that opens in a new tab.", { label: S.DynamicString, href: S.DynamicString });
+const Link = createComponentImplementation(LinkApi, ({ props }) => (
+  props.href ? <a className="pa2-link" href={props.href} target="_blank" rel="noopener">{props.label} ↗</a> : null
+));
+
 /* ── Pebble domain components ───────────────────────────── */
 const KIND = { article: "Article", social: "LinkedIn post", short: "Short video", video: "Video", newsletter: "Newsletter", launch: "Product launch" } as const;
+const KIND_ICON = { article: FileText, social: MessageSquareText, short: Clapperboard, video: Video, newsletter: Mail, launch: Rocket } as const;
 const STATUS_TONE: Record<string, string> = { idea: "neutral", draft: "neutral", "needs review": "pink", approved: "success", scheduled: "accent", published: "success" };
 
 const ContentItemApi = api("ContentItem", "One piece of planned content: its kind, title, date and status. Optionally an action to open it.", {
@@ -150,13 +198,13 @@ const ContentItem = createComponentImplementation(ContentItemApi, ({ props }) =>
   const tone = STATUS_TONE[status] ?? "neutral";
   const Tag: any = props.action ? "button" : "div";
   return (
-    <Tag type={props.action ? "button" : undefined} className="pa2-item" onClick={props.action ? () => (props.action as any)() : undefined}>
-      <span className={`pa2-kind pa2-kind-${kind}`}>{KIND[kind] ?? kind}</span>
-      <span className="pa2-item-title">{props.title}</span>
-      <span className="pa2-item-meta">
-        <span className="pa2-muted pa2-small">{props.date}</span>
-        <GBadge variant={badgeVariant[tone as keyof typeof badgeVariant] as any} className={`pa2-badge pa2-badge-${tone}`}>{status}</GBadge>
+    <Tag type={props.action ? "button" : undefined} className={`pa2-item pa2-kind-${kind}`} onClick={props.action ? () => (props.action as any)() : undefined}>
+      <span className="pa2-item-icon" aria-hidden="true">{(() => { const I = KIND_ICON[kind] ?? Circle; return <I size={18} strokeWidth={2} />; })()}</span>
+      <span className="pa2-item-text">
+        <span className="pa2-item-title">{props.title}</span>
+        <span className="pa2-item-sub">{KIND[kind] ?? kind}<span aria-hidden="true"> · </span>{props.date}</span>
       </span>
+      <Pill tone={tone}>{status}</Pill>
     </Tag>
   );
 });
@@ -165,13 +213,16 @@ const ProductCardApi = api("ProductCard", "A Pebble digital product with its pri
   title: S.DynamicString,
   summary: S.DynamicString,
   price: S.DynamicString,
-  status: z.enum(["draft", "coming soon", "on sale"]),
+  status: S.DynamicString.describe("REF:#/$defs/DynamicString|One of: draft, coming soon, on sale"),
+  action: S.Action.optional(),
 });
 const ProductCard = createComponentImplementation(ProductCardApi, ({ props }) => (
-  <div className="pa2-product">
+  <div className={props.action ? "pa2-product pa2-clickable" : "pa2-product"} role={props.action ? "button" : undefined} tabIndex={props.action ? 0 : undefined}
+    onClick={props.action ? () => (props.action as any)() : undefined}
+    onKeyDown={props.action ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); (props.action as any)(); } } : undefined}>
     <div className="pa2-row pa2-justify-between">
       <span className="pa2-eyebrow">Product</span>
-      <GBadge variant={(props.status === "on sale" ? "success-soft" : "highlight") as any} className={`pa2-badge ${props.status === "on sale" ? "pa2-badge-success" : "pa2-badge-pink"}`}>{props.status}</GBadge>
+      <Pill tone={props.status === "on sale" ? "success" : props.status === "draft" ? "neutral" : "pink"}>{String(props.status ?? "")}</Pill>
     </div>
     <h4 className="pa2-title">{props.title}</h4>
     <p className="pa2-text pa2-muted">{props.summary}</p>
@@ -179,11 +230,11 @@ const ProductCard = createComponentImplementation(ProductCardApi, ({ props }) =>
   </div>
 ));
 
-export const apis = [CardApi, ColumnApi, RowApi, HeadingApi, TextApi, BadgeApi, StatApi, ButtonApi, DateFieldApi, ChoiceApi, ContentItemApi, ProductCardApi];
+export const apis = [CardApi, ColumnApi, RowApi, SectionApi, HeadingApi, TextApi, LinkApi, BadgeApi, StatApi, ButtonApi, TextFieldApi, DateFieldApi, ChoiceApi, ContentItemApi, ProductCardApi];
 
 export const pebbleCatalog = new Catalog(
   CATALOG_ID,
   "1.0",
-  [Card, Column, Row, Heading, Text, Badge, Stat, Button, DateField, Choice, ContentItem, ProductCard] as any,
+  [Card, Column, Row, Section, Heading, Text, Link, Badge, Stat, Button, TextField, DateField, Choice, ContentItem, ProductCard] as any,
   [],
 );
