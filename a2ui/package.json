@@ -1,0 +1,22 @@
+{
+  "name": "@pebble/a2ui",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Pebble's A2UI component catalogue (protocol 1.0), built on Grade. Used by the site's live demos and by Pebble Studio.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./demo": "./src/demo.tsx",
+    "./examples/*": "./examples/*"
+  },
+  "dependencies": {
+    "@a2ui/react": "0.15.0",
+    "@a2ui/web_core": "0.15.0",
+    "zod": "3.25.76"
+  },
+  "peerDependencies": {
+    "@gradeui/ui": "*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

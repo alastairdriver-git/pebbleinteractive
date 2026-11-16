@@ -4,6 +4,9 @@
      ![Alt text](/clip.mp4 "Caption")          → looping muted video
    An image alone in its paragraph is unwrapped from the <p>.
 
+   {{a2ui name}} on a line of its own becomes a live A2UI demo, rendered in
+   the browser from Pebble's catalogue (package @pebble/a2ui, examples/<name>.json).
+
    A URL on a line of its own becomes a link preview card, using the
    metadata saved by `pnpm links` in src/data/link-previews.json. A URL
    that hasn't been fetched yet stays a plain link. */
@@ -60,6 +63,12 @@ export default function rehypeFigures() {
         if (c.type === "element" && c.tagName === "p") {
           const kids = c.children.filter((k) => !blank(k));
           if (kids.length === 1 && isImg(kids[0])) return toFigure(kids[0]);
+          const demo = textOf(c).trim().match(/^\{\{a2ui ([a-z0-9-]+)\}\}$/);
+          if (demo) {
+            return el("div", { className: ["a2ui-demo-slot"], dataA2uiDemo: demo[1] }, [
+              el("p", { className: ["pa2-fallback"] }, [text("Loading a live A2UI surface…")]),
+            ]);
+          }
           const a = kids.length === 1 && kids[0].type === "element" && kids[0].tagName === "a" ? kids[0] : null;
           if (a) {
             const href = String(a.properties?.href || "");

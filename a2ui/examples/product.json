@@ -1,0 +1,120 @@
+{
+  "prompt": "When should we launch the policy pack?",
+  "messages": [
+    {
+      "version": "1.0",
+      "createSurface": {
+        "surfaceId": "launch",
+        "catalogId": "https://www.pebbleinteractive.com/a2ui/catalog/v1.json"
+      }
+    },
+    {
+      "version": "1.0",
+      "updateComponents": {
+        "surfaceId": "launch",
+        "components": [
+          {
+            "id": "root",
+            "component": "Card",
+            "eyebrow": "Pebble Studio",
+            "title": "Plan a launch",
+            "children": [
+              "product",
+              "note",
+              "date",
+              "channel",
+              "go"
+            ]
+          },
+          {
+            "id": "product",
+            "component": "ProductCard",
+            "title": {
+              "@path": "/product/title"
+            },
+            "summary": {
+              "@path": "/product/summary"
+            },
+            "price": {
+              "@path": "/product/price"
+            },
+            "status": "coming soon"
+          },
+          {
+            "id": "note",
+            "component": "Text",
+            "tone": "muted",
+            "text": "Launch to newsletter subscribers first, then LinkedIn the day after."
+          },
+          {
+            "id": "date",
+            "component": "DateField",
+            "label": "Launch date",
+            "value": {
+              "@path": "/launch/date"
+            }
+          },
+          {
+            "id": "channel",
+            "component": "Choice",
+            "label": "Announce first on",
+            "options": [
+              "Newsletter",
+              "LinkedIn",
+              "Both"
+            ],
+            "value": {
+              "@path": "/launch/channel"
+            }
+          },
+          {
+            "id": "go",
+            "component": "Row",
+            "justify": "end",
+            "children": [
+              "schedule"
+            ]
+          },
+          {
+            "id": "schedule",
+            "component": "Button",
+            "label": "Schedule the launch",
+            "variant": "primary",
+            "action": {
+              "event": {
+                "name": "schedule_launch",
+                "context": {
+                  "product": "supplier-ready-policy-pack",
+                  "date": {
+                    "@path": "/launch/date"
+                  },
+                  "channel": {
+                    "@path": "/launch/channel"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.0",
+      "updateDataModel": {
+        "surfaceId": "launch",
+        "path": "/",
+        "value": {
+          "product": {
+            "title": "Supplier-ready policy pack",
+            "summary": "Eighteen plain-English policies and a guide to procurement due diligence forms.",
+            "price": "$19"
+          },
+          "launch": {
+            "date": "2026-12-01",
+            "channel": "Newsletter"
+          }
+        }
+      }
+    }
+  ]
+}

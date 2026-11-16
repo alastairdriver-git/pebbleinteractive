@@ -1,0 +1,177 @@
+{
+  "prompt": "What's going out this week, and what needs me?",
+  "messages": [
+    {
+      "version": "1.0",
+      "createSurface": {
+        "surfaceId": "week",
+        "catalogId": "https://www.pebbleinteractive.com/a2ui/catalog/v1.json"
+      }
+    },
+    {
+      "version": "1.0",
+      "updateComponents": {
+        "surfaceId": "week",
+        "components": [
+          {
+            "id": "root",
+            "component": "Card",
+            "eyebrow": "Pebble Studio",
+            "title": "This week",
+            "children": [
+              "stats",
+              "list",
+              "actions"
+            ]
+          },
+          {
+            "id": "stats",
+            "component": "Row",
+            "children": [
+              "s1",
+              "s2",
+              "s3"
+            ]
+          },
+          {
+            "id": "s1",
+            "component": "Stat",
+            "label": "Going out",
+            "value": {
+              "@path": "/counts/out"
+            }
+          },
+          {
+            "id": "s2",
+            "component": "Stat",
+            "label": "Need you",
+            "value": {
+              "@path": "/counts/review"
+            }
+          },
+          {
+            "id": "s3",
+            "component": "Stat",
+            "label": "Articles live",
+            "value": {
+              "@path": "/counts/live"
+            }
+          },
+          {
+            "id": "list",
+            "component": "Column",
+            "gap": "sm",
+            "children": {
+              "componentId": "item",
+              "path": "/items"
+            }
+          },
+          {
+            "id": "item",
+            "component": "ContentItem",
+            "kind": {
+              "@path": "kind"
+            },
+            "title": {
+              "@path": "title"
+            },
+            "date": {
+              "@path": "date"
+            },
+            "status": {
+              "@path": "status"
+            },
+            "action": {
+              "event": {
+                "name": "open_item",
+                "context": {
+                  "id": {
+                    "@path": "id"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "actions",
+            "component": "Row",
+            "justify": "end",
+            "children": [
+              "later",
+              "approve"
+            ]
+          },
+          {
+            "id": "later",
+            "component": "Button",
+            "label": "Remind me tomorrow",
+            "variant": "ghost",
+            "action": {
+              "event": {
+                "name": "snooze"
+              }
+            }
+          },
+          {
+            "id": "approve",
+            "component": "Button",
+            "label": "Review the script",
+            "variant": "primary",
+            "action": {
+              "event": {
+                "name": "open_item",
+                "context": {
+                  "id": "short-why-ai"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.0",
+      "updateDataModel": {
+        "surfaceId": "week",
+        "path": "/",
+        "value": {
+          "counts": {
+            "out": "4",
+            "review": "1",
+            "live": "8"
+          },
+          "items": [
+            {
+              "id": "li-a2ui",
+              "kind": "social",
+              "title": "A2UI and the future of interfaces",
+              "date": "Tue 17 Nov",
+              "status": "scheduled"
+            },
+            {
+              "id": "short-why-ai",
+              "kind": "short",
+              "title": "Why AI prototyping needs a design system",
+              "date": "Wed 18 Nov",
+              "status": "needs review"
+            },
+            {
+              "id": "li-real-data",
+              "kind": "social",
+              "title": "Real data in prototypes changes the conversation",
+              "date": "Thu 19 Nov",
+              "status": "approved"
+            },
+            {
+              "id": "news-1",
+              "kind": "newsletter",
+              "title": "Systemised, issue 1",
+              "date": "Fri 20 Nov",
+              "status": "draft"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

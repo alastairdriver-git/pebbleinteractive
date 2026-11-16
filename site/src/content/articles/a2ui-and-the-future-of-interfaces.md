@@ -25,16 +25,16 @@ So the agent should choose and arrange. It shouldn't invent.
 
 ## What A2UI is
 
-A2UI is an open-source generative UI framework built around that principle. This is how its documentation at a2ui.org describes it.
+A2UI is an open-source generative UI framework built around that principle. This is how [its documentation](https://a2ui.org/concepts/overview/) describes it.
 
 ![Four steps: the agent decides a screen will help, composes it only from your catalogue, streams it as JSON data, and your app renders it with your own components.](/figures/a2ui-and-the-future-of-interfaces/how-a2ui-works.png "wide: How an agent builds a screen from your components.")
 
 - **The agent describes, the client renders.** An agent describes an interactive UI as a stream of JSON messages. The client renders that description using its own native widgets.
-- **There is a catalogue.** The client registers a component catalogue, a file called `catalog.json`. The agent may only place components from it.
+- **There is a catalogue.** The client registers a component catalogue, a file called [`catalog.json`](https://a2ui.org/concepts/catalogs/). The agent may only place components from it.
 - **It's data, not code.** A2UI sends declarative data, never executable code. The agent says "a card containing a date picker and a button". It doesn't send a script.
-- **It updates as it goes.** Messages include `updateComponents`, which changes what is on screen, and `updateDataModel`, which changes the data behind it. User actions are sent back to the agent.
-- **It works across platforms.** Renderers exist for React, Lit, Angular, Flutter, SwiftUI and Jetpack Compose.
-- **It isn't tied to one transport.** Messages can travel over AG-UI, A2A, MCP and WebSockets. An A2UI surface can also run inside an MCP App, in hosts that support MCP Apps.
+- **It updates as it goes.** Messages include [`updateComponents`](https://a2ui.org/concepts/messages/), which changes what is on screen, and [`updateDataModel`](https://a2ui.org/concepts/data-binding/), which changes the data behind it. User [actions](https://a2ui.org/concepts/actions-and-functions/) are sent back to the agent.
+- **It works across platforms.** [Renderers](https://a2ui.org/ecosystem/renderers/) exist for React, Lit, Angular, Flutter, SwiftUI and Jetpack Compose.
+- **It isn't tied to one transport.** Messages can travel over AG-UI, A2A, MCP and WebSockets. An A2UI surface can also [run inside an MCP App](https://a2ui.org/guides/a2ui-in-mcp-apps/), in hosts that support MCP Apps.
 
 In short, the agent sends a description, and your app builds it from parts you've already made.
 
@@ -44,11 +44,19 @@ https://a2ui.org/
 
 Here is the part that matters to anyone who looks after a design system. That catalogue of components the agent is allowed to use is, in effect, your design system.
 
+Here's one of ours. This is a live surface rendered by Pebble's own A2UI catalogue, built on [Grade](https://gradeui.com), our design system. It shows the kind of screen we use to plan our own content. Switch to **Messages** to see the JSON behind it, and use the surface to see what gets sent back to the agent.
+
+{{a2ui schedule}}
+
 If the catalogue contains your button, your card, your form field and your table, then everything an agent composes is made from them. It inherits your tokens, your themes, your accessibility work and your platform behaviour, because the client is rendering its own native widgets. The agent can't produce a button that isn't yours, because it can't produce a button at all. It can only ask for one.
 
 That changes what a design system is for. Until now it has been a tool for teams: a way for designers and developers to build screens consistently. In this model it also becomes the material agents build with. Its quality sets the ceiling on what they can produce.
 
 A thin, inconsistent or poorly described system gives an agent little to work with. A well-made one, with clear components and clear rules, gives it a great deal.
+
+The same catalogue handles input too. The date and the choice below are bound to the surface's data model, so whatever you pick travels back with the action.
+
+{{a2ui product}}
 
 ## What this asks of your system
 
