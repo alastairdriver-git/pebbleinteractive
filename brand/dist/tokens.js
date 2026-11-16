@@ -9,7 +9,8 @@ export const color = {
   "mint": "oklch(0.9 0.065 195)",
   "navy": "oklch(0.27 0.07 255)",
   "pink": "oklch(0.72 0.19 352)",
-  "pink-soft": "oklch(0.95 0.04 352)"
+  "pink-soft": "oklch(0.95 0.04 352)",
+  "white": "oklch(1 0 0)"
 };
 export const colourways = {
   "ink": {
@@ -43,6 +44,14 @@ export const colourways = {
     "accent": "oklch(0.27 0.07 255)",
     "fill": "oklch(0.27 0.07 255)",
     "fill-text": "oklch(0.9 0.065 195)"
+  },
+  "white": {
+    "ground": "oklch(1 0 0)",
+    "text": "oklch(0.245 0.045 220)",
+    "muted": "oklch(0.245 0.045 220 / 0.65)",
+    "accent": "oklch(0.45 0.095 195)",
+    "fill": "oklch(0.72 0.19 352)",
+    "fill-text": "oklch(0.245 0.045 220)"
   }
 };
 export const font = {

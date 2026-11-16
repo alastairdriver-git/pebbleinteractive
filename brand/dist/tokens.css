@@ -10,6 +10,7 @@
   --pb-navy: oklch(0.27 0.07 255);
   --pb-pink: oklch(0.72 0.19 352);
   --pb-pink-soft: oklch(0.95 0.04 352);
+  --pb-white: oklch(1 0 0);
   --pb-font: "Mona Sans", system-ui, sans-serif;
   --pb-heading-width: 115;
   --pb-heading-weight: 650;
@@ -55,6 +56,16 @@
   --cw-accent: oklch(0.27 0.07 255);
   --cw-fill: oklch(0.27 0.07 255);
   --cw-fill-text: oklch(0.9 0.065 195);
+  background: var(--cw-ground);
+  color: var(--cw-text);
+}
+.cw-white {
+  --cw-ground: oklch(1 0 0);
+  --cw-text: oklch(0.245 0.045 220);
+  --cw-muted: oklch(0.245 0.045 220 / 0.65);
+  --cw-accent: oklch(0.45 0.095 195);
+  --cw-fill: oklch(0.72 0.19 352);
+  --cw-fill-text: oklch(0.245 0.045 220);
   background: var(--cw-ground);
   color: var(--cw-text);
 }

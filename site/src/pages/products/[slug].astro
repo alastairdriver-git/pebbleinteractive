@@ -71,7 +71,7 @@ const cta = live && checkout ? { href: checkout, label: `Buy now · ${price}`, c
             {d.status === "draft" && <p class="article-draft">Draft: not listed</p>}
             <span class="product-pill">{d.format}{free && live ? " · Free" : ""}</span>
             <h1 class="product-title text-balance font-display text-4xl sm:text-5xl">{d.headline ?? d.title}</h1>
-            <p class="max-w-2xl text-pretty text-xl leading-relaxed opacity-85">{d.headline ? `${d.title}. ${d.summary}` : d.summary}</p>
+            <p class="max-w-2xl text-pretty text-xl leading-[1.45] opacity-85">{d.headline ? `${d.title}. ${d.summary}` : d.summary}</p>
             <div class="product-hero-actions">
               {cta ? <a href={cta.href} class={`product-cta ${cta.cls}`} download={free ? true : undefined}>{cta.label}</a>
                    : <a href={notify} class="product-cta">Email me when it's out</a>}
@@ -86,52 +86,71 @@ const cta = live && checkout ? { href: checkout, label: `Buy now · ${price}`, c
     </Section>
   </div>
 
-  <Section pad="lg">
-    <Container maxW="xl">
-      {d.problem && (
+  {d.problem && (
+    <Section pad="lg">
+      <Container maxW="xl">
         <section class="product-problem">
           <span class="eyebrow">The problem</span>
           <p class="text-balance font-display text-2xl leading-snug tracking-tight sm:text-3xl">{d.problem}</p>
         </section>
-      )}
+      </Container>
+    </Section>
+  )}
 
-      {d.outcomes.length > 0 && (
-        <section class="product-section">
+  {d.outcomes.length > 0 && (
+    <div class="cw-band cw-pink">
+      <Section pad="lg">
+        <Container maxW="xl">
           <h2 class="product-h2">What you'll be able to do</h2>
           <ul class="product-outcomes">
             {d.outcomes.map((o) => (<li><span class="product-tick" aria-hidden="true"><Icons.Check size={18} strokeWidth={3} /></span>{o}</li>))}
           </ul>
-        </section>
-      )}
+        </Container>
+      </Section>
+    </div>
+  )}
 
-      {d.highlights.length > 0 && (
-        <section class="product-section">
+  {d.highlights.length > 0 && (
+    <div class="cw-band cw-mint">
+      <Section pad="lg">
+        <Container maxW="xl">
           <h2 class="product-h2">Why it works</h2>
           <div class="product-highlights">
             {d.highlights.map((h) => { const I = icon(h.icon); return (
               <div class="product-highlight"><span class="product-icon" aria-hidden="true"><I size={22} strokeWidth={2} /></span><h3>{h.title}</h3><p>{h.body}</p></div>
             ); })}
           </div>
-        </section>
-      )}
+        </Container>
+      </Section>
+    </div>
+  )}
 
-      {d.video && (
-        <section class="product-section">
-          <h2 class="product-h2">See it in a minute</h2>
-          <video class="product-video" src={d.video.src} poster={d.video.poster} controls preload="metadata" playsinline></video>
-        </section>
-      )}
+  {(d.video || d.previews.length > 0) && (
+    <div class="cw-band cw-white">
+      <Section pad="lg">
+        <Container maxW="xl">
+          {d.video && (
+            <section class="product-block">
+              <h2 class="product-h2">See it in a minute</h2>
+              <video class="product-video" src={d.video.src} poster={d.video.poster} controls preload="metadata" playsinline></video>
+            </section>
+          )}
+          {d.previews.length > 0 && (
+            <section class="product-block">
+              <h2 class="product-h2">Take a look inside</h2>
+              <div class="product-previews">
+                {d.previews.map((p) => (<figure><img src={p.src} alt={p.alt} loading="lazy" /><figcaption>{p.alt}</figcaption></figure>))}
+              </div>
+            </section>
+          )}
+        </Container>
+      </Section>
+    </div>
+  )}
 
-      {d.previews.length > 0 && (
-        <section class="product-section">
-          <h2 class="product-h2">Take a look inside</h2>
-          <div class="product-previews">
-            {d.previews.map((p) => (<figure><img src={p.src} alt={p.alt} loading="lazy" /><figcaption>{p.alt}</figcaption></figure>))}
-          </div>
-        </section>
-      )}
-
-      <section class="product-section">
+  <Section pad="lg">
+    <Container maxW="xl">
+      <section class="product-section product-first">
         <h2 class="product-h2">What's inside</h2>
         <div class="product-inside">
           {inside.map((x) => { const I = icon(x.icon); return (
