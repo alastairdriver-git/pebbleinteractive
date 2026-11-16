@@ -29,15 +29,15 @@ export default function SiteHeader({
         <div className="flex h-20 items-center justify-between gap-6">
           <a href="/" className="flex shrink-0 items-center gap-3" aria-label={site.name}>
             {site.logo && <img src={site.logo} alt="" className="h-8 w-auto" />}
-            <span className="font-display text-xl">{site.name}</span>
+            <span className="hidden font-display text-xl sm:inline">{site.name}</span>
           </a>
 
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav className="flex items-center gap-0 sm:gap-1" aria-label="Main">
             {nav.map((item) => (
               <div key={item.label} className={`group ${item.children ? "relative" : ""}`}>
                 <a
                   href={item.href}
-                  className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  className="inline-flex items-center gap-1 rounded-md px-2.5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:px-3 sm:text-base"
                 >
                   {item.label}
                   {(item.children || item.mega) && (

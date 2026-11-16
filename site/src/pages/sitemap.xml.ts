@@ -7,7 +7,7 @@ export async function GET() {
   const pages = (await getCollection("pages")).filter((p) => p.id !== "index").map((p) => `/${p.id}`);
   const work = (await getCollection("work")).map((w) => `/work/${w.id}`);
   const articles = (await getCollection("articles")).filter((a) => !a.data.draft);
-  const products = (await getCollection("products")).filter((p) => p.data.status === "live");
+  const products = (await getCollection("products")).filter((p) => p.data.status !== "draft");
   const urls = [
     "/",
     "/work",

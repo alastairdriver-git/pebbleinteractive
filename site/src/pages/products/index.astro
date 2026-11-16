@@ -27,7 +27,7 @@ const ld = graph(
 
 <BaseLayout site={SITE} nav={NAV} fontHref={FONT_HREF} title="Products — Pebble Interactive" description={description} image="/og.png">
   <JsonLd slot="head" data={ld} />
-  {live.length === 0 && <meta slot="head" name="robots" content="noindex" />}
+  {all.length === 0 && <meta slot="head" name="robots" content="noindex" />}
 
   <Section pad="lg">
     <Container maxW="xl">

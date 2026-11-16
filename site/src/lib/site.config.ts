@@ -15,7 +15,11 @@ export const SITE: SiteConfig = {
   theme: "pebble",
 };
 
-export const NAV: NavItem[] = [];
+export const NAV: NavItem[] = [
+  { label: "Work", href: "/work" },
+  { label: "Articles", href: "/articles" },
+  { label: "Products", href: "/products" },
+];
 
 /** Article byline. */
 export const AUTHOR = {
