@@ -1,0 +1,24 @@
+figures:
+  - id: what-breaks
+    type: grid
+    eyebrow: Outside the default theme
+    title: What breaks in dark and high-contrast modes
+    items:
+      - { label: Contrast drops, note: Secondary text on dark surfaces }
+      - { label: Focus rings vanish, note: box-shadow is removed in forced colours }
+      - { label: Borders disappear, note: Pale tints and fill-only components }
+      - { label: Colour-only states, note: Selected and error look the same }
+      - { label: Images and icons, note: Dark logos on dark surfaces }
+      - { label: Shadows as structure, note: Elevation that relies on shadow alone }
+  - id: every-theme
+    type: checklist
+    tone: light
+    eyebrow: Light, dark, more contrast, forced colours
+    title: Six checks in every theme
+    items:
+      - Text contrast
+      - Control boundaries
+      - Focus ring on every step
+      - States without colour
+      - Icons and images
+      - "Anything that's gone"

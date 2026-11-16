@@ -1,0 +1,20 @@
+figures:
+  - id: appearance-or-purpose
+    type: comparison
+    tone: light
+    eyebrow: Token naming
+    title: Name the job, not the colour
+    left:
+      label: Named for appearance
+      items: [blue-500, grey-light, dark-background, red, btn-bg-1]
+    right:
+      label: Named for purpose
+      items: [color.action.primary, color.text.subtle, color.surface.page, color.text.danger, button.background]
+  - id: three-tiers
+    type: flow
+    eyebrow: Three tiers
+    title: One kind of name per tier
+    items:
+      - { label: Primitive, note: "Named for the value: color.teal.600" }
+      - { label: Semantic, note: "Named for the job: color.action.primary" }
+      - { label: Component, note: "Named for the part: button.background" }

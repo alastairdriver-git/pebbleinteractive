@@ -6,5 +6,45 @@
     "site": "a2ui.org",
     "image": "/link-previews/a2ui-org.png",
     "fetched": "2026-11-16"
+  },
+  "https://developers.figma.com/docs/figma-mcp-server/": {
+    "url": "https://developers.figma.com/docs/figma-mcp-server/",
+    "title": "Introduction | Developer Docs",
+    "description": "The Figma MCP server brings Figma into your AI workflow. It gives AI agents the design context they need to generate code from your Figma files, and lets agents write native Figma content back to the canvas.",
+    "site": "developers.figma.com",
+    "image": "/link-previews/developers-figma-com-docs-figma-mcp-server.png",
+    "fetched": "2026-11-16"
+  },
+  "https://github.com/southleft/figma-console-mcp": {
+    "url": "https://github.com/southleft/figma-console-mcp",
+    "title": "GitHub - southleft/figma-console-mcp: Your design system as an API. Connect AI to Figma for extraction, creation, and debugging.",
+    "description": "Your design system as an API. Connect AI to Figma for extraction, creation, and debugging. - southleft/figma-console-mcp",
+    "site": "GitHub",
+    "image": "/link-previews/github-com-southleft-figma-console-mcp.png",
+    "fetched": "2026-11-16"
+  },
+  "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/forced-colors": {
+    "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/forced-colors",
+    "title": "forced-colors CSS media feature - CSS | MDN",
+    "description": "The forced-colors CSS media feature is used to detect if the user agent has enabled a forced colors mode where it enforces a user-chosen limited color palette on the page. An example of a forced colors mode is Windows High Contrast mode.",
+    "site": "MDN Web Docs",
+    "image": "/link-previews/developer-mozilla-org-en-US-docs-Web-CSS-Reference-At-rules-media-forced-colors.png",
+    "fetched": "2026-11-16"
+  },
+  "https://www.designtokens.org/TR/2025.10/format/": {
+    "url": "https://www.designtokens.org/TR/2025.10/format/",
+    "title": "Design Tokens Format Module 2025.10",
+    "description": "This document describes the technical specification for a file format to\n        exchange design tokens between different tools.",
+    "site": "designtokens.org",
+    "image": "/link-previews/designtokens-org-TR-2025-10-format.png",
+    "fetched": "2026-11-16"
+  },
+  "https://a2ui.org/concepts/catalogs/": {
+    "url": "https://a2ui.org/concepts/catalogs/",
+    "title": "Catalogs",
+    "description": "How component catalogs define the components, functions, and rules shared between agents and renderers.",
+    "site": "A2UI",
+    "image": "/link-previews/a2ui-org-concepts-catalogs.png",
+    "fetched": "2026-11-16"
   }
 }
