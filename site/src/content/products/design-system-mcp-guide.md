@@ -42,7 +42,7 @@ faqs:
   - { q: "Which tools does it work with?", a: "Any tool that supports MCP. The guide covers Claude Code, Claude Desktop, Cursor and VS Code." }
   - { q: "Does it change my code or design files?", a: "No. The server is read-only: it only serves your tokens and docs to the AI tool." }
   - { q: "What if MCP changes?", a: "The tools move quickly. Buyers get updated versions of the guide and server as they change." }
-order: 2
+order: 4
 keywords: [MCP, model context protocol, design system, Claude Code, Cursor, AI coding tools, design tokens]
 ---
 

@@ -13,7 +13,7 @@ includes:
   - "A seven-page guide to answering supplier due diligence forms"
   - "A supplier register template with a gifts and hospitality sheet"
 forWho: Freelancers, studios and small consultancies applying to supplier lists, frameworks or public sector work, who are asked for policies they've never had to write.
-order: 3
+order: 5
 keywords: [company policies, procurement, due diligence, supplier, small business, tender]
 image: /products/supplier-ready-policy-pack/preview.png
 heroImage: /products/supplier-ready-policy-pack/hero.png

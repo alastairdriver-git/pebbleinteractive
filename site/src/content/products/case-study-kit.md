@@ -13,7 +13,7 @@ includes:
   - "A five-page structure guide with eight before-and-after rewrites"
   - "A render script for macOS and Linux, and printing notes for Windows"
 forWho: Designers, developers and consultants who need case studies for tenders, applications and portfolios, and want them short enough that people actually read them.
-order: 4
+order: 6
 keywords: [case study template, portfolio, freelance, design case study, PDF template]
 image: /products/case-study-kit/preview.png
 heroImage: /products/case-study-kit/hero.png
