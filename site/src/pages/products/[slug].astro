@@ -1,13 +1,18 @@
 ---
+/* Product page, generated from the product's brief (frontmatter in
+   src/content/products). It sells the outcome first: what the buyer will be
+   able to do, then why it works, video, previews, what's inside, who it's
+   for and FAQs. */
 import "../../styles/global.css";
 import { render } from "astro:content";
 import BaseLayout from "@grade/astro-kit/BaseLayout.astro";
 import { Section, Container } from "@gradeui/ui";
+import * as Icons from "lucide-react";
 import { SITE, NAV, FONT_HREF } from "../../lib/site.config";
 import JsonLd from "../../components/JsonLd.astro";
 import Subscribe from "../../components/Subscribe.astro";
 import { getProducts, formatPrice } from "../../lib/content";
-import { graph, organization, website, webPage, product, breadcrumbs } from "../../lib/seo";
+import { graph, organization, website, webPage, product, breadcrumbs, SITE_URL } from "../../lib/seo";
 
 export async function getStaticPaths() {
   return (await getProducts()).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
@@ -20,10 +25,14 @@ const path = `/products/${entry.id}`;
 const og = `/og/products/${entry.id}.png`;
 const live = d.status === "live";
 const free = d.price === 0;
+const price = live ? formatPrice(d.price, d.currency) : "Coming soon";
+const icon = (name: string) => (Icons as any)[name] ?? Icons.Circle;
+const inside = d.inside.length ? d.inside : d.includes.map((t) => ({ icon: "Check", title: t, body: "" }));
+
 const nodes: object[] = [
   organization(),
   website(),
-  webPage({ path, name: d.title, description: d.summary }),
+  webPage({ path, name: d.headline ?? d.title, description: d.summary }),
   breadcrumbs([
     { name: "Home", path: "/" },
     { name: "Products", path: "/products" },
@@ -31,60 +40,143 @@ const nodes: object[] = [
   ]),
 ];
 if (live) nodes.push(product(entry.id, d, d.image ?? og));
+if (d.faqs.length)
+  nodes.push({
+    "@type": "FAQPage",
+    "@id": `${SITE_URL}${path}#faq`,
+    mainEntity: d.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  });
 const ld = graph(...nodes);
-/* Lemon Squeezy: the overlay checkout opens in-page when lemon.js loads;
-   without it the link still goes to the hosted checkout. */
+/* Lemon Squeezy: overlay checkout when lemon.js loads; otherwise the hosted checkout. */
 const checkout = d.checkoutUrl ? `${d.checkoutUrl}${d.checkoutUrl.includes("?") ? "&" : "?"}embed=1` : undefined;
+const cta = live && checkout ? { href: checkout, label: `Buy now · ${price}`, cls: "lemonsqueezy-button" }
+  : live && free && d.downloadUrl ? { href: d.downloadUrl, label: "Download free", cls: "" }
+  : null;
 ---
 
-<BaseLayout site={SITE} nav={NAV} fontHref={FONT_HREF} title={`${d.title} — Pebble Interactive`} description={d.summary} image={og}>
+<BaseLayout site={SITE} nav={NAV} fontHref={FONT_HREF} title={`${d.title} — Pebble Interactive`} description={d.summary} image={d.image ?? og}>
   <JsonLd slot="head" data={ld} />
   {!live && <meta slot="head" name="robots" content="noindex" />}
 
-  <Section pad="lg">
-    <Container maxW="xl">
-      <nav aria-label="Breadcrumb" class="work-crumbs">
-        <a href="/">Home</a><span aria-hidden="true">/</span><a href="/products">Products</a>
-      </nav>
-      <div class="product-head">
-        <div class="flex flex-col gap-5">
-          {d.status === "draft" && <p class="article-draft">Draft: not listed</p>}
-          <span class="eyebrow">{d.format}</span>
-          <h1 class="text-balance font-display text-4xl leading-[1.05] tracking-tight sm:text-5xl">{d.title}</h1>
-          <p class="max-w-3xl text-pretty text-xl leading-relaxed text-muted-foreground">{d.summary}</p>
+  {/* Hero: the outcome, the price, the action */}
+  <div class="bg-camel product-hero">
+    <Section pad="lg">
+      <Container maxW="xl">
+        <nav aria-label="Breadcrumb" class="work-crumbs product-crumbs">
+          <a href="/">Home</a><span aria-hidden="true">/</span><a href="/products">Products</a>
+        </nav>
+        <div class="product-hero-grid">
+          <div class="flex flex-col gap-6">
+            {d.status === "draft" && <p class="article-draft">Draft: not listed</p>}
+            <span class="product-pill">{d.format}{free && live ? " · Free" : ""}</span>
+            <h1 class="product-title text-balance font-display text-4xl sm:text-5xl">{d.headline ?? d.title}</h1>
+            <p class="max-w-2xl text-pretty text-xl leading-relaxed opacity-85">{d.headline ? `${d.title}. ${d.summary}` : d.summary}</p>
+            <div class="product-hero-actions">
+              {cta ? <a href={cta.href} class={`product-cta ${cta.cls}`} download={free ? true : undefined}>{cta.label}</a>
+                   : <span class="product-cta product-cta-soon">Coming soon</span>}
+              {!free && live && <span class="product-hero-note">Instant download. VAT handled at checkout.</span>}
+              {free && live && <span class="product-hero-note">No sign-up needed.</span>}
+              {!live && <a href="#subscribe" class="product-hero-link">Hear when it launches</a>}
+            </div>
+          </div>
+          {d.image && <img src={d.image} alt={d.imageAlt ?? ""} class="product-hero-image" />}
         </div>
-        <div class="product-buy">
-          <p class="product-buy-price">{live ? formatPrice(d.price, d.currency) : "Coming soon"}</p>
-          {live && checkout && <a href={checkout} class="product-buy-button lemonsqueezy-button">Buy now</a>}
-          {live && free && d.downloadUrl && <a href={d.downloadUrl} class="product-buy-button" download>Download free</a>}
-          {d.sample && <a href={d.sample.href} class="work-all">{d.sample.label}</a>}
-          <p class="product-buy-note">
-            {live && !free ? "Secure checkout by Lemon Squeezy. VAT and sales tax handled at checkout. Instant download." :
-             live ? "Free download." : "Subscribe below to hear when it launches."}
-          </p>
-        </div>
-      </div>
-      {d.image && <figure class="article-hero"><img src={d.image} alt={d.imageAlt ?? ""} /></figure>}
-    </Container>
-  </Section>
+      </Container>
+    </Section>
+  </div>
 
   <Section pad="lg">
     <Container maxW="xl">
-      <section class="work-block">
-        <h2 class="work-label">What's included</h2>
-        <div class="work-block-body">
-          <ul class="product-includes">{d.includes.map((i) => <li>{i}</li>)}</ul>
+      {d.problem && (
+        <section class="product-problem">
+          <span class="eyebrow">The problem</span>
+          <p class="text-balance font-display text-2xl leading-snug tracking-tight sm:text-3xl">{d.problem}</p>
+        </section>
+      )}
+
+      {d.outcomes.length > 0 && (
+        <section class="product-section">
+          <h2 class="product-h2">What you'll be able to do</h2>
+          <ul class="product-outcomes">
+            {d.outcomes.map((o) => (<li><span class="product-tick" aria-hidden="true"><Icons.Check size={18} strokeWidth={3} /></span>{o}</li>))}
+          </ul>
+        </section>
+      )}
+
+      {d.highlights.length > 0 && (
+        <section class="product-section">
+          <h2 class="product-h2">Why it works</h2>
+          <div class="product-highlights">
+            {d.highlights.map((h) => { const I = icon(h.icon); return (
+              <div class="product-highlight"><span class="product-icon" aria-hidden="true"><I size={22} strokeWidth={2} /></span><h3>{h.title}</h3><p>{h.body}</p></div>
+            ); })}
+          </div>
+        </section>
+      )}
+
+      {d.video && (
+        <section class="product-section">
+          <h2 class="product-h2">See it in a minute</h2>
+          <video class="product-video" src={d.video.src} poster={d.video.poster} controls preload="metadata" playsinline></video>
+        </section>
+      )}
+
+      {d.previews.length > 0 && (
+        <section class="product-section">
+          <h2 class="product-h2">Take a look inside</h2>
+          <div class="product-previews">
+            {d.previews.map((p) => (<figure><img src={p.src} alt={p.alt} loading="lazy" /><figcaption>{p.alt}</figcaption></figure>))}
+          </div>
+        </section>
+      )}
+
+      <section class="product-section">
+        <h2 class="product-h2">What's inside</h2>
+        <div class="product-inside">
+          {inside.map((x) => { const I = icon(x.icon); return (
+            <div><span class="product-icon small" aria-hidden="true"><I size={18} strokeWidth={2} /></span><div><strong>{x.title}</strong>{x.body && <span>{x.body}</span>}</div></div>
+          ); })}
         </div>
+        {d.inside.length > 0 && d.includes.length > 0 && (
+          <ul class="product-includes">{d.includes.map((i) => <li>{i}</li>)}</ul>
+        )}
       </section>
-      <section class="work-block">
-        <h2 class="work-label">Who it's for</h2>
-        <div class="work-block-body"><p class="work-lead">{d.forWho}</p></div>
+
+      <section class="product-section product-for">
+        <h2 class="product-h2">Who it's for</h2>
+        <p class="work-lead">{d.forWho}</p>
+        <div class="es-prose product-about"><Content /></div>
       </section>
-      <section class="work-block">
-        <h2 class="work-label">About it</h2>
-        <div class="work-block-body es-prose"><Content /></div>
-      </section>
-      <div class="mt-16"><Subscribe /></div>
+
+      {d.faqs.length > 0 && (
+        <section class="product-section">
+          <h2 class="product-h2">Questions</h2>
+          <div class="product-faqs">
+            {d.faqs.map((f) => (<details><summary>{f.q}</summary><p>{f.a}</p></details>))}
+          </div>
+        </section>
+      )}
+    </Container>
+  </Section>
+
+  <div class="bg-camel">
+    <Section pad="lg">
+      <Container maxW="xl">
+        <div class="product-final">
+          <div>
+            <span class="eyebrow">{d.title}</span>
+            <p class="mt-3 text-balance font-display text-3xl tracking-tight sm:text-4xl">{d.headline ?? d.summary}</p>
+          </div>
+          {cta ? <a href={cta.href} class={`product-cta ${cta.cls}`} download={free ? true : undefined}>{cta.label}</a>
+               : <a href="#subscribe" class="product-cta">Hear when it launches</a>}
+        </div>
+      </Container>
+    </Section>
+  </div>
+
+  <Section pad="lg">
+    <Container maxW="xl">
+      <div id="subscribe"><Subscribe /></div>
       <p class="mt-12"><a href="/products" class="work-all">All products</a></p>
     </Container>
   </Section>

@@ -1,0 +1,13 @@
+{
+  "name": "@pebble/brand",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Pebble Interactive brand tokens: colour, colourways, type and shape. One source for the site, Pebble Studio, the A2UI catalogue, PDFs, social cards and video.",
+  "type": "module",
+  "exports": {
+    "./tokens.json": "./tokens.json",
+    "./tokens.css": "./dist/tokens.css",
+    ".": "./dist/tokens.js"
+  },
+  "scripts": { "build": "node build.mjs" }
+}

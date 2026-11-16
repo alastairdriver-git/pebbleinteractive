@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
-  "description": "Pebble Interactive — content + theme layer on the vendored Grade × Astro kit.",
+  "description": "Pebble Interactive \u2014 content + theme layer on the vendored Grade \u00d7 Astro kit.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -24,7 +24,9 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwindcss": "^4.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "lucide-react": "0.562.0",
+    "@pebble/brand": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^19.0.0",

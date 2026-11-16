@@ -1,0 +1,90 @@
+---
+/* Carousel slides (1080×1350) for every product, from its brief. Not linked
+   anywhere: `pnpm og` screenshots each slide into
+   public/carousels/<product>/<n>.png and prints /all into
+   public/carousels/<product>.pdf for LinkedIn document posts. */
+import { getCollection } from "astro:content";
+import * as Icons from "lucide-react";
+import "@pebble/brand/tokens.css";
+
+import { slidesFor, type Slide } from "../../lib/carousel";
+
+export async function getStaticPaths() {
+  const products = (await getCollection("products")).filter((p) => p.data.status !== "draft");
+  return products.flatMap((p) => {
+    const slides = slidesFor(p);
+    return [
+      ...slides.map((slide, i) => ({ params: { slug: `${p.id}/${i + 1}` }, props: { slides: [slide], total: slides.length, start: i } })),
+      { params: { slug: `${p.id}/all` }, props: { slides, total: slides.length, start: 0 } },
+    ];
+  });
+}
+
+const { slides, total, start } = Astro.props as { slides: Slide[]; total: number; start: number };
+const I = (name: string) => (Icons as any)[name] ?? Icons.Circle;
+
+---
+
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&display=swap">
+<style is:global>
+  @page { size: 1080px 1350px; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; }
+  .slide { width: 1080px; height: 1350px; position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 96px 96px 88px; background: var(--cw-ground); color: var(--cw-text); font-family: var(--pb-font); break-after: page; }
+  .blob { position: absolute; right: -200px; top: -240px; width: 720px; height: 640px; border-radius: 52% 48% 55% 45% / 50% 55% 45% 50%; background: var(--pb-pink); opacity: .16; }
+  .cw-pink .blob { background: var(--pb-ink); opacity: .08; }
+  .cw-mint .blob { background: var(--pb-navy); opacity: .07; }
+  .top { display: flex; justify-content: space-between; align-items: center; font-size: 30px; font-weight: 650; font-variation-settings: "wdth" 110; position: relative; }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand svg { width: 50px; height: 41px; }
+  .count { font-size: 26px; font-weight: 600; color: var(--cw-muted); }
+  .body { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 36px; position: relative; }
+  .pill { align-self: flex-start; padding: 12px 26px; border-radius: 999px; background: var(--cw-fill); color: var(--cw-fill-text); font-size: 30px; font-weight: 700; font-variation-settings: "wdth" 110; }
+  h1 { font-size: 104px; line-height: 1.0; letter-spacing: -0.035em; font-weight: 690; font-variation-settings: "wdth" 115; text-wrap: balance; }
+  h2 { font-size: 76px; line-height: 1.04; letter-spacing: -0.03em; font-weight: 680; font-variation-settings: "wdth" 115; text-wrap: balance; }
+  .eyebrow { font-size: 28px; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; font-variation-settings: "wdth" 115; color: var(--cw-accent); }
+  .big { font-size: 64px; line-height: 1.16; letter-spacing: -0.02em; font-weight: 620; font-variation-settings: "wdth" 110; text-wrap: balance; }
+  .lede { font-size: 40px; line-height: 1.35; color: var(--cw-muted); text-wrap: pretty; }
+  .icon { display: grid; place-items: center; width: 120px; height: 120px; border-radius: 30px; background: var(--cw-fill); color: var(--cw-fill-text); }
+  .list { list-style: none; display: flex; flex-direction: column; gap: 30px; }
+  .list li { display: flex; gap: 26px; align-items: flex-start; font-size: 44px; line-height: 1.22; font-weight: 580; text-wrap: pretty; }
+  .list .mk { flex: none; display: grid; place-items: center; width: 62px; height: 62px; border-radius: 18px; background: var(--cw-fill); color: var(--cw-fill-text); margin-top: -4px; }
+  .cta { align-self: flex-start; display: inline-flex; padding: 26px 44px; border-radius: 999px; background: var(--cw-fill); color: var(--cw-fill-text); font-size: 40px; font-weight: 720; font-variation-settings: "wdth" 110; }
+  .url { font-size: 34px; font-weight: 600; color: var(--cw-text); text-decoration: underline; text-underline-offset: 8px; text-decoration-thickness: 3px; }
+  .swipe { position: absolute; right: 96px; bottom: 88px; font-size: 28px; font-weight: 650; color: var(--cw-muted); font-variation-settings: "wdth" 110; }
+</style>
+</head>
+<body>
+  {slides.map((s, i) => (
+    <section class={`slide cw-${(s as any).cw}`}>
+      <div class="blob"></div>
+      <div class="top">
+        <div class="brand">
+          <svg viewBox="0 0 125 102" aria-hidden="true">
+            <path fill="var(--cw-accent)" d="M60 2 C95 -3 122 18 124 48 C126 78 100 100 62 101 C26 102 -2 82 0 50 C2 20 28 7 60 2 Z" />
+            <rect x="-20" y="58" width="180" height="12" fill="var(--cw-ground)" transform="rotate(-7 62 64)" />
+          </svg>
+          Pebble Interactive
+        </div>
+        <span class="count">{start + i + 1} / {total}</span>
+      </div>
+      <div class="body">
+        {s.kind === "hook" && (<><span class="pill">{s.pill}</span><h1>{s.title}</h1></>)}
+        {s.kind === "problem" && (<><span class="eyebrow">The problem</span><p class="big">{s.text}</p></>)}
+        {s.kind === "outcomes" && (<><span class="eyebrow">What you'll be able to do</span>
+          <ul class="list">{s.items.map((o) => { const C = I("Check"); return <li><span class="mk"><C size={34} strokeWidth={3} /></span>{o}</li>; })}</ul></>)}
+        {s.kind === "point" && (() => { const C = I(s.icon); return (<><span class="icon"><C size={60} strokeWidth={2} /></span><h2>{s.title}</h2><p class="lede">{s.body}</p></>); })()}
+        {s.kind === "inside" && (<><span class="eyebrow">What's inside</span>
+          <ul class="list">{s.items.map((x) => { const C = I(x.icon); return <li><span class="mk"><C size={32} strokeWidth={2.2} /></span>{x.title}</li>; })}</ul></>)}
+        {s.kind === "cta" && (<><span class="eyebrow">{s.title}</span><h2>{s.price === "Free" ? "Get it free" : s.price === "Coming soon" ? "Coming soon" : `Get it for ${s.price}`}</h2><span class="cta">{s.price === "Free" ? "Download free" : s.price === "Coming soon" ? "Join the list" : "Buy now"}</span><span class="url">{s.url}</span></>)}
+      </div>
+      {s.kind === "hook" && <span class="swipe">Swipe →</span>}
+    </section>
+  ))}
+</body>
+</html>

@@ -16,6 +16,7 @@ const dist = join(root, "dist");
 const SETS = [
   { name: "og", dir: "og-cards", out: join(root, "public", "og"), size: "1200,630" },
   { name: "figures", dir: "figure-cards", out: join(root, "public", "figures"), size: "1600,1000" },
+  { name: "carousels", dir: "carousel-cards", out: join(root, "public", "carousels"), size: "1080,1350" },
 ];
 const only = process.argv.slice(2).find((a) => SETS.some((s) => s.name === a));
 const CHROME =
@@ -54,6 +55,15 @@ for (const set of SETS) {
   let slugs = [];
   try { slugs = await cards(join(dist, set.dir)); } catch { continue; }
   for (const slug of slugs) {
+    // A carousel's "/all" page becomes one multi-page PDF (LinkedIn document post).
+    if (slug.endsWith("/all")) {
+      const pdf = join(set.out, `${slug.slice(0, -4)}.pdf`);
+      await mkdir(dirname(pdf), { recursive: true });
+      await run(CHROME, ["--headless=new", "--disable-gpu", "--no-pdf-header-footer", "--virtual-time-budget=8000", `--print-to-pdf=${pdf}`, `http://127.0.0.1:${port}/${set.dir}/${slug}/`]);
+      console.log(`og: public/${set.name}/${slug.slice(0, -4)}.pdf`);
+      total++;
+      continue;
+    }
     const file = join(set.out, `${slug}.png`);
     await mkdir(dirname(file), { recursive: true });
     await run(CHROME, [

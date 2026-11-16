@@ -3,5 +3,6 @@ Allow: /
 Disallow: /og-cards/
 Disallow: /case-studies/
 Disallow: /figure-cards/
+Disallow: /carousel-cards/
 
 Sitemap: https://www.pebbleinteractive.com/sitemap.xml

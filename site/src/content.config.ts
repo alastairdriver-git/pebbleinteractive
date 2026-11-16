@@ -98,6 +98,16 @@ const products = defineCollection({
       imageAlt: z.string().optional(),
       sample: z.object({ label: z.string(), href: z.string() }).optional(),
       order: z.number(),
+      // Marketing brief: the product page, carousel and marketing video are
+      // all generated from these. Sell the outcome, not the file.
+      headline: z.string().optional(), // benefit-led page title
+      problem: z.string().optional(), // the pain, one or two sentences
+      outcomes: z.array(z.string()).default([]), // "You'll be able to..."
+      highlights: z.array(z.object({ icon: z.string(), title: z.string(), body: z.string() })).default([]), // icon = lucide name
+      inside: z.array(z.object({ icon: z.string(), title: z.string(), body: z.string() })).default([]),
+      previews: z.array(z.object({ src: z.string(), alt: z.string() })).default([]),
+      video: z.object({ src: z.string(), poster: z.string().optional() }).optional(),
+      faqs: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
       keywords: z.array(z.string()).default([]),
     })
     .refine((p) => p.status !== "live" || p.checkoutUrl || (p.price === 0 && p.downloadUrl), {

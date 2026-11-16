@@ -6,3 +6,4 @@ packages:
   - "site"
   - "a2ui"
   - "admin"
+  - "brand"

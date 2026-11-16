@@ -40,6 +40,15 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/carousel-cards/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ]
 }
