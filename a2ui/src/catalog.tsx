@@ -236,7 +236,7 @@ const MetricRowApi = api("MetricRow", "One row of a metrics list: an optional pr
   logo: S.DynamicString.optional().describe("REF:#/$defs/DynamicString|One of: google, gemini, perplexity, claude, chatgpt, copilot"),
   label: S.DynamicString,
   value: S.DynamicString,
-  status: S.DynamicString.optional().describe("REF:#/$defs/DynamicString|One of: good, neutral, bad. Sets the value's tone."),
+  status: S.DynamicString.optional().describe("REF:#/$defs/DynamicString|One of: good, neutral, bad, plain. Sets the value's tone; plain shows it as text."),
 });
 const ProviderMark = ({ id }: { id: string }) => {
   const l = LOGOS[id];
@@ -256,16 +256,37 @@ const MetricRow = createComponentImplementation(MetricRowApi, ({ props }) => {
       {props.logo !== undefined && <ProviderMark id={String(props.logo ?? "")} />}
       <span className="pa2-metric-label">{props.label}</span>
       {pct && <span className="pa2-metric-bar" aria-hidden="true"><span style={{ width: `${Math.min(100, +pct[1])}%` }} /></span>}
-      <Pill tone={METRIC_TONE[String(props.status ?? "")] ?? "accent"}>{value}</Pill>
+      {props.status === "plain" ? <span className="pa2-metric-value">{value}</span> : <Pill tone={METRIC_TONE[String(props.status ?? "")] ?? "accent"}>{value}</Pill>}
     </div>
   );
 });
 
-export const apis = [CardApi, ColumnApi, RowApi, SectionApi, HeadingApi, TextApi, LinkApi, BadgeApi, StatApi, ButtonApi, TextFieldApi, DateFieldApi, ChoiceApi, ContentItemApi, ProductCardApi, MetricRowApi];
+const ListItemApi = api("ListItem", "One row in a list of records (a lead, an order, a task): a title, a detail line and a status tag. Optionally an action to open it.", {
+  title: S.DynamicString,
+  detail: S.DynamicString.optional(),
+  tag: S.DynamicString.optional(),
+  tone: S.DynamicString.optional().describe("REF:#/$defs/DynamicString|One of: neutral, accent, pink, success, warning. The tag's tone."),
+  action: S.Action.optional(),
+});
+const ListItem = createComponentImplementation(ListItemApi, ({ props }) => {
+  const Tag: any = props.action ? "button" : "div";
+  const tone = ["neutral", "accent", "pink", "success", "warning"].includes(String(props.tone)) ? String(props.tone) : "neutral";
+  return (
+    <Tag type={props.action ? "button" : undefined} className="pa2-item pa2-listitem" onClick={props.action ? () => (props.action as any)() : undefined}>
+      <span className="pa2-item-text">
+        <span className="pa2-item-title">{props.title}</span>
+        {props.detail && <span className="pa2-item-sub">{props.detail}</span>}
+      </span>
+      {props.tag && <Pill tone={tone}>{String(props.tag)}</Pill>}
+    </Tag>
+  );
+});
+
+export const apis = [CardApi, ColumnApi, RowApi, SectionApi, HeadingApi, TextApi, LinkApi, BadgeApi, StatApi, ButtonApi, TextFieldApi, DateFieldApi, ChoiceApi, ContentItemApi, ProductCardApi, MetricRowApi, ListItemApi];
 
 export const pebbleCatalog = new Catalog(
   CATALOG_ID,
   "1.0",
-  [Card, Column, Row, Section, Heading, Text, Link, Badge, Stat, Button, TextField, DateField, Choice, ContentItem, ProductCard, MetricRow] as any,
+  [Card, Column, Row, Section, Heading, Text, Link, Badge, Stat, Button, TextField, DateField, Choice, ContentItem, ProductCard, MetricRow, ListItem] as any,
   [],
 );

@@ -3,8 +3,8 @@
    A2UI messages: usually just an updateDataModel, so the screen updates in
    place. Phase 2 exposes the same operations as MCP tools. */
 import { NextResponse } from "next/server";
-import { currentUser, getItems, getProducts, updateItem, updateProduct, STATUSES, type ItemStatus, type Product } from "@/lib/data";
-import { itemEditor, productEditor, productsData, remove, scheduleData, updateData, VIEWS, type View } from "@/lib/surfaces";
+import { currentUser, getItems, getLeads, getProducts, updateItem, updateLead, updateProduct, LEAD_STATUSES, STATUSES, type ItemStatus, type LeadStatus, type Product } from "@/lib/data";
+import { itemEditor, leadEditor, leadsData, LEAD_VIEWS, productEditor, productsData, remove, scheduleData, updateData, VIEWS, type LeadView, type View } from "@/lib/surfaces";
 
 type Action = { name?: string; context?: Record<string, unknown> };
 const str = (v: unknown) => (typeof v === "string" ? v : v == null ? "" : String(v));
@@ -60,6 +60,24 @@ export async function POST(req: Request) {
           launch_channel: str(c.channel) || null,
         });
         return NextResponse.json({ messages: [updateData("products", productsData(await getProducts())), remove("editor")] });
+      }
+      case "set_lead_view": {
+        const view = (LEAD_VIEWS as readonly string[]).includes(str(c.view)) ? (str(c.view) as LeadView) : "Open";
+        return NextResponse.json({ messages: [updateData("leads", leadsData(await getLeads(), view))] });
+      }
+      case "open_lead": {
+        const lead = (await getLeads()).find((l) => l.id === str(c.id));
+        if (!lead) return NextResponse.json({ error: "Lead not found" }, { status: 404 });
+        return NextResponse.json({ messages: leadEditor(lead) });
+      }
+      case "save_lead": {
+        const status = str(c.status) as LeadStatus;
+        await updateLead(str(c.id), {
+          status: (LEAD_STATUSES as readonly string[]).includes(status) ? status : undefined,
+          notes: str(c.notes).trim() || null,
+        });
+        const view = (LEAD_VIEWS as readonly string[]).includes(str(c.view)) ? (str(c.view) as LeadView) : "Open";
+        return NextResponse.json({ messages: [updateData("leads", leadsData(await getLeads(), view)), remove("editor")] });
       }
       default:
         return NextResponse.json({ error: `Unknown action: ${str(action.name)}` }, { status: 400 });

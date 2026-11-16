@@ -1,6 +1,6 @@
 /* Demo data for development only (STUDIO_DEMO=1): the same items and
    products the Supabase project was seeded with on 16 November 2026. */
-import type { Item, Product } from "./data";
+import type { Lead, Item, Product } from "./data";
 
 type Row = [Item["kind"], string, string | null, Item["status"], string, string | null, string?];
 const A = "AI in the design process", D = "Design systems in practice", C = "Curating AI output";
@@ -67,4 +67,13 @@ export const demoProducts: Product[] = [
   { id: "demo-p1", slug: "design-system-health-check", title: "Design system health check", summary: "A one-page checklist to see where your design system is strong, where it's drifting, and what to fix first.", price: 0, currency: "USD", status: "coming soon", checkout_url: null, format: "One-page PDF checklist", sort: 0, sales: 0, revenue: 0, launch_date: null, launch_channel: null },
   { id: "demo-p2", slug: "supplier-ready-policy-pack", title: "Supplier-ready policy pack", summary: "Eighteen plain-English company policies and a guide to answering procurement due diligence forms.", price: 19, currency: "USD", status: "coming soon", checkout_url: null, format: "PDF and editable Word files", sort: 1, sales: 0, revenue: 0, launch_date: null, launch_channel: null },
   { id: "demo-p3", slug: "case-study-kit", title: "Case study kit", summary: "A one-page case study template and a structure guide, so every project you write up reads clearly and prints well.", price: 15, currency: "USD", status: "coming soon", checkout_url: null, format: "HTML template, PDF guide", sort: 2, sales: 0, revenue: 0, launch_date: null, launch_channel: null },
+];
+
+/* Sample leads for demo mode only. Made-up people and companies. */
+const ago = (days: number) => new Date(Date.now() - days * 86400000).toISOString();
+export const demoLeads: Lead[] = [
+  { id: "demo-l1", created_at: ago(0), status: "new", name: "Sam Example", email: "sam@example.com", role: "Head of Design", company: "Example Bank (sample)", website: "https://example.com", company_size: "201 to 1,000", services: ["Design system audit", "Accessibility"], has_design_system: "Yes, but it needs work", engagement: "A project", budget: "£25k to £50k", timeline: "1 to 3 months", message: "Our design system has drifted across three products and we fail contrast in dark mode. We'd like an audit and a plan.", heard_from: "LinkedIn", notes: null },
+  { id: "demo-l2", created_at: ago(2), status: "call booked", name: "Jo Sample", email: "jo@example.org", role: "CTO", company: "Sample Health (sample)", website: "https://example.org", company_size: "51 to 200", services: ["MCP and AI tooling", "Design tokens"], has_design_system: "Starting one", engagement: "A monthly retainer", budget: "£5k to £10k a month", timeline: "In the next month", message: "We want our engineers' AI tools to use our components properly.", heard_from: "Article: Figma MCP vs Figma Console MCP", notes: "Call Thursday 2pm" },
+  { id: "demo-l3", created_at: ago(9), status: "proposal sent", name: "Alex Placeholder", email: "alex@example.net", role: "Product Director", company: "Placeholder SaaS (sample)", website: "https://example.net", company_size: "11 to 50", services: ["A2UI and agent interfaces", "Component library"], has_design_system: "Yes, mature", engagement: "A project", budget: "£10k to £25k", timeline: "3 to 6 months", message: null, heard_from: "Search", notes: null },
+  { id: "demo-l4", created_at: ago(20), status: "not a fit", name: "Pat Test", email: "pat@example.com", role: null, company: null, website: null, company_size: "Just me", services: ["Something else"], has_design_system: "No", engagement: "Not sure yet", budget: "Under £10k", timeline: "Just exploring", message: "Can you build my wedding website?", heard_from: null, notes: null },
 ];

@@ -36,8 +36,8 @@ export default function StudioSurfaces({ initial }: { initial: unknown[] }) {
   useEffect(() => {
     const p = new MessageProcessor([pebbleCatalog], async (action: any) => {
       // Saving keeps whatever the schedule is currently showing.
-      if (action?.name === "save_item") {
-        const view = p.getSurface("schedule")?.dataModel?.get?.("/view");
+      if (action?.name === "save_item" || action?.name === "save_lead") {
+        const view = p.getSurface(action.name === "save_item" ? "schedule" : "leads")?.dataModel?.get?.("/view");
         action = { ...action, context: { ...(action.context ?? {}), view } };
       }
       record("out", action);

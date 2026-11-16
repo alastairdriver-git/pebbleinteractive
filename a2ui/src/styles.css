@@ -127,3 +127,10 @@
 .pa2-metric-bar { height: .4rem; border-radius: 999px; background: oklch(var(--muted)); overflow: hidden; }
 .pa2-metric-bar > span { display: block; height: 100%; border-radius: inherit; background: var(--pb-color-ink, #0e3b43); }
 @media (max-width: 30rem) { .pa2-metric-bar { display: none; } .pa2-metric { grid-template-columns: auto 1fr auto; } }
+
+/* ListItem: like ContentItem but without the kind icon */
+.pa2-listitem { grid-template-columns: minmax(0, 1fr) auto; padding-left: 1rem; }
+div.pa2-listitem { cursor: default; }
+.pa2-metric-value { font-size: .92rem; text-align: right; min-width: 0; overflow-wrap: anywhere; }
+.pa2-metric:has(.pa2-metric-value) { grid-template-columns: minmax(6rem, auto) 1fr; align-items: baseline; padding: .2rem 0; }
+.pa2-metric:has(.pa2-metric-value) .pa2-metric-label { color: oklch(var(--muted-foreground)); }

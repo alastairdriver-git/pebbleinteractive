@@ -1,11 +1,12 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CalendarDays, Package } from "lucide-react";
+import { CalendarDays, Inbox, Package } from "lucide-react";
 
 const LINKS = [
   { href: "/", label: "Schedule", icon: CalendarDays },
   { href: "/products", label: "Products", icon: Package },
+  { href: "/leads", label: "Leads", icon: Inbox },
 ];
 
 export default function Nav() {
