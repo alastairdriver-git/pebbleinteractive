@@ -9,9 +9,10 @@ import { A2uiSurface } from "@a2ui/react";
 import { pebbleCatalog } from "./catalog";
 import schedule from "../examples/schedule.json";
 import product from "../examples/product.json";
+import visibility from "../examples/visibility.json";
 
 type Example = { prompt: string; note?: string; messages: any[] };
-const EXAMPLES: Record<string, Example> = { schedule, product } as any;
+const EXAMPLES: Record<string, Example> = { schedule, product, visibility } as any;
 
 function useProcessor(messages: any[], step: number, onAction: (a: unknown) => void) {
   const [state, setState] = useState<{ p: MessageProcessor<any>; surfaces: any[] } | null>(null);

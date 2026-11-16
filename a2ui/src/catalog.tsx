@@ -10,6 +10,7 @@ import { FileText, MessageSquareText, Clapperboard, Video, Mail, Rocket, Circle 
 /* Built from Grade components (Card, Badge, Button) and Grade's icon set,
    themed with the Pebble tokens. House-style refinements (wide Mona Sans,
    flat pills, aligned rows, the Pebble mark) live in styles.css. */
+import { LOGOS } from "./logos";
 import { Badge as GBadge, Button as GButton, Card as GCard } from "@gradeui/ui";
 
 export const CATALOG_ID = "https://www.pebbleinteractive.com/a2ui/catalog/v1.json";
@@ -231,11 +232,40 @@ const ProductCard = createComponentImplementation(ProductCardApi, ({ props }) =>
   </div>
 ));
 
-export const apis = [CardApi, ColumnApi, RowApi, SectionApi, HeadingApi, TextApi, LinkApi, BadgeApi, StatApi, ButtonApi, TextFieldApi, DateFieldApi, ChoiceApi, ContentItemApi, ProductCardApi];
+const MetricRowApi = api("MetricRow", "One row of a metrics list: an optional provider logo, a label and a value. Values ending in % also draw a bar.", {
+  logo: S.DynamicString.optional().describe("REF:#/$defs/DynamicString|One of: google, gemini, perplexity, claude, chatgpt, copilot"),
+  label: S.DynamicString,
+  value: S.DynamicString,
+  status: S.DynamicString.optional().describe("REF:#/$defs/DynamicString|One of: good, neutral, bad. Sets the value's tone."),
+});
+const ProviderMark = ({ id }: { id: string }) => {
+  const l = LOGOS[id];
+  if (!l) return <span className="pa2-logo pa2-logo-blank" aria-hidden="true" />;
+  return (
+    <span className="pa2-logo" style={{ color: l.hex }} aria-hidden="true">
+      {l.path ? <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d={l.path} /></svg> : <span className="pa2-logo-initials" style={{ background: l.hex }}>{l.initials}</span>}
+    </span>
+  );
+};
+const METRIC_TONE: Record<string, string> = { good: "success", neutral: "neutral", bad: "warning" };
+const MetricRow = createComponentImplementation(MetricRowApi, ({ props }) => {
+  const value = String(props.value ?? "");
+  const pct = /^(\d{1,3})%$/.exec(value);
+  return (
+    <div className="pa2-metric">
+      {props.logo !== undefined && <ProviderMark id={String(props.logo ?? "")} />}
+      <span className="pa2-metric-label">{props.label}</span>
+      {pct && <span className="pa2-metric-bar" aria-hidden="true"><span style={{ width: `${Math.min(100, +pct[1])}%` }} /></span>}
+      <Pill tone={METRIC_TONE[String(props.status ?? "")] ?? "accent"}>{value}</Pill>
+    </div>
+  );
+});
+
+export const apis = [CardApi, ColumnApi, RowApi, SectionApi, HeadingApi, TextApi, LinkApi, BadgeApi, StatApi, ButtonApi, TextFieldApi, DateFieldApi, ChoiceApi, ContentItemApi, ProductCardApi, MetricRowApi];
 
 export const pebbleCatalog = new Catalog(
   CATALOG_ID,
   "1.0",
-  [Card, Column, Row, Section, Heading, Text, Link, Badge, Stat, Button, TextField, DateField, Choice, ContentItem, ProductCard] as any,
+  [Card, Column, Row, Section, Heading, Text, Link, Badge, Stat, Button, TextField, DateField, Choice, ContentItem, ProductCard, MetricRow] as any,
   [],
 );

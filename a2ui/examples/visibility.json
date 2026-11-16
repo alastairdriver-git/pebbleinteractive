@@ -1,0 +1,239 @@
+{
+  "prompt": "Show me my AI visibility metrics and top keyword searches",
+  "messages": [
+    {
+      "version": "1.0",
+      "createSurface": {
+        "surfaceId": "visibility",
+        "catalogId": "https://www.pebbleinteractive.com/a2ui/catalog/v1.json"
+      }
+    },
+    {
+      "version": "1.0",
+      "updateComponents": {
+        "surfaceId": "visibility",
+        "components": [
+          {
+            "id": "root",
+            "component": "Card",
+            "eyebrow": "Sample figures, not real data",
+            "title": {
+              "@path": "/business"
+            },
+            "children": [
+              "stats",
+              "assistants",
+              "prompts",
+              "gaps",
+              "actions"
+            ]
+          },
+          {
+            "id": "stats",
+            "component": "Row",
+            "children": [
+              "score",
+              "mentioned",
+              "cited"
+            ]
+          },
+          {
+            "id": "score",
+            "component": "Stat",
+            "label": "AI visibility score",
+            "value": {
+              "@path": "/score"
+            },
+            "hint": "Out of 100"
+          },
+          {
+            "id": "mentioned",
+            "component": "Stat",
+            "label": "Prompts that mention you",
+            "value": {
+              "@path": "/mentioned"
+            }
+          },
+          {
+            "id": "cited",
+            "component": "Stat",
+            "label": "Answers that link to you",
+            "value": {
+              "@path": "/cited"
+            }
+          },
+          {
+            "id": "assistants",
+            "component": "Section",
+            "title": "By assistant",
+            "hint": "Share of answers that name you",
+            "children": {
+              "componentId": "aRow",
+              "path": "/assistants"
+            }
+          },
+          {
+            "id": "aRow",
+            "component": "MetricRow",
+            "logo": {
+              "@path": "logo"
+            },
+            "label": {
+              "@path": "name"
+            },
+            "value": {
+              "@path": "share"
+            }
+          },
+          {
+            "id": "prompts",
+            "component": "Section",
+            "title": "Top searches",
+            "hint": "What people asked, and whether you came up",
+            "children": {
+              "componentId": "pRow",
+              "path": "/prompts"
+            }
+          },
+          {
+            "id": "pRow",
+            "component": "MetricRow",
+            "label": {
+              "@path": "text"
+            },
+            "value": {
+              "@path": "result"
+            },
+            "status": {
+              "@path": "status"
+            }
+          },
+          {
+            "id": "gaps",
+            "component": "Section",
+            "title": "What's holding you back",
+            "children": [
+              "g1",
+              "g2",
+              "g3"
+            ]
+          },
+          {
+            "id": "g1",
+            "component": "Text",
+            "text": "Your Bing Places listing is unclaimed, and ChatGPT and Copilot lean on Bing."
+          },
+          {
+            "id": "g2",
+            "component": "Text",
+            "text": "Opening hours differ between Google, Yelp and your website."
+          },
+          {
+            "id": "g3",
+            "component": "Text",
+            "tone": "muted",
+            "text": "No answer-first page for \"wholesale coffee for offices\", your biggest missed search."
+          },
+          {
+            "id": "actions",
+            "component": "Row",
+            "justify": "end",
+            "children": [
+              "later",
+              "fix"
+            ]
+          },
+          {
+            "id": "later",
+            "component": "Button",
+            "label": "Check again next week",
+            "variant": "ghost",
+            "action": {
+              "event": {
+                "name": "schedule_check"
+              }
+            }
+          },
+          {
+            "id": "fix",
+            "component": "Button",
+            "label": "Fix my listings",
+            "variant": "primary",
+            "action": {
+              "event": {
+                "name": "open_fixes"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.0",
+      "updateDataModel": {
+        "surfaceId": "visibility",
+        "path": "/",
+        "value": {
+          "business": "Harbour Coffee Roasters (example)",
+          "score": "54",
+          "mentioned": "11 of 20",
+          "cited": "6 of 20",
+          "assistants": [
+            {
+              "name": "Google AI Overviews",
+              "share": "70%",
+              "logo": "google"
+            },
+            {
+              "name": "Perplexity",
+              "share": "60%",
+              "logo": "perplexity"
+            },
+            {
+              "name": "Gemini",
+              "share": "55%",
+              "logo": "gemini"
+            },
+            {
+              "name": "ChatGPT",
+              "share": "45%",
+              "logo": "chatgpt"
+            },
+            {
+              "name": "Copilot",
+              "share": "25%",
+              "logo": "copilot"
+            }
+          ],
+          "prompts": [
+            {
+              "text": "Best coffee roasters in Bristol",
+              "result": "Named 2nd",
+              "status": "good"
+            },
+            {
+              "text": "Where to buy fresh coffee beans near me",
+              "result": "Named 4th",
+              "status": "neutral"
+            },
+            {
+              "text": "Coffee subscription gift UK",
+              "result": "Not named",
+              "status": "bad"
+            },
+            {
+              "text": "Wholesale coffee for offices Bristol",
+              "result": "Not named",
+              "status": "bad"
+            },
+            {
+              "text": "Harbour Coffee Roasters opening hours",
+              "result": "Wrong hours",
+              "status": "bad"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

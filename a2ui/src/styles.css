@@ -115,3 +115,15 @@
 .pa2-card .pa2-title::before, .pa2-card .pa2-heading::before { content: none; }
 .pa2-card :where(ul, ol) { margin: 0; padding: 0; list-style: none; }
 .pa2-card :where(li)::before { content: none; }
+
+/* MetricRow: logo, label, optional bar, value */
+.pa2-metric { display: grid; grid-template-columns: auto 1fr minmax(4rem, 7rem) auto; align-items: center; gap: .7rem; padding: .35rem 0; }
+.pa2-metric:not(:has(.pa2-logo)) { grid-template-columns: 1fr minmax(4rem, 7rem) auto; }
+.pa2-metric:not(:has(.pa2-metric-bar)) { grid-template-columns: auto 1fr auto; }
+.pa2-metric:not(:has(.pa2-logo)):not(:has(.pa2-metric-bar)) { grid-template-columns: 1fr auto; }
+.pa2-metric-label { font-size: .92rem; min-width: 0; }
+.pa2-logo { display: inline-grid; place-items: center; width: 1.75rem; height: 1.75rem; border-radius: 999px; background: oklch(var(--muted)); flex: none; }
+.pa2-logo-initials { font-size: .66rem; font-weight: 700; color: #fff; border-radius: 999px; width: 100%; height: 100%; display: grid; place-items: center; }
+.pa2-metric-bar { height: .4rem; border-radius: 999px; background: oklch(var(--muted)); overflow: hidden; }
+.pa2-metric-bar > span { display: block; height: 100%; border-radius: inherit; background: var(--pb-color-ink, #0e3b43); }
+@media (max-width: 30rem) { .pa2-metric-bar { display: none; } .pa2-metric { grid-template-columns: auto 1fr auto; } }
